@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Container para o layout da atividade específica -->
+    <FrameLayout
+        android:id="@+id/layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- O banner de "sem conexão" será exibido aqui, sobreposto no topo -->
+    <include layout="@layout/offline_banner" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

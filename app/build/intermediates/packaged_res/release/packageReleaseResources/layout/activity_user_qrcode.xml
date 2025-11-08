@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".ui.UserQRCodeActivity">
+
+    <TextView
+        android:id="@+id/tvUserNameForQR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QR Code do Usuário"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <ImageView
+        android:id="@+id/ivUserQRCode"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnImprimirUserQR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Imprimir QR Code"
+        android:layout_marginTop="24dp"/>
+
+</LinearLayout>

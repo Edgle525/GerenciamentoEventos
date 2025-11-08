@@ -1,0 +1,214 @@
+[
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_admin.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_admin.xml"
+    },
+    {
+        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_nav_header_main.xml.flat",
+        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\drawable_imagemapp.jpg.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\imagemapp.jpg"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_offline_banner.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\offline_banner.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\drawable_texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview.png.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview.png"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\menu_admin_drawer_menu.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\menu\\admin_drawer_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\menu_search_menu.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\menu\\search_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\menu_options_menu.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\menu\\options_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_user.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_user.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_historico.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_historico.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\menu_user_drawer_menu.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\menu\\user_drawer_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_meu_perfil.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_meu_perfil.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_listar_eventos_admin.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_listar_eventos_admin.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_list_item_historico.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\list_item_historico.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_base.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_base.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_dialog_offline.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\dialog_offline.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_gerar_presenca.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_gerar_presenca.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-hdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-hdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-mdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-mdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_view_participants.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_view_participants.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_participant_qrcode.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_participant_qrcode.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_participant_history.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_participant_history.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_editar_evento.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_editar_evento.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxxhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxxhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_meus_eventos.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_meus_eventos.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_cadastro_evento.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_cadastro_evento.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_event_participants.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_event_participants.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\menu_activity_main_drawer.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\menu\\activity_main_drawer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_comprovante.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_comprovante.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_event_qrcode.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_event_qrcode.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_nav_header_main.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\nav_header_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_cadastro.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_cadastro.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xhdpi_ic_launcher_foreground.webp.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_qrcode.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_qrcode.xml"
+    },
+    {
+        "merged": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_user_qrcode.xml.flat",
+        "source": "C:\\Users\\Edgle\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\activity_user_qrcode.xml"
+    }
+]

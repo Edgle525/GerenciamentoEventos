@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.edu.fatecgru.Eventos.ExampleUnitTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2025-11-08T01:08:37.841Z" hostname="DESKTOP-SA4AQ4H" time="0.005">
+  <properties/>
+  <testcase name="addition_isCorrect" classname="br.edu.fatecgru.Eventos.ExampleUnitTest" time="0.005"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

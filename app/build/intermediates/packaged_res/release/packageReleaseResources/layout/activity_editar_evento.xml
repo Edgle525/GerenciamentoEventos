@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".ui.EditarEventoActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Editar Evento"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <EditText
+            android:id="@+id/edtNomeEventoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome do Evento"/>
+
+        <EditText
+            android:id="@+id/edtDataEventoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Data do Evento (DD/MM/AAAA)"/>
+
+        <EditText
+            android:id="@+id/edtHorarioEventoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Horário do Evento (HH:MM)"/>
+
+        <EditText
+            android:id="@+id/edtDescricaoEventoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descrição do Evento"
+            android:inputType="textMultiLine"
+            android:minLines="3"/>
+
+        <Button
+            android:id="@+id/btnSalvarEdicaoEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salvar Alterações"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/btnExcluirEvento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Excluir Evento"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+</ScrollView>
