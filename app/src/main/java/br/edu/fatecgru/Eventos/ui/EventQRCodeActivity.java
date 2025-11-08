@@ -8,8 +8,15 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,6 +34,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -40,10 +49,11 @@ import br.edu.fatecgru.Eventos.util.PrinterUtils;
 public class EventQRCodeActivity extends AppCompatActivity {
 
     private static final int REQUEST_BLUETOOTH_PERMISSION = 1;
+    private static final int REQUEST_STORAGE_PERMISSION = 2;
 
     private ImageView ivQRCodeEntrada, ivQRCodeSaida;
     private TextView tvEventName;
-    private Button btnImprimir;
+    private Button btnImprimir, btnGerarPdf;
     private Bitmap qrCodeEntradaBitmap, qrCodeSaidaBitmap;
     private String eventoNome;
 
@@ -62,6 +72,7 @@ public class EventQRCodeActivity extends AppCompatActivity {
         ivQRCodeSaida = findViewById(R.id.ivQRCodeSaida);
         tvEventName = findViewById(R.id.tvEventNameQRCode);
         btnImprimir = findViewById(R.id.btnImprimirQRCodes);
+        btnGerarPdf = findViewById(R.id.btnGerarPdfQRCodes);
 
         String eventoId = getIntent().getStringExtra("evento_id");
         eventoNome = getIntent().getStringExtra("nome_evento");
@@ -103,6 +114,99 @@ public class EventQRCodeActivity extends AppCompatActivity {
                 selectPrinterAndPrint();
             }
         });
+
+        btnGerarPdf.setOnClickListener(v -> {
+            if (checkAndRequestStoragePermission()) {
+                gerarPdf();
+            }
+        });
+    }
+
+    private void gerarPdf() {
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+        Canvas canvas = page.getCanvas();
+
+        TextPaint paint = new TextPaint();
+        int margin = 40;
+        float y = margin;
+        int pageContentWidth = pageInfo.getPageWidth() - 2 * margin;
+
+        paint.setTextSize(18);
+        String title = "QR Codes para o evento: " + eventoNome;
+        StaticLayout titleLayout = new StaticLayout(title, paint, pageContentWidth, android.text.Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+        canvas.save();
+        canvas.translate(margin, y);
+        titleLayout.draw(canvas);
+        canvas.restore();
+        y += titleLayout.getHeight() + 40;
+
+        paint.setTextSize(14);
+        paint.setTextAlign(Paint.Align.CENTER);
+        canvas.drawText("QR Code de ENTRADA", pageInfo.getPageWidth() / 2, y, paint);
+        y += paint.descent() - paint.ascent() + 10;
+
+        if (qrCodeEntradaBitmap != null) {
+            float qrX = (pageInfo.getPageWidth() - qrCodeEntradaBitmap.getWidth()) / 2f;
+            canvas.drawBitmap(qrCodeEntradaBitmap, qrX, y, null);
+            y += qrCodeEntradaBitmap.getHeight() + 40;
+        }
+
+        canvas.drawText("QR Code de SAÍDA", pageInfo.getPageWidth() / 2, y, paint);
+        y += paint.descent() - paint.ascent() + 10;
+
+        if (qrCodeSaidaBitmap != null) {
+            float qrX = (pageInfo.getPageWidth() - qrCodeSaidaBitmap.getWidth()) / 2f;
+            canvas.drawBitmap(qrCodeSaidaBitmap, qrX, y, null);
+        }
+
+        try {
+            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.cps_transparente);
+            if (logo != null) {
+                int logoWidth = 200;
+                int logoHeight = (int) (logo.getHeight() * ((float) logoWidth / logo.getWidth()));
+                Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+
+                float logoX = (pageInfo.getPageWidth() - scaledLogo.getWidth()) / 2f;
+                float logoY = pageInfo.getPageHeight() - scaledLogo.getHeight() - margin;
+                canvas.drawBitmap(scaledLogo, logoX, logoY, null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        document.finishPage(page);
+
+        try {
+            File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            String baseName = "QRCodes-" + eventoNome.replaceAll("[^a-zA-Z0-9]", "-");
+            File file = new File(downloadsDir, baseName + ".pdf");
+            int count = 1;
+            while(file.exists()){
+                file = new File(downloadsDir, baseName + "-" + count + ".pdf");
+                count++;
+            }
+
+            FileOutputStream fos = new FileOutputStream(file);
+            document.writeTo(fos);
+            document.close();
+            fos.close();
+            Toast.makeText(this, "PDF salvo em Downloads!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao salvar PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean checkAndRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+                return false;
+            }
+        }
+        return true;
     }
 
     private boolean checkAndRequestBluetoothPermission() {
@@ -201,6 +305,13 @@ public class EventQRCodeActivity extends AppCompatActivity {
                 selectPrinterAndPrint();
             } else {
                 Toast.makeText(this, "Permissão de Bluetooth negada", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (requestCode == REQUEST_STORAGE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                gerarPdf();
+            } else {
+                Toast.makeText(this, "Permissão de armazenamento negada", Toast.LENGTH_SHORT).show();
             }
         }
     }

@@ -3620,6 +3620,7 @@ drawable common_google_signin_btn_text_light
 drawable common_google_signin_btn_text_light_focused
 drawable common_google_signin_btn_text_light_normal
 drawable common_google_signin_btn_text_light_normal_background
+drawable cps_transparente
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3731,6 +3732,7 @@ drawable test_level_drawable
 drawable texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user_icon_eps10_by_kanggraphic
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -3853,6 +3855,7 @@ id btnCadastrarUsuario
 id btnExcluirEvento
 id btnExcluirPerfil
 id btnGerarPdf
+id btnGerarPdfQRCodes
 id btnGerarQRCode
 id btnGoogleLogin
 id btnImprimir

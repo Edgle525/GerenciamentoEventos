@@ -7,12 +7,15 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
@@ -138,8 +141,8 @@ public class ComprovanteActivity extends BaseActivity {
 
         String observacao = "";
         if (diffMinutes < tempoMinimoEvento) {
-            observacao = String.format("\nObservação: A participação neste evento exigia um tempo mínimo de %d minutos." +
-                    " O participante não atingiu o tempo necessário para receber o certificado de conclusão, mas sua presença foi registrada.\n", tempoMinimoEvento);
+            observacao = String.format("\nObservação: A participação neste evento exigia um tempo mínimo de %d minutos. " +
+                    "O participante não atingiu o tempo necessário para receber o certificado de conclusão, mas sua presença foi registrada.\n", tempoMinimoEvento);
         }
 
         return "--- COMPROVANTE DE PARTICIPACAO ---\n\n" +
@@ -206,15 +209,58 @@ public class ComprovanteActivity extends BaseActivity {
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
-
         Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
+        TextPaint paint = new TextPaint();
         paint.setTextSize(12);
 
-        float y = 40;
-        for (String line : text.split("\n")) {
-            canvas.drawText(line, 40, y, paint);
-            y += paint.descent() - paint.ascent();
+        int margin = 40;
+        int pageContentWidth = pageInfo.getPageWidth() - 2 * margin;
+        int pageContentHeight = pageInfo.getPageHeight() - 2 * margin;
+
+        float y = margin;
+        int pageNumber = 1;
+
+        String[] lines = text.split("\n");
+
+        for (String line : lines) {
+            StaticLayout lineLayout = new StaticLayout(line, paint, pageContentWidth, android.text.Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+
+            if (y + lineLayout.getHeight() > pageContentHeight) {
+                document.finishPage(page);
+                pageInfo = new PdfDocument.PageInfo.Builder(595, 842, ++pageNumber).create();
+                page = document.startPage(pageInfo);
+                canvas = page.getCanvas();
+                y = margin;
+            }
+
+            canvas.save();
+            canvas.translate(margin, y);
+            lineLayout.draw(canvas);
+            canvas.restore();
+
+            y += lineLayout.getHeight();
+        }
+
+        try {
+            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.cps_transparente);
+            if (logo != null) {
+                int logoWidth = 200;
+                int logoHeight = (int) (logo.getHeight() * ((float) logoWidth / logo.getWidth()));
+                Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+
+                if (y + scaledLogo.getHeight() + 20 > pageContentHeight) {
+                    document.finishPage(page);
+                    pageInfo = new PdfDocument.PageInfo.Builder(595, 842, ++pageNumber).create();
+                    page = document.startPage(pageInfo);
+                    canvas = page.getCanvas();
+                }
+
+                float logoX = (pageInfo.getPageWidth() - scaledLogo.getWidth()) / 2f;
+                float logoY = pageInfo.getPageHeight() - scaledLogo.getHeight() - margin;
+                canvas.drawBitmap(scaledLogo, logoX, logoY, null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         document.finishPage(page);

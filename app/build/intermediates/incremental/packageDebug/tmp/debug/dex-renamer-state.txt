@@ -1,4 +1,4 @@
-#Sat Nov 08 15:43:05 BRT 2025
+#Sat Nov 08 16:20:31 BRT 2025
 base.0=C\:\\Users\\Edgle\\Downloads\\GerenciamentoEventos\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\Edgle\\Downloads\\GerenciamentoEventos\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.2=C\:\\Users\\Edgle\\Downloads\\GerenciamentoEventos\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\2\\classes.dex

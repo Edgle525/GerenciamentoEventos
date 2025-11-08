@@ -3,12 +3,15 @@ package br.edu.fatecgru.Eventos.ui;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +49,7 @@ public class EventParticipantsActivity extends AppCompatActivity {
     private Button btnBaixarListaPdf;
     private FirebaseFirestore db;
     private String eventoId;
+    private String eventoNome;
     private List<Usuario> participantsList = new ArrayList<>();
     private ParticipantAdapter adapter;
 
@@ -62,7 +66,8 @@ public class EventParticipantsActivity extends AppCompatActivity {
 
         db.collection("eventos").document(eventoId).get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
-                tvEventName.setText("Participantes: " + documentSnapshot.getString("nome"));
+                eventoNome = documentSnapshot.getString("nome");
+                tvEventName.setText("Participantes: " + eventoNome);
             }
         });
 
@@ -88,32 +93,88 @@ public class EventParticipantsActivity extends AppCompatActivity {
     }
 
     private void createPdfFromParticipantList() {
+        if (participantsList.isEmpty()) {
+            Toast.makeText(this, "Não há participantes para gerar a lista.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         PdfDocument document = new PdfDocument();
         PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
         PdfDocument.Page page = document.startPage(pageInfo);
-
         Canvas canvas = page.getCanvas();
-        Paint paint = new Paint();
+
+        TextPaint paint = new TextPaint();
         paint.setTextSize(12);
 
-        float y = 40;
-        canvas.drawText("Lista de Participantes - " + tvEventName.getText().toString(), 40, y, paint);
-        y += (paint.descent() - paint.ascent()) * 2;
+        int margin = 40;
+        int pageContentWidth = pageInfo.getPageWidth() - 2 * margin;
+        int pageContentHeight = pageInfo.getPageHeight() - 2 * margin;
+        float y = margin;
+        int pageNumber = 1;
+
+        String title = "Lista de Participantes - " + (eventoNome != null ? eventoNome : "");
+        StaticLayout titleLayout = new StaticLayout(title, paint, pageContentWidth, android.text.Layout.Alignment.ALIGN_CENTER, 1.0f, 0.0f, false);
+        canvas.save();
+        canvas.translate(margin, y);
+        titleLayout.draw(canvas);
+        canvas.restore();
+        y += titleLayout.getHeight() + 20;
 
         for (Usuario user : participantsList) {
-            canvas.drawText("Nome: " + user.getNome(), 40, y, paint);
-            y += paint.descent() - paint.ascent();
-            canvas.drawText("Curso: " + user.getCurso(), 40, y, paint);
-            y += paint.descent() - paint.ascent();
-            canvas.drawText("Semestre: " + user.getSemestre(), 40, y, paint);
-            y += (paint.descent() - paint.ascent()) * 2;
+            String userText = "Nome: " + user.getNome() + "\n" +
+                              "Curso: " + user.getCurso() + "\n" +
+                              "Semestre: " + user.getSemestre() + "\n";
+            StaticLayout userLayout = new StaticLayout(userText, paint, pageContentWidth, android.text.Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false);
+
+            if (y + userLayout.getHeight() > pageContentHeight) {
+                document.finishPage(page);
+                pageInfo = new PdfDocument.PageInfo.Builder(595, 842, ++pageNumber).create();
+                page = document.startPage(pageInfo);
+                canvas = page.getCanvas();
+                y = margin;
+            }
+
+            canvas.save();
+            canvas.translate(margin, y);
+            userLayout.draw(canvas);
+            canvas.restore();
+            y += userLayout.getHeight() + 10; // Espaçamento entre participantes
+        }
+
+        try {
+            Bitmap logo = BitmapFactory.decodeResource(getResources(), R.drawable.cps_transparente);
+            if (logo != null) {
+                int logoWidth = 200;
+                int logoHeight = (int) (logo.getHeight() * ((float) logoWidth / logo.getWidth()));
+                Bitmap scaledLogo = Bitmap.createScaledBitmap(logo, logoWidth, logoHeight, true);
+
+                if (y + scaledLogo.getHeight() + 20 > pageContentHeight) {
+                    document.finishPage(page);
+                    pageInfo = new PdfDocument.PageInfo.Builder(595, 842, ++pageNumber).create();
+                    page = document.startPage(pageInfo);
+                    canvas = page.getCanvas();
+                }
+
+                float logoX = (pageInfo.getPageWidth() - scaledLogo.getWidth()) / 2f;
+                float logoY = pageInfo.getPageHeight() - scaledLogo.getHeight() - margin;
+                canvas.drawBitmap(scaledLogo, logoX, logoY, null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         document.finishPage(page);
 
         try {
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            File file = new File(downloadsDir, "ListaParticipantes-" + tvEventName.getText().toString().replaceAll("[^a-zA-Z0-9]", "-") + ".pdf");
+            String baseName = "ListaParticipantes-" + (eventoNome != null ? eventoNome.replaceAll("[^a-zA-Z0-9]", "-") : "Geral");
+            File file = new File(downloadsDir, baseName + ".pdf");
+            int count = 1;
+            while(file.exists()){
+                file = new File(downloadsDir, baseName + "-" + count + ".pdf");
+                count++;
+            }
+            
             FileOutputStream fos = new FileOutputStream(file);
             document.writeTo(fos);
             document.close();
@@ -130,6 +191,10 @@ public class EventParticipantsActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         participantsList.clear();
+                        if (task.getResult().isEmpty()) {
+                            Toast.makeText(EventParticipantsActivity.this, "Nenhum participante inscrito neste evento.", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Inscricao inscricao = document.toObject(Inscricao.class);
                             db.collection("usuarios").document(inscricao.getIdUsuario()).get()
