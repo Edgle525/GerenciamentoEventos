@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Array para o Filtro do Administrador -->
+    <string-array name="cursos_array">
+        <item>Selecione o Curso</item>
+        <item>Geral</item>
+        <item>Comércio exterior</item>
+        <item>Logistica</item>
+        <item>Logistica aeroportuária</item>
+        <item>Gestão empresarial</item>
+        <item>Gestão de produção industrial</item>
+        <item>Análise e desenvolvimento de sistemas</item>
+    </string-array>
+
+    <string-array name="semestres_array">
+        <item>Selecione o Semestre</item>
+        <item>Geral</item>
+        <item>1º Semestre</item>
+        <item>2º Semestre</item>
+        <item>3º Semestre</item>
+        <item>4º Semestre</item>
+        <item>5º Semestre</item>
+        <item>6º Semestre</item>
+    </string-array>
+    
+    <!-- Array para o Cadastro do Usuário (Sem a opção "Geral") -->
+    <string-array name="cursos_array_cadastro">
+        <item>Selecione o Curso</item>
+        <item>Comércio exterior</item>
+        <item>Logistica</item>
+        <item>Logistica aeroportuária</item>
+        <item>Gestão empresarial</item>
+        <item>Gestão de produção industrial</item>
+        <item>Análise e desenvolvimento de sistemas</item>
+    </string-array>
+
+    <string-array name="semestres_array_cadastro">
+        <item>Selecione o Semestre</item>
+        <item>1º Semestre</item>
+        <item>2º Semestre</item>
+        <item>3º Semestre</item>
+        <item>4º Semestre</item>
+        <item>5º Semestre</item>
+        <item>6º Semestre</item>
+    </string-array>
+</resources>

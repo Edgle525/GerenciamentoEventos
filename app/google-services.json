@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957847679183",
+    "project_id": "controle-de-presenca-2cdbe",
+    "storage_bucket": "controle-de-presenca-2cdbe.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957847679183:android:5d2abc1e5817c936fa07ba",
+        "android_client_info": {
+          "package_name": "br.edu.fatecgru.Eventos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDruVCw2Sl3AjH1Lk7vh2X-S4XWq3vXuYI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

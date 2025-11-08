@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GerenciamentoEventos</string>
+
+    <!-- COMENTÁRIO: Strings para o Navigation Drawer, necessárias para acessibilidade. -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- ADICIONADO: ID do cliente Web para o Login com Google. SUBSTITUA O VALOR ABAIXO. -->
+    <string name="default_web_client_id">957847679183-fl11ru3uis7l596knfmd423aqe2bjuv6.apps.googleusercontent.com</string>
+</resources>

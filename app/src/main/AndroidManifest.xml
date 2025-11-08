@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GerenciamentoEventos"> 
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.CadastroActivity" android:exported="false" />
+        <activity android:name=".ui.AdminActivity" android:exported="false" />
+        <activity android:name=".ui.UserActivity" android:exported="false" />
+        <activity android:name=".ui.MeuPerfilActivity" android:exported="false" />
+        <activity android:name=".ui.CadastroEventoActivity" android:exported="false" />
+        <activity android:name=".ui.ListarEventosAdminActivity" android:exported="false" />
+        <activity android:name=".ui.EditarEventoActivity" android:exported="false" />
+        <activity android:name=".ui.ComprovanteActivity" android:exported="false" />
+        <activity android:name=".ui.HistoricoActivity" android:exported="false" />
+        <activity android:name=".ui.ViewParticipantsActivity" android:exported="false" />
+        <activity android:name=".ui.EventParticipantsActivity" android:exported="false" />
+        <activity android:name=".ui.ParticipantHistoryActivity" android:exported="false" />
+        <activity android:name=".ui.MeusEventosActivity" android:exported="false" />
+        <activity android:name=".ui.UserQRCodeActivity" android:exported="false" />
+        <activity android:name=".ui.ParticipantQRCodeActivity" android:exported="false" />
+        <activity android:name=".ui.EventQRCodeActivity" android:exported="false" />
+        <activity android:name=".ui.GerarPresencaActivity" android:exported="false" />
+
+        <activity
+            android:name=".ui.CaptureActivityPortrait"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+    </application>
+
+</manifest>
