@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
@@ -26,7 +27,8 @@ import br.edu.fatecgru.Eventos.util.MaskUtils;
 
 public class CadastroActivity extends BaseActivity {
 
-    private EditText edtNome, edtCpf, edtTelefone, edtEmail, edtSenha;
+    private EditText edtNome, edtCpf, edtTelefone, edtEmail;
+    private TextInputEditText edtSenha, edtConfirmarSenha;
     private Spinner spinnerCurso, spinnerSemestre;
     private Button btnCadastrar;
 
@@ -53,6 +55,7 @@ public class CadastroActivity extends BaseActivity {
         spinnerSemestre = findViewById(R.id.spinnerSemestre);
         edtEmail = findViewById(R.id.edtEmailCadastro);
         edtSenha = findViewById(R.id.edtSenhaCadastro);
+        edtConfirmarSenha = findViewById(R.id.edtConfirmarSenhaCadastro);
         btnCadastrar = findViewById(R.id.btnCadastrarUsuario);
 
         setupMasks();
@@ -86,8 +89,9 @@ public class CadastroActivity extends BaseActivity {
         String semestre = spinnerSemestre.getSelectedItem().toString();
         String email = edtEmail.getText().toString().trim();
         String senha = edtSenha.getText().toString().trim();
+        String confirmarSenha = edtConfirmarSenha.getText().toString().trim();
 
-        if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty() || senha.isEmpty() || curso.equals("Selecione o Curso") || semestre.equals("Selecione o Semestre")) {
+        if (nome.isEmpty() || cpf.isEmpty() || telefone.isEmpty() || email.isEmpty() || senha.isEmpty() || confirmarSenha.isEmpty() || curso.equals("Selecione o Curso") || semestre.equals("Selecione o Semestre")) {
             Toast.makeText(this, "Todos os campos são obrigatórios!", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -99,6 +103,11 @@ public class CadastroActivity extends BaseActivity {
 
         if (senha.length() < 6) {
             edtSenha.setError("A senha deve ter no mínimo 6 caracteres");
+            return;
+        }
+
+        if (!senha.equals(confirmarSenha)) {
+            edtConfirmarSenha.setError("As senhas não coincidem");
             return;
         }
 

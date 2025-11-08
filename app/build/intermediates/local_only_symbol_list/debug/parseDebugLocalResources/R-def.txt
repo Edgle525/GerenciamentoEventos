@@ -31,6 +31,7 @@ id btnSalvarPerfil
 id content_frame_admin
 id drawer_layout_admin
 id drawer_layout_user
+id edtConfirmarSenhaCadastro
 id edtCpfCadastro
 id edtCpfPerfil
 id edtDataEvento
