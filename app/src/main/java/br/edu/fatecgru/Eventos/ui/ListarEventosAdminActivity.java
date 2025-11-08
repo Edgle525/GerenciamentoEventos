@@ -16,20 +16,24 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
 
 public class ListarEventosAdminActivity extends BaseActivity {
 
+    private static final String TAG = "ListarEventosAdmin";
     private ListView listViewEventos;
     private FirebaseFirestore db;
     private List<Evento> eventos = new ArrayList<>();
     private ArrayAdapter<String> adapter;
     private List<String> nomesEventos = new ArrayList<>();
-    private static final String TAG = "ListarEventosAdmin";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +99,31 @@ public class ListarEventosAdminActivity extends BaseActivity {
             if (task.isSuccessful()) {
                 eventos.clear();
                 nomesEventos.clear();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date agora = new Date();
+
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    Evento evento = document.toObject(Evento.class);
-                    evento.setId(document.getId());
-                    eventos.add(evento);
-                    nomesEventos.add(evento.getNome());
+                    try {
+                        Evento evento = document.toObject(Evento.class);
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
+
+                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            if (dataTermino.after(agora)) {
+                                evento.setId(document.getId());
+                                eventos.add(evento);
+                                nomesEventos.add(evento.getNome());
+                            }
+                        } else {
+                            evento.setId(document.getId());
+                            eventos.add(evento);
+                            nomesEventos.add(evento.getNome());
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
+                    }
                 }
                 adapter.notifyDataSetChanged();
             } else {

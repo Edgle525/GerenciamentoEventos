@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,6 +43,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,12 +58,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    private static final String TAG = "UserActivity";
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private ListView listViewEventos;
     private TextView tvProfileWarning;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     private List<Evento> eventosList = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -92,6 +99,12 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         mAuth = FirebaseAuth.getInstance();
         userIdLogado = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         Toolbar toolbar = findViewById(R.id.toolbar_user);
         setSupportActionBar(toolbar);
@@ -207,21 +220,51 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                 nomesEventos.clear();
                 boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
 
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date agora = new Date();
+
                 for (QueryDocumentSnapshot document : task.getResult()) {
-                    Evento evento = document.toObject(Evento.class);
-                    List<String> cursosPermitidos = evento.getCursosPermitidos();
+                    try {
+                        Evento evento = document.toObject(Evento.class);
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
 
-                    boolean isEventoVisivel = false;
-                    if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
-                        isEventoVisivel = true;
-                    } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
-                        isEventoVisivel = true;
-                    }
+                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            if (dataTermino.after(agora)) {
+                                List<String> cursosPermitidos = evento.getCursosPermitidos();
 
-                    if (isEventoVisivel) {
-                        evento.setId(document.getId());
-                        eventosList.add(evento);
-                        nomesEventos.add(evento.getNome());
+                                boolean isEventoVisivel = false;
+                                if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                                    isEventoVisivel = true;
+                                } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                                    isEventoVisivel = true;
+                                }
+
+                                if (isEventoVisivel) {
+                                    evento.setId(document.getId());
+                                    eventosList.add(evento);
+                                    nomesEventos.add(evento.getNome());
+                                }
+                            }
+                        } else {
+                            List<String> cursosPermitidos = evento.getCursosPermitidos();
+
+                            boolean isEventoVisivel = false;
+                            if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                                isEventoVisivel = true;
+                            } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                                isEventoVisivel = true;
+                            }
+
+                            if (isEventoVisivel) {
+                                evento.setId(document.getId());
+                                eventosList.add(evento);
+                                nomesEventos.add(evento.getNome());
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -335,7 +378,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                                     Toast.makeText(UserActivity.this, "Entrada registrada com sucesso!", Toast.LENGTH_SHORT).show();
                                 }
                             })
-                            .addOnFailureListener(e -> Toast.makeText(UserActivity.this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());
+                            .addOnFailureListener(e -> Toast.makeText(this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());
                 } else {
                     Toast.makeText(this, "Você não está inscrito no evento '" + nomeEvento + "'.", Toast.LENGTH_LONG).show();
                 }
@@ -388,14 +431,18 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             }
         } else if (id == R.id.nav_historico) {
             startActivity(new Intent(this, HistoricoActivity.class));
+        } else if (id == R.id.nav_eventos_finalizados) {
+            startActivity(new Intent(this, EventosFinalizadosActivity.class));
         } else if (id == R.id.nav_meu_perfil) {
             startActivity(new Intent(this, MeuPerfilActivity.class));
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            });
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

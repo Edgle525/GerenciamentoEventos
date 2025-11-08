@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.EventosFinalizadosActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_eventos_finalizados"
+        android:layout_width="match_parent"
+        android_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Eventos Finalizados"
+        app:titleTextColor="@android:color/white" />
+
+    <ListView
+        android:id="@+id/listViewEventosFinalizados"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

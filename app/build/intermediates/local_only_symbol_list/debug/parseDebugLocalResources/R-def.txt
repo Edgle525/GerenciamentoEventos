@@ -74,6 +74,8 @@ id ivQRCodeSaida
 id ivUserQRCode
 id layout_container
 id listViewEventosAdmin
+id listViewEventosFinalizados
+id listViewEventosFinalizadosAdmin
 id listViewEventosUser
 id listViewHistorico
 id listViewMeusEventos
@@ -83,6 +85,8 @@ id listViewPresenca
 id main
 id nav_cadastrar_evento
 id nav_escanear
+id nav_eventos_finalizados
+id nav_eventos_finalizados_admin
 id nav_header_info
 id nav_header_nome
 id nav_header_profile_image
@@ -105,6 +109,8 @@ id spinnerSemestre
 id spinnerSemestrePerfil
 id toolbar_admin
 id toolbar_cadastro_evento
+id toolbar_eventos_finalizados
+id toolbar_eventos_finalizados_admin
 id toolbar_gerar_presenca
 id toolbar_historico
 id toolbar_listar_eventos
@@ -136,6 +142,8 @@ layout activity_comprovante
 layout activity_editar_evento
 layout activity_event_participants
 layout activity_event_qrcode
+layout activity_eventos_finalizados
+layout activity_eventos_finalizados_admin
 layout activity_gerar_presenca
 layout activity_historico
 layout activity_listar_eventos_admin

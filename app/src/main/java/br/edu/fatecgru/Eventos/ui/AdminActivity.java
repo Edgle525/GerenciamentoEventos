@@ -12,6 +12,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -23,6 +26,7 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,12 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_admin);
 
         mAuth = FirebaseAuth.getInstance();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         Toolbar toolbar = findViewById(R.id.toolbar_admin);
         setSupportActionBar(toolbar);
@@ -76,12 +86,16 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
             startActivity(new Intent(this, ListarEventosAdminActivity.class));
         } else if (id == R.id.nav_view_participants) {
             startActivity(new Intent(this, ViewParticipantsActivity.class));
+        } else if (id == R.id.nav_eventos_finalizados_admin) {
+            startActivity(new Intent(this, EventosFinalizadosAdminActivity.class));
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
+            });
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
