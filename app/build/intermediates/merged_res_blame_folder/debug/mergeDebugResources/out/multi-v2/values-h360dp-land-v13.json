@@ -4,7 +4,7 @@
             "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-h360dp-land-v13/values-h360dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-h360dp-land-v13\\values-h360dp-land-v13.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-h360dp-land-v13\\values-h360dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
