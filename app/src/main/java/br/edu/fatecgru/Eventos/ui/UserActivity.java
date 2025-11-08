@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -108,7 +109,6 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
 
         updateNavHeader();
         checkProfileCompleteness();
-        loadEventos();
 
         listViewEventos.setOnItemClickListener((parent, view, position, id) -> {
             Evento eventoClicado = eventosList.get(position);
@@ -188,6 +188,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                     tvProfileWarning.setVisibility(View.GONE);
                     isProfileComplete = true;
                 }
+                loadEventos(curso);
             }
         });
     }
@@ -199,16 +200,29 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         updateNavHeader();
     }
 
-    private void loadEventos() {
+    private void loadEventos(String cursoUsuario) {
         db.collection("eventos").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 eventosList.clear();
                 nomesEventos.clear();
+                boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
+
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     Evento evento = document.toObject(Evento.class);
-                    evento.setId(document.getId());
-                    eventosList.add(evento);
-                    nomesEventos.add(evento.getNome());
+                    List<String> cursosPermitidos = evento.getCursosPermitidos();
+
+                    boolean isEventoVisivel = false;
+                    if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                        isEventoVisivel = true;
+                    } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                        isEventoVisivel = true;
+                    }
+
+                    if (isEventoVisivel) {
+                        evento.setId(document.getId());
+                        eventosList.add(evento);
+                        nomesEventos.add(evento.getNome());
+                    }
                 }
                 adapter.notifyDataSetChanged();
             } else {
@@ -323,10 +337,10 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                             })
                             .addOnFailureListener(e -> Toast.makeText(UserActivity.this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());
                 } else {
-                    Toast.makeText(UserActivity.this, "Você não está inscrito no evento '" + nomeEvento + "'.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Você não está inscrito no evento '" + nomeEvento + "'.", Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(UserActivity.this, "Erro ao verificar inscrição.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_LONG).show();
             }
         });
     }

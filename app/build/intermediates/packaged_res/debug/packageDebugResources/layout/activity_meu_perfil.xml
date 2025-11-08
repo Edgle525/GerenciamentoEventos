@@ -42,9 +42,13 @@
                     android:id="@+id/fab_edit_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/profile_image"
-                    android:layout_alignBottom="@+id/profile_image"
-                    android:src="@android:drawable/ic_menu_edit" />
+                    android:layout_alignEnd="@id/profile_image"
+                    android:layout_alignBottom="@id/profile_image"
+                    app:backgroundTint="@android:color/transparent"
+                    app:elevation="0dp"
+                    app:fabSize="mini"
+                    app:shapeAppearance="@null"
+                    app:srcCompat="@android:drawable/ic_menu_edit" />
 
             </RelativeLayout>
 
