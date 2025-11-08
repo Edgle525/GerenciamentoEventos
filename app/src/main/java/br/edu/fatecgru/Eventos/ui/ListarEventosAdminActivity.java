@@ -16,12 +16,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
 
 import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
@@ -96,39 +93,39 @@ public class ListarEventosAdminActivity extends BaseActivity {
 
     private void loadEventos() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
+            if (task.isSuccessful() && task.getResult() != null) {
                 eventos.clear();
                 nomesEventos.clear();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-                Date agora = new Date();
-
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Evento evento = document.toObject(Evento.class);
-                        String dataTerminoStr = evento.getDataTermino();
-                        String horarioTerminoStr = evento.getHorarioTermino();
+                        Map<String, Object> data = document.getData();
 
-                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
-                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                            if (dataTermino.after(agora)) {
-                                evento.setId(document.getId());
-                                eventos.add(evento);
-                                nomesEventos.add(evento.getNome());
-                            }
-                        } else {
-                            evento.setId(document.getId());
-                            eventos.add(evento);
-                            nomesEventos.add(evento.getNome());
+                        String nome = (data.get("nome") instanceof String) ? (String) data.get("nome") : null;
+                        if (nome == null) {
+                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
+                            continue;
                         }
+
+                        Evento evento = new Evento();
+                        evento.setId(document.getId());
+                        evento.setNome(nome);
+
+                        if (data.get("data") instanceof String) evento.setData((String) data.get("data"));
+                        if (data.get("horario") instanceof String) evento.setHorario((String) data.get("horario"));
+                        if (data.get("descricao") instanceof String) evento.setDescricao((String) data.get("descricao"));
+
+                        eventos.add(evento);
+                        nomesEventos.add(nome);
+
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
+                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId(), e);
                     }
                 }
                 adapter.notifyDataSetChanged();
             } else {
                 Log.e(TAG, "Erro ao carregar eventos.", task.getException());
-                Toast.makeText(this, "Falha ao carregar eventos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ListarEventosAdminActivity.this, "Falha ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
         });
     }

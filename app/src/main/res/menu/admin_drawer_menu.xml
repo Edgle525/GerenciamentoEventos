@@ -11,9 +11,6 @@
             android:id="@+id/nav_view_participants"
             android:title="Visualizar Usuários" />
         <item
-            android:id="@+id/nav_eventos_finalizados_admin"
-            android:title="Eventos Finalizados" />
-        <item
             android:id="@+id/nav_logout"
             android:title="Sair" />
     </group>

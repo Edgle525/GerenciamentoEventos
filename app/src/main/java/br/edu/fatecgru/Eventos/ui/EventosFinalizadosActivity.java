@@ -12,15 +12,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import br.edu.fatecgru.Eventos.R;
-import br.edu.fatecgru.Eventos.model.Evento;
 
 public class EventosFinalizadosActivity extends AppCompatActivity {
 
@@ -51,30 +50,55 @@ public class EventosFinalizadosActivity extends AppCompatActivity {
 
     private void loadEventosFinalizados() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
+            if (task.isSuccessful() && task.getResult() != null) {
                 nomesEventos.clear();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Evento evento = document.toObject(Evento.class);
-                        String dataTerminoStr = evento.getDataTermino();
-                        String horarioTerminoStr = evento.getHorarioTermino();
+                        Map<String, Object> data = document.getData();
 
+                        // Leitura segura do nome
+                        String nome = null;
+                        if (data.get("nome") instanceof String) {
+                            nome = (String) data.get("nome");
+                        }
+                        if (nome == null) {
+                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
+                            continue;
+                        }
+
+                        // Leitura segura da data e hora de término
+                        String dataTerminoStr = null;
+                        if (data.get("dataTermino") instanceof String) {
+                            dataTerminoStr = (String) data.get("dataTermino");
+                        }
+
+                        String horarioTerminoStr = null;
+                        if (data.get("horarioTermino") instanceof String) {
+                            horarioTerminoStr = (String) data.get("horarioTermino");
+                        }
+
+                        // Processa apenas se a data e hora de término existirem
                         if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
-                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                            if (dataTermino.before(agora)) {
-                                nomesEventos.add(evento.getNome());
+                            try {
+                                Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                                if (dataTermino.before(agora)) {
+                                    nomesEventos.add(nome);
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, "Erro ao parsear data/hora para o evento: " + document.getId(), e);
                             }
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
+                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId() + ". O evento pode estar malformado.", e);
                     }
                 }
                 adapter.notifyDataSetChanged();
             } else {
-                Toast.makeText(this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Erro ao buscar eventos.", task.getException());
+                Toast.makeText(EventosFinalizadosActivity.this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
             }
         });
     }

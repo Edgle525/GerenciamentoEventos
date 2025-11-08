@@ -85,8 +85,6 @@ id listViewPresenca
 id main
 id nav_cadastrar_evento
 id nav_escanear
-id nav_eventos_finalizados
-id nav_eventos_finalizados_admin
 id nav_header_info
 id nav_header_nome
 id nav_header_profile_image

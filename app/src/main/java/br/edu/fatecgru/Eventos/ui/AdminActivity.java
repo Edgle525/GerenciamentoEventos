@@ -86,8 +86,6 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
             startActivity(new Intent(this, ListarEventosAdminActivity.class));
         } else if (id == R.id.nav_view_participants) {
             startActivity(new Intent(this, ViewParticipantsActivity.class));
-        } else if (id == R.id.nav_eventos_finalizados_admin) {
-            startActivity(new Intent(this, EventosFinalizadosAdminActivity.class));
         } else if (id == R.id.nav_logout) {
             mAuth.signOut();
             mGoogleSignInClient.signOut().addOnCompleteListener(this, task -> {
