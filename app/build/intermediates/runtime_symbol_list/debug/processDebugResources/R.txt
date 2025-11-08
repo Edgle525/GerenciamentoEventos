@@ -3942,12 +3942,18 @@ int id edtCpfCadastro 0x7f0900cf
 int id edtCpfPerfil 0x7f0900d0
 int id edtDataEvento 0x7f0900d1
 int id edtDataEventoEditar 0x7f0900d2
+int id edtDataTerminoEvento 0x7f090284
+int id edtDataTerminoEventoEditar 0x7f090288
 int id edtDescricaoEvento 0x7f0900d3
 int id edtDescricaoEventoEditar 0x7f0900d4
 int id edtEmailCadastro 0x7f0900d5
 int id edtEmailPerfil 0x7f0900d6
 int id edtHorarioEvento 0x7f0900d7
 int id edtHorarioEventoEditar 0x7f0900d8
+int id edtHorarioTerminoEvento 0x7f090285
+int id edtHorarioTerminoEventoEditar 0x7f090289
+int id edtLocalEvento 0x7f090286
+int id edtLocalEventoEditar 0x7f09028a
 int id edtNomeCadastro 0x7f0900d9
 int id edtNomeEvento 0x7f0900da
 int id edtNomeEventoEditar 0x7f0900db
@@ -3956,6 +3962,8 @@ int id edtSenha 0x7f0900dd
 int id edtSenhaCadastro 0x7f0900de
 int id edtTelefoneCadastro 0x7f0900df
 int id edtTelefonePerfil 0x7f0900e0
+int id edtTempoMinimoPermanencia 0x7f090287
+int id edtTempoMinimoPermanenciaEditar 0x7f09028b
 int id edtUsuario 0x7f0900e1
 int id elastic 0x7f0900e2
 int id embed 0x7f0900e3

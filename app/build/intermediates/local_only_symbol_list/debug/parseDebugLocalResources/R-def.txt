@@ -36,12 +36,18 @@ id edtCpfCadastro
 id edtCpfPerfil
 id edtDataEvento
 id edtDataEventoEditar
+id edtDataTerminoEvento
+id edtDataTerminoEventoEditar
 id edtDescricaoEvento
 id edtDescricaoEventoEditar
 id edtEmailCadastro
 id edtEmailPerfil
 id edtHorarioEvento
 id edtHorarioEventoEditar
+id edtHorarioTerminoEvento
+id edtHorarioTerminoEventoEditar
+id edtLocalEvento
+id edtLocalEventoEditar
 id edtNomeCadastro
 id edtNomeEvento
 id edtNomeEventoEditar
@@ -50,6 +56,8 @@ id edtSenha
 id edtSenhaCadastro
 id edtTelefoneCadastro
 id edtTelefonePerfil
+id edtTempoMinimoPermanencia
+id edtTempoMinimoPermanenciaEditar
 id edtUsuario
 id fab_edit_photo
 id fab_scan

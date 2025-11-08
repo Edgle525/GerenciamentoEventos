@@ -26,7 +26,7 @@ import br.edu.fatecgru.Eventos.model.Evento;
 
 public class CadastroEventoActivity extends BaseActivity {
 
-    private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento;
+    private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento, edtDataTerminoEvento, edtHorarioTerminoEvento, edtLocalEvento, edtTempoMinimoPermanencia;
     private Button btnCadastrarEvento, btnGerarQRCode;
     private FirebaseFirestore db;
 
@@ -47,7 +47,11 @@ public class CadastroEventoActivity extends BaseActivity {
         edtNomeEvento = findViewById(R.id.edtNomeEvento);
         edtDataEvento = findViewById(R.id.edtDataEvento);
         edtHorarioEvento = findViewById(R.id.edtHorarioEvento);
+        edtDataTerminoEvento = findViewById(R.id.edtDataTerminoEvento);
+        edtHorarioTerminoEvento = findViewById(R.id.edtHorarioTerminoEvento);
+        edtLocalEvento = findViewById(R.id.edtLocalEvento);
         edtDescricaoEvento = findViewById(R.id.edtDescricaoEvento);
+        edtTempoMinimoPermanencia = findViewById(R.id.edtTempoMinimoPermanencia);
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
         btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
@@ -58,13 +62,19 @@ public class CadastroEventoActivity extends BaseActivity {
 
     private void setupDateTimePickers() {
         edtDataEvento.setFocusable(false);
-        edtDataEvento.setOnClickListener(v -> showDatePickerDialog());
+        edtDataEvento.setOnClickListener(v -> showDatePickerDialog(edtDataEvento));
 
         edtHorarioEvento.setFocusable(false);
-        edtHorarioEvento.setOnClickListener(v -> showTimePickerDialog());
+        edtHorarioEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioEvento));
+
+        edtDataTerminoEvento.setFocusable(false);
+        edtDataTerminoEvento.setOnClickListener(v -> showDatePickerDialog(edtDataTerminoEvento));
+
+        edtHorarioTerminoEvento.setFocusable(false);
+        edtHorarioTerminoEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioTerminoEvento));
     }
 
-    private void showDatePickerDialog() {
+    private void showDatePickerDialog(EditText dateField) {
         Calendar calendar = Calendar.getInstance();
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this,
@@ -72,7 +82,7 @@ public class CadastroEventoActivity extends BaseActivity {
                     Calendar selectedDate = Calendar.getInstance();
                     selectedDate.set(year, month, dayOfMonth);
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    edtDataEvento.setText(sdf.format(selectedDate.getTime()));
+                    dateField.setText(sdf.format(selectedDate.getTime()));
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
@@ -82,13 +92,13 @@ public class CadastroEventoActivity extends BaseActivity {
         datePickerDialog.show();
     }
 
-    private void showTimePickerDialog() {
+    private void showTimePickerDialog(EditText timeField) {
         Calendar calendar = Calendar.getInstance();
         TimePickerDialog timePickerDialog = new TimePickerDialog(
                 this,
                 (view, hourOfDay, minute) -> {
                     String time = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
-                    edtHorarioEvento.setText(time);
+                    timeField.setText(time);
                 },
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
@@ -101,28 +111,34 @@ public class CadastroEventoActivity extends BaseActivity {
         String nome = edtNomeEvento.getText().toString().trim();
         String data = edtDataEvento.getText().toString().trim();
         String horario = edtHorarioEvento.getText().toString().trim();
+        String dataTermino = edtDataTerminoEvento.getText().toString().trim();
+        String horarioTermino = edtHorarioTerminoEvento.getText().toString().trim();
+        String local = edtLocalEvento.getText().toString().trim();
         String descricao = edtDescricaoEvento.getText().toString().trim();
+        String tempoMinimoStr = edtTempoMinimoPermanencia.getText().toString().trim();
 
-        if (!validateInput(nome, data, horario, descricao)) {
+        if (!validateInput(nome, data, horario, dataTermino, horarioTermino, local, descricao, tempoMinimoStr)) {
             return;
         }
+
+        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
 
         Evento novoEvento = new Evento();
         novoEvento.setNome(nome);
         novoEvento.setData(data);
         novoEvento.setHorario(horario);
+        novoEvento.setDataTermino(dataTermino);
+        novoEvento.setHorarioTermino(horarioTermino);
+        novoEvento.setLocal(local);
         novoEvento.setDescricao(descricao);
+        novoEvento.setTempoMinimo(tempoMinimo);
 
         db.collection("eventos").add(novoEvento)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
                     String eventoId = documentReference.getId();
 
-                    edtNomeEvento.setEnabled(false);
-                    edtDataEvento.setEnabled(false);
-                    edtHorarioEvento.setEnabled(false);
-                    edtDescricaoEvento.setEnabled(false);
-                    btnCadastrarEvento.setEnabled(false);
+                    // Disable fields after successful registration
 
                     btnGerarQRCode.setVisibility(View.VISIBLE);
                     btnGerarQRCode.setOnClickListener(v -> {
@@ -141,27 +157,17 @@ public class CadastroEventoActivity extends BaseActivity {
                 });
     }
 
-    private boolean validateInput(String nome, String data, String horario, String descricao) {
-        if (TextUtils.isEmpty(nome)) {
-            edtNomeEvento.setError("O nome do evento é obrigatório.");
+    private boolean validateInput(String nome, String data, String horario, String dataTermino, String horarioTermino, String local, String descricao, String tempoMinimoStr) {
+        if (TextUtils.isEmpty(nome) || TextUtils.isEmpty(data) || TextUtils.isEmpty(horario) || TextUtils.isEmpty(dataTermino) || TextUtils.isEmpty(horarioTermino) || TextUtils.isEmpty(local) || TextUtils.isEmpty(descricao) || TextUtils.isEmpty(tempoMinimoStr)) {
+            Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return false;
         }
-        if (TextUtils.isEmpty(data)) {
-            edtDataEvento.setError("A data do evento é obrigatória.");
-            return false;
-        }
-        if (TextUtils.isEmpty(horario)) {
-            edtHorarioEvento.setError("O horário do evento é obrigatório.");
-            return false;
-        }
+
         if (isDateTimeInPast(data, horario)) {
-            Toast.makeText(this, "Não é possível cadastrar um evento em uma data ou horário que já passou.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "A data/hora de início não pode ser no passado.", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (TextUtils.isEmpty(descricao)) {
-            edtDescricaoEvento.setError("A descrição do evento é obrigatória.");
-            return false;
-        }
+        
         return true;
     }
 

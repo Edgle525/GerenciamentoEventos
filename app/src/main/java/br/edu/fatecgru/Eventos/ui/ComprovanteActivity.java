@@ -30,6 +30,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import br.edu.fatecgru.Eventos.R;
+import br.edu.fatecgru.Eventos.model.Evento;
 import br.edu.fatecgru.Eventos.model.Inscricao;
 
 public class ComprovanteActivity extends BaseActivity {
@@ -40,6 +41,7 @@ public class ComprovanteActivity extends BaseActivity {
     private String eventoId, userIdLogado, nomeEvento, dataEvento, horarioEvento, nomeParticipante, emailParticipante;
     private String curso, semestre;
     private BluetoothAdapter bluetoothAdapter;
+    private int tempoMinimoEvento = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class ComprovanteActivity extends BaseActivity {
 
         getIntentData();
         fetchUserData();
+        fetchEventData();
 
         btnImprimir.setOnClickListener(v -> {
             if (checkAndRequestBluetoothPermission()) {
@@ -88,6 +91,20 @@ public class ComprovanteActivity extends BaseActivity {
         }
     }
 
+    private void fetchEventData() {
+        if (eventoId != null) {
+            db.collection("eventos").document(eventoId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            Evento evento = documentSnapshot.toObject(Evento.class);
+                            if (evento != null) {
+                                tempoMinimoEvento = evento.getTempoMinimo();
+                            }
+                        }
+                    });
+        }
+    }
+
     private String buildProof(Inscricao inscricao) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         long diff = 0;
@@ -98,14 +115,16 @@ public class ComprovanteActivity extends BaseActivity {
             diff = dateSaida.getTime() - dateEntrada.getTime();
         } catch (ParseException | NullPointerException e) {
             runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao calcular a duração do evento.", Toast.LENGTH_SHORT).show());
-            return null; 
+            return null;
         }
 
-        long diffSeconds = diff / 1000 % 60;
-        long diffMinutes = diff / (60 * 1000) % 60;
-        long diffHours = diff / (60 * 60 * 1000) % 24;
+        long diffMinutes = diff / (60 * 1000);
+        String tempoPermanencia = String.format(Locale.getDefault(), "%d minutos", diffMinutes);
 
-        String tempoPermanencia = String.format(Locale.getDefault(), "%02d:%02d:%02d", diffHours, diffMinutes, diffSeconds);
+        String observacao = "";
+        if (diffMinutes < tempoMinimoEvento) {
+            observacao = "\nObservação: O usuário não cumpriu o tempo mínimo de permanência, porém sua presença foi registrada.\n";
+        }
 
         return "--- COMPROVANTE DE PARTICIPACAO ---\n\n" +
                 "Participante: " + nomeParticipante + "\n" +
@@ -116,7 +135,8 @@ public class ComprovanteActivity extends BaseActivity {
                 "Data: " + dataEvento + " " + horarioEvento + "\n\n" +
                 "Entrada: " + inscricao.getHoraEntrada() + "\n" +
                 "Saida: " + inscricao.getHoraSaida() + "\n" +
-                "Permanencia: " + tempoPermanencia + "\n\n" +
+                "Permanencia: " + tempoPermanencia + "\n" +
+                observacao + "\n" +
                 "----------------------------------\n\n";
     }
 
@@ -176,7 +196,7 @@ public class ComprovanteActivity extends BaseActivity {
                         runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Inscrição não encontrada.", Toast.LENGTH_LONG).show());
                         return;
                     }
-                    
+
                     Inscricao inscricao = documentSnapshot.toObject(Inscricao.class);
                     if (inscricao == null || inscricao.getHoraEntrada() == null || inscricao.getHoraSaida() == null) {
                         runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Registro de entrada e/ou saída incompleto.", Toast.LENGTH_LONG).show());

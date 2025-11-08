@@ -19,7 +19,7 @@ import br.edu.fatecgru.Eventos.model.Evento;
 
 public class EditarEventoActivity extends BaseActivity {
 
-    private EditText edtNome, edtData, edtHorario, edtDescricao;
+    private EditText edtNome, edtData, edtHorario, edtDescricao, edtDataTermino, edtHorarioTermino, edtLocal, edtTempoMinimo;
     private Button btnSalvar, btnExcluir;
     private FirebaseFirestore db;
     private String eventoId;
@@ -41,7 +41,11 @@ public class EditarEventoActivity extends BaseActivity {
         edtNome = findViewById(R.id.edtNomeEventoEditar);
         edtData = findViewById(R.id.edtDataEventoEditar);
         edtHorario = findViewById(R.id.edtHorarioEventoEditar);
+        edtDataTermino = findViewById(R.id.edtDataTerminoEventoEditar);
+        edtHorarioTermino = findViewById(R.id.edtHorarioTerminoEventoEditar);
+        edtLocal = findViewById(R.id.edtLocalEventoEditar);
         edtDescricao = findViewById(R.id.edtDescricaoEventoEditar);
+        edtTempoMinimo = findViewById(R.id.edtTempoMinimoPermanenciaEditar);
         btnSalvar = findViewById(R.id.btnSalvarEdicaoEvento);
         btnExcluir = findViewById(R.id.btnExcluirEvento);
 
@@ -62,7 +66,11 @@ public class EditarEventoActivity extends BaseActivity {
                             edtNome.setText(evento.getNome());
                             edtData.setText(evento.getData());
                             edtHorario.setText(evento.getHorario());
+                            edtDataTermino.setText(evento.getDataTermino());
+                            edtHorarioTermino.setText(evento.getHorarioTermino());
+                            edtLocal.setText(evento.getLocal());
                             edtDescricao.setText(evento.getDescricao());
+                            edtTempoMinimo.setText(String.valueOf(evento.getTempoMinimo()));
                         }
                     }
                 })
@@ -73,15 +81,21 @@ public class EditarEventoActivity extends BaseActivity {
         String nome = edtNome.getText().toString().trim();
         String data = edtData.getText().toString().trim();
         String horario = edtHorario.getText().toString().trim();
+        String dataTermino = edtDataTermino.getText().toString().trim();
+        String horarioTermino = edtHorarioTermino.getText().toString().trim();
+        String local = edtLocal.getText().toString().trim();
         String descricao = edtDescricao.getText().toString().trim();
+        String tempoMinimoStr = edtTempoMinimo.getText().toString().trim();
 
-        if (nome.isEmpty() || data.isEmpty() || horario.isEmpty() || descricao.isEmpty()) {
+        if (nome.isEmpty() || data.isEmpty() || horario.isEmpty() || dataTermino.isEmpty() || horarioTermino.isEmpty() || local.isEmpty() || descricao.isEmpty() || tempoMinimoStr.isEmpty()) {
             Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return;
         }
+        
+        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
 
         db.collection("eventos").document(eventoId)
-                .update("nome", nome, "data", data, "horario", horario, "descricao", descricao)
+                .update("nome", nome, "data", data, "horario", horario, "dataTermino", dataTermino, "horarioTermino", horarioTermino, "local", local, "descricao", descricao, "tempoMinimo", tempoMinimo)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Evento atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                     finish();

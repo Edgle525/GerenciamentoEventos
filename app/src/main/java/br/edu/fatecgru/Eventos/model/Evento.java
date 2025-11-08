@@ -10,9 +10,12 @@ public class Evento {
     private String id;
     private String nome;
     private String data;
-    private String dia;
     private String horario;
+    private String dataTermino;
+    private String horarioTermino;
+    private String local;
     private String descricao;
+    private int tempoMinimo;
 
     /**
      * Construtor vazio necessário para o Firebase Firestore.
@@ -46,14 +49,6 @@ public class Evento {
         this.data = data;
     }
 
-    public String getDia() {
-        return dia;
-    }
-
-    public void setDia(String dia) {
-        this.dia = dia;
-    }
-
     public String getHorario() {
         return horario;
     }
@@ -62,11 +57,43 @@ public class Evento {
         this.horario = horario;
     }
 
+    public String getDataTermino() {
+        return dataTermino;
+    }
+
+    public void setDataTermino(String dataTermino) {
+        this.dataTermino = dataTermino;
+    }
+
+    public String getHorarioTermino() {
+        return horarioTermino;
+    }
+
+    public void setHorarioTermino(String horarioTermino) {
+        this.horarioTermino = horarioTermino;
+    }
+
+    public String getLocal() {
+        return local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }
+
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getTempoMinimo() {
+        return tempoMinimo;
+    }
+
+    public void setTempoMinimo(int tempoMinimo) {
+        this.tempoMinimo = tempoMinimo;
     }
 }

@@ -42,15 +42,35 @@
                 android:id="@+id/edtDataEvento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data do Evento (DD/MM/AAAA)"
+                android:hint="Data de Início (DD/MM/AAAA)"
                 android:inputType="date"/>
 
             <EditText
                 android:id="@+id/edtHorarioEvento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Horário do Evento (HH:MM)"
+                android:hint="Horário de Início (HH:MM)"
                 android:inputType="time"/>
+
+            <EditText
+                android:id="@+id/edtDataTerminoEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data de Término (DD/MM/AAAA)"
+                android:inputType="date"/>
+
+            <EditText
+                android:id="@+id/edtHorarioTerminoEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Horário de Término (HH:MM)"
+                android:inputType="time"/>
+
+            <EditText
+                android:id="@+id/edtLocalEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Local do Evento"/>
 
             <EditText
                 android:id="@+id/edtDescricaoEvento"
@@ -59,6 +79,13 @@
                 android:hint="Descrição do Evento"
                 android:inputType="textMultiLine"
                 android:minLines="3"/>
+
+            <EditText
+                android:id="@+id/edtTempoMinimoPermanencia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Tempo Mínimo de Permanência (minutos)"
+                android:inputType="number"/>
 
             <Button
                 android:id="@+id/btnCadastrarEvento"
