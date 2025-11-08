@@ -87,6 +87,15 @@
                 android:hint="Tempo Mínimo de Permanência (minutos)"
                 android:inputType="number"/>
 
+            <TextView
+                android:id="@+id/tvCursosPermitidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cursos Permitidos: Todos"
+                android:padding="12dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_marginTop="16dp"/>
+
             <Button
                 android:id="@+id/btnCadastrarEvento"
                 android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package br.edu.fatecgru.Eventos.ui;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,7 +20,10 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
@@ -28,7 +33,9 @@ public class CadastroEventoActivity extends BaseActivity {
 
     private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento, edtDataTerminoEvento, edtHorarioTerminoEvento, edtLocalEvento, edtTempoMinimoPermanencia;
     private Button btnCadastrarEvento, btnGerarQRCode;
+    private TextView tvCursosPermitidos;
     private FirebaseFirestore db;
+    private ArrayList<String> cursosSelecionados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +59,14 @@ public class CadastroEventoActivity extends BaseActivity {
         edtLocalEvento = findViewById(R.id.edtLocalEvento);
         edtDescricaoEvento = findViewById(R.id.edtDescricaoEvento);
         edtTempoMinimoPermanencia = findViewById(R.id.edtTempoMinimoPermanencia);
+        tvCursosPermitidos = findViewById(R.id.tvCursosPermitidos);
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
         btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
         setupDateTimePickers();
+        cursosSelecionados.add("Todos"); // Default to all courses
 
+        tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnCadastrarEvento.setOnClickListener(v -> cadastrarEvento());
     }
 
@@ -107,6 +117,47 @@ public class CadastroEventoActivity extends BaseActivity {
         timePickerDialog.show();
     }
 
+    private void showCursosDialog() {
+        String[] cursos = getResources().getStringArray(R.array.cursos_array);
+        List<String> cursosDialogList = new ArrayList<>(Arrays.asList(cursos));
+        cursosDialogList.remove("Selecione o Curso");
+        String[] cursosDialog = cursosDialogList.toArray(new String[0]);
+        boolean[] checkedItems = new boolean[cursosDialog.length];
+
+        ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
+
+        for (int i = 0; i < cursosDialog.length; i++) {
+            if (tempCursosSelecionados.contains(cursosDialog[i])) {
+                checkedItems[i] = true;
+            }
+        }
+
+        new AlertDialog.Builder(this)
+            .setTitle("Selecione os Cursos")
+            .setMultiChoiceItems(cursosDialog, checkedItems, (dialog, which, isChecked) -> {
+                if (isChecked) {
+                    tempCursosSelecionados.add(cursosDialog[which]);
+                } else {
+                    tempCursosSelecionados.remove(cursosDialog[which]);
+                }
+            })
+            .setPositiveButton("OK", (dialog, which) -> {
+                cursosSelecionados.clear();
+                cursosSelecionados.addAll(tempCursosSelecionados);
+
+                if (cursosSelecionados.isEmpty() || cursosSelecionados.size() == cursosDialog.length) {
+                    cursosSelecionados.clear(); 
+                    cursosSelecionados.add("Todos");
+                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+                } else {
+                    cursosSelecionados.remove("Todos");
+                    tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
+                }
+            })
+            .setNegativeButton("Cancelar", null)
+            .show();
+    }
+
     private void cadastrarEvento() {
         String nome = edtNomeEvento.getText().toString().trim();
         String data = edtDataEvento.getText().toString().trim();
@@ -133,12 +184,16 @@ public class CadastroEventoActivity extends BaseActivity {
         novoEvento.setDescricao(descricao);
         novoEvento.setTempoMinimo(tempoMinimo);
 
+        if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
+            novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
+        } else {
+            novoEvento.setCursosPermitidos(cursosSelecionados);
+        }
+
         db.collection("eventos").add(novoEvento)
                 .addOnSuccessListener(documentReference -> {
                     Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
                     String eventoId = documentReference.getId();
-
-                    // Disable fields after successful registration
 
                     btnGerarQRCode.setVisibility(View.VISIBLE);
                     btnGerarQRCode.setOnClickListener(v -> {

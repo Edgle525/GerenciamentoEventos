@@ -44,587 +44,595 @@
 24-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:13:22-77
 25        android:maxSdkVersion="32" />
 25-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:13:78-104
-26    <uses-permission android:name="android.permission.WAKE_LOCK" />
-26-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:25:5-68
-26-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:25:22-65
-27    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-27-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:26:5-110
-27-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:26:22-107
-28    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-28-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:25:5-79
-28-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:25:22-76
-29    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
-29-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:26:5-88
-29-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:26:22-85
-30    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
-30-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:27:5-82
-30-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:27:22-79
-31    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-31-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8b48ace9697f809af86514f0cee333c5\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:5-98
-31-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8b48ace9697f809af86514f0cee333c5\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:22-95
-32
-33    <permission
-33-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
-34        android:name="br.edu.fatecgru.Eventos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-34-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
-35        android:protectionLevel="signature" />
-35-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
-36
-37    <uses-permission android:name="br.edu.fatecgru.Eventos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
-37-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
-37-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
-38    <uses-feature
-38-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
-39        android:name="android.hardware.camera"
-39-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
-40        android:required="false" />
-40-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
+26    <uses-permission
+26-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:5-107
+27        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+27-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:22-78
+28        android:maxSdkVersion="28" />
+28-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:79-105
+29    <uses-permission android:name="android.permission.WAKE_LOCK" />
+29-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:25:5-68
+29-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:25:22-65
+30    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+30-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:26:5-110
+30-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:26:22-107
+31    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+31-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:25:5-79
+31-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:25:22-76
+32    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" />
+32-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:26:5-88
+32-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:26:22-85
+33    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" />
+33-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:27:5-82
+33-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:27:22-79
+34    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+34-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8b48ace9697f809af86514f0cee333c5\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:5-98
+34-->[com.google.android.recaptcha:recaptcha:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8b48ace9697f809af86514f0cee333c5\transformed\recaptcha-18.4.0\AndroidManifest.xml:9:22-95
+35
+36    <permission
+36-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+37        android:name="br.edu.fatecgru.Eventos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+37-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+38        android:protectionLevel="signature" />
+38-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+39
+40    <uses-permission android:name="br.edu.fatecgru.Eventos.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Don't require camera, as this requires a rear camera. This allows it to work on the Nexus 7 -->
+40-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+40-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
 41    <uses-feature
-41-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
-42        android:name="android.hardware.camera.front"
-42-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
-43        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
-43-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
-44    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
-45    <uses-feature
-45-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
-46        android:name="android.hardware.camera.autofocus"
-46-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
-47        android:required="false" />
-47-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
+41-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:25:5-27:36
+42        android:name="android.hardware.camera"
+42-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:26:9-47
+43        android:required="false" />
+43-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:27:9-33
+44    <uses-feature
+44-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:28:5-30:36
+45        android:name="android.hardware.camera.front"
+45-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:29:9-53
+46        android:required="false" /> <!-- TODO replace above two with next line after Android 4.2 -->
+46-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:30:9-33
+47    <!-- <uses-feature android:name="android.hardware.camera.any"/> -->
 48    <uses-feature
-48-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
-49        android:name="android.hardware.camera.flash"
-49-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
+48-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:33:5-35:36
+49        android:name="android.hardware.camera.autofocus"
+49-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:34:9-57
 50        android:required="false" />
-50-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
+50-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:35:9-33
 51    <uses-feature
-51-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
-52        android:name="android.hardware.screen.landscape"
-52-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
+51-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:36:5-38:36
+52        android:name="android.hardware.camera.flash"
+52-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:37:9-53
 53        android:required="false" />
-53-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+53-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:38:9-33
 54    <uses-feature
-54-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
-55        android:name="android.hardware.wifi"
-55-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+54-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:39:5-41:36
+55        android:name="android.hardware.screen.landscape"
+55-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:40:9-57
 56        android:required="false" />
-56-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
-57
-58    <application
-58-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:15:5-59:19
-59        android:allowBackup="true"
-59-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:16:9-35
-60        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-60-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
-61        android:dataExtractionRules="@xml/data_extraction_rules"
-61-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:17:9-65
-62        android:debuggable="true"
-63        android:extractNativeLibs="false"
-64        android:fullBackupContent="@xml/backup_rules"
-64-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:18:9-54
-65        android:icon="@mipmap/ic_launcher"
-65-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:19:9-43
-66        android:label="@string/app_name"
-66-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:20:9-41
-67        android:roundIcon="@mipmap/ic_launcher_round"
-67-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:21:9-54
-68        android:supportsRtl="true"
-68-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:22:9-35
-69        android:testOnly="true"
-70        android:theme="@style/Theme.GerenciamentoEventos" >
-70-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:23:9-58
-71        <activity
-71-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:25:9-32:20
-72            android:name="br.edu.fatecgru.Eventos.ui.MainActivity"
-72-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:26:13-44
-73            android:exported="true" >
-73-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:27:13-36
-74            <intent-filter>
-74-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:28:13-31:29
-75                <action android:name="android.intent.action.MAIN" />
-75-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:17-69
-75-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:25-66
-76
-77                <category android:name="android.intent.category.LAUNCHER" />
-77-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:17-77
-77-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:27-74
-78            </intent-filter>
-79        </activity>
-80        <activity
-80-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:9-82
-81            android:name="br.edu.fatecgru.Eventos.ui.CadastroActivity"
-81-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:19-54
-82            android:exported="false" />
-82-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:55-79
-83        <activity
-83-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:9-79
-84            android:name="br.edu.fatecgru.Eventos.ui.AdminActivity"
-84-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:19-51
-85            android:exported="false" />
-85-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:52-76
-86        <activity
-86-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:9-78
-87            android:name="br.edu.fatecgru.Eventos.ui.UserActivity"
-87-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:19-50
-88            android:exported="false" />
-88-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:51-75
-89        <activity
-89-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:9-83
-90            android:name="br.edu.fatecgru.Eventos.ui.MeuPerfilActivity"
-90-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:19-55
-91            android:exported="false" />
-91-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:56-80
-92        <activity
-92-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:9-88
-93            android:name="br.edu.fatecgru.Eventos.ui.CadastroEventoActivity"
-93-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:19-60
-94            android:exported="false" />
-94-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:61-85
-95        <activity
-95-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:9-92
-96            android:name="br.edu.fatecgru.Eventos.ui.ListarEventosAdminActivity"
-96-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:19-64
-97            android:exported="false" />
-97-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:65-89
-98        <activity
-98-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:9-86
-99            android:name="br.edu.fatecgru.Eventos.ui.EditarEventoActivity"
-99-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:19-58
-100            android:exported="false" />
-100-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:59-83
-101        <activity
-101-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:9-85
-102            android:name="br.edu.fatecgru.Eventos.ui.ComprovanteActivity"
-102-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:19-57
-103            android:exported="false" />
-103-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:58-82
-104        <activity
-104-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:9-83
-105            android:name="br.edu.fatecgru.Eventos.ui.HistoricoActivity"
-105-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:19-55
-106            android:exported="false" />
-106-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:56-80
-107        <activity
-107-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:9-90
-108            android:name="br.edu.fatecgru.Eventos.ui.ViewParticipantsActivity"
-108-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:19-62
-109            android:exported="false" />
-109-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:63-87
-110        <activity
-110-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:9-91
-111            android:name="br.edu.fatecgru.Eventos.ui.EventParticipantsActivity"
-111-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:19-63
-112            android:exported="false" />
-112-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:64-88
-113        <activity
-113-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:9-92
-114            android:name="br.edu.fatecgru.Eventos.ui.ParticipantHistoryActivity"
-114-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:19-64
-115            android:exported="false" />
-115-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:65-89
-116        <activity
-116-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:9-85
-117            android:name="br.edu.fatecgru.Eventos.ui.MeusEventosActivity"
-117-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:19-57
-118            android:exported="false" />
-118-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:58-82
-119        <activity
-119-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:9-84
-120            android:name="br.edu.fatecgru.Eventos.ui.UserQRCodeActivity"
-120-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:19-56
-121            android:exported="false" />
-121-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:57-81
-122        <activity
-122-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:9-91
-123            android:name="br.edu.fatecgru.Eventos.ui.ParticipantQRCodeActivity"
-123-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:19-63
-124            android:exported="false" />
-124-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:64-88
-125        <activity
-125-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:9-85
-126            android:name="br.edu.fatecgru.Eventos.ui.EventQRCodeActivity"
-126-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:19-57
-127            android:exported="false" />
-127-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:58-82
-128        <activity
-128-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:9-87
-129            android:name="br.edu.fatecgru.Eventos.ui.GerarPresencaActivity"
-129-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:19-59
-130            android:exported="false" />
-130-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:60-84
-131        <activity
-131-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:9-57:63
-132            android:name="br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait"
-132-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:53:13-55
-133            android:screenOrientation="portrait"
-133-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:54:13-49
-134            android:stateNotNeeded="true"
-134-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:55:13-42
-135            android:theme="@style/zxing_CaptureTheme"
-135-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:56:13-54
-136            android:windowSoftInputMode="stateAlwaysHidden" />
-136-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:57:13-60
-137        <activity
-137-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:29:9-46:20
-138            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-138-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:30:13-80
-139            android:excludeFromRecents="true"
-139-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:31:13-46
-140            android:exported="true"
-140-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:32:13-36
-141            android:launchMode="singleTask"
-141-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:33:13-44
-142            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-142-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:34:13-72
-143            <intent-filter>
-143-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:35:13-45:29
-144                <action android:name="android.intent.action.VIEW" />
-144-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:17-69
-144-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:25-66
-145
-146                <category android:name="android.intent.category.DEFAULT" />
-146-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:17-76
-146-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:27-73
-147                <category android:name="android.intent.category.BROWSABLE" />
-147-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:17-78
-147-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:27-75
-148
-149                <data
-149-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:41:17-44:51
-150                    android:host="firebase.auth"
-150-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:42:21-49
-151                    android:path="/"
-151-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:43:21-37
-152                    android:scheme="genericidp" />
-152-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:44:21-48
-153            </intent-filter>
-154        </activity>
-155        <activity
-155-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:47:9-64:20
-156            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-156-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:48:13-79
-157            android:excludeFromRecents="true"
-157-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:49:13-46
-158            android:exported="true"
-158-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:50:13-36
-159            android:launchMode="singleTask"
-159-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:51:13-44
-160            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-160-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:52:13-72
-161            <intent-filter>
-161-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:53:13-63:29
-162                <action android:name="android.intent.action.VIEW" />
-162-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:17-69
-162-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:25-66
-163
-164                <category android:name="android.intent.category.DEFAULT" />
-164-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:17-76
-164-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:27-73
-165                <category android:name="android.intent.category.BROWSABLE" />
-165-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:17-78
-165-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:27-75
-166
-167                <data
-167-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:41:17-44:51
-168                    android:host="firebase.auth"
-168-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:42:21-49
-169                    android:path="/"
-169-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:43:21-37
-170                    android:scheme="recaptcha" />
-170-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:44:21-48
-171            </intent-filter>
-172        </activity>
-173
-174        <service
-174-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:66:9-72:19
-175            android:name="com.google.firebase.components.ComponentDiscoveryService"
-175-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:67:13-84
-176            android:directBootAware="true"
-176-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
-177            android:exported="false" >
-177-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:68:13-37
-178            <meta-data
-178-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:69:13-71:85
-179                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-179-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:70:17-109
-180                android:value="com.google.firebase.components.ComponentRegistrar" />
-180-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:71:17-82
-181            <meta-data
-181-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:17:13-19:85
-182                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
-182-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:18:17-122
-183                android:value="com.google.firebase.components.ComponentRegistrar" />
-183-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:19:17-82
-184            <meta-data
-184-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:20:13-22:85
-185                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
-185-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:21:17-111
-186                android:value="com.google.firebase.components.ComponentRegistrar" />
-186-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:22:17-82
-187            <meta-data
-187-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:30:13-32:85
-188                android:name="com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar"
-188-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:31:17-118
-189                android:value="com.google.firebase.components.ComponentRegistrar" />
-189-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:32:17-82
-190            <meta-data
-190-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:33:13-35:85
-191                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
-191-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:34:17-107
-192                android:value="com.google.firebase.components.ComponentRegistrar" />
-192-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:35:17-82
-193            <meta-data
-193-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:25:13-27:85
-194                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
-194-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:26:17-120
-195                android:value="com.google.firebase.components.ComponentRegistrar" />
-195-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:27:17-82
-196            <meta-data
-196-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:28:13-30:85
-197                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar"
-197-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:29:17-117
-198                android:value="com.google.firebase.components.ComponentRegistrar" />
-198-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:30:17-82
-199            <meta-data
-199-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:37:13-39:85
-200                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-200-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:38:17-139
-201                android:value="com.google.firebase.components.ComponentRegistrar" />
-201-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:39:17-82
-202            <meta-data
-202-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
-203                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
-203-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
-204                android:value="com.google.firebase.components.ComponentRegistrar" />
-204-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
-205            <meta-data
-205-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
-206                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-206-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
-207                android:value="com.google.firebase.components.ComponentRegistrar" />
-207-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
-208            <meta-data
-208-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
-209                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
-209-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
-210                android:value="com.google.firebase.components.ComponentRegistrar" />
-210-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
-211            <meta-data
-211-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
-212                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
-212-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
-213                android:value="com.google.firebase.components.ComponentRegistrar" />
-213-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
-214        </service>
-215        <service
-215-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
-216            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
-216-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
-217            android:enabled="true"
-217-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
-218            android:exported="false" >
-218-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
-219            <meta-data
-219-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
-220                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
-220-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
-221                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
-221-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
-222        </service>
-223
-224        <activity
-224-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
-225            android:name="androidx.credentials.playservices.HiddenActivity"
-225-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
-226            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-226-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
-227            android:enabled="true"
-227-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
-228            android:exported="false"
-228-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
-229            android:fitsSystemWindows="true"
-229-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
-230            android:theme="@style/Theme.Hidden" >
-230-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
-231        </activity>
-232        <activity
-232-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:23:9-27:75
-233            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
-233-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:24:13-93
-234            android:excludeFromRecents="true"
-234-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:25:13-46
-235            android:exported="false"
-235-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:26:13-37
-236            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-236-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:27:13-72
-237        <!--
-238            Service handling Google Sign-In user revocation. For apps that do not integrate with
-239            Google Sign-In, this service will never be started.
-240        -->
-241        <service
-241-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:33:9-37:51
-242            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
-242-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:34:13-89
-243            android:exported="true"
-243-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:35:13-36
-244            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
-244-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:36:13-107
-245            android:visibleToInstantApps="true" />
-245-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:37:13-48
-246
-247        <activity
-247-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
-248            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-248-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:20:19-85
-249            android:exported="false"
-249-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:22:19-43
-250            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-250-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:21:19-78
-251
-252        <receiver
-252-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:29:9-33:20
-253            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-253-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:30:13-85
-254            android:enabled="true"
-254-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:31:13-35
-255            android:exported="false" >
-255-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:32:13-37
-256        </receiver>
-257
-258        <service
-258-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:35:9-38:40
-259            android:name="com.google.android.gms.measurement.AppMeasurementService"
-259-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:36:13-84
-260            android:enabled="true"
-260-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:37:13-35
-261            android:exported="false" />
-261-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:38:13-37
+56-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:41:9-33
+57    <uses-feature
+57-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:42:5-44:36
+58        android:name="android.hardware.wifi"
+58-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:43:9-45
+59        android:required="false" />
+59-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:44:9-33
+60
+61    <application
+61-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:16:5-61:19
+62        android:allowBackup="true"
+62-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:17:9-35
+63        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+63-->[androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+64        android:dataExtractionRules="@xml/data_extraction_rules"
+64-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:18:9-65
+65        android:debuggable="true"
+66        android:extractNativeLibs="false"
+67        android:fullBackupContent="@xml/backup_rules"
+67-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:19:9-54
+68        android:icon="@mipmap/ic_launcher"
+68-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:20:9-43
+69        android:label="@string/app_name"
+69-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:21:9-41
+70        android:requestLegacyExternalStorage="true"
+70-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:24:9-52
+71        android:roundIcon="@mipmap/ic_launcher_round"
+71-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:22:9-54
+72        android:supportsRtl="true"
+72-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:23:9-35
+73        android:testOnly="true"
+74        android:theme="@style/Theme.GerenciamentoEventos" >
+74-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:25:9-58
+75        <activity
+75-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:27:9-34:20
+76            android:name="br.edu.fatecgru.Eventos.ui.MainActivity"
+76-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:28:13-44
+77            android:exported="true" >
+77-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:13-36
+78            <intent-filter>
+78-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:13-33:29
+79                <action android:name="android.intent.action.MAIN" />
+79-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:31:17-69
+79-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:31:25-66
+80
+81                <category android:name="android.intent.category.LAUNCHER" />
+81-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:32:17-77
+81-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:32:27-74
+82            </intent-filter>
+83        </activity>
+84        <activity
+84-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:9-82
+85            android:name="br.edu.fatecgru.Eventos.ui.CadastroActivity"
+85-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:19-54
+86            android:exported="false" />
+86-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:55-79
+87        <activity
+87-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:9-79
+88            android:name="br.edu.fatecgru.Eventos.ui.AdminActivity"
+88-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:19-51
+89            android:exported="false" />
+89-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:52-76
+90        <activity
+90-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:9-78
+91            android:name="br.edu.fatecgru.Eventos.ui.UserActivity"
+91-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:19-50
+92            android:exported="false" />
+92-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:51-75
+93        <activity
+93-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:9-83
+94            android:name="br.edu.fatecgru.Eventos.ui.MeuPerfilActivity"
+94-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:19-55
+95            android:exported="false" />
+95-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:56-80
+96        <activity
+96-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:9-88
+97            android:name="br.edu.fatecgru.Eventos.ui.CadastroEventoActivity"
+97-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:19-60
+98            android:exported="false" />
+98-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:61-85
+99        <activity
+99-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:9-92
+100            android:name="br.edu.fatecgru.Eventos.ui.ListarEventosAdminActivity"
+100-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:19-64
+101            android:exported="false" />
+101-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:65-89
+102        <activity
+102-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:9-86
+103            android:name="br.edu.fatecgru.Eventos.ui.EditarEventoActivity"
+103-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:19-58
+104            android:exported="false" />
+104-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:59-83
+105        <activity
+105-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:9-85
+106            android:name="br.edu.fatecgru.Eventos.ui.ComprovanteActivity"
+106-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:19-57
+107            android:exported="false" />
+107-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:58-82
+108        <activity
+108-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:9-83
+109            android:name="br.edu.fatecgru.Eventos.ui.HistoricoActivity"
+109-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:19-55
+110            android:exported="false" />
+110-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:56-80
+111        <activity
+111-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:9-90
+112            android:name="br.edu.fatecgru.Eventos.ui.ViewParticipantsActivity"
+112-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:19-62
+113            android:exported="false" />
+113-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:63-87
+114        <activity
+114-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:9-91
+115            android:name="br.edu.fatecgru.Eventos.ui.EventParticipantsActivity"
+115-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:19-63
+116            android:exported="false" />
+116-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:64-88
+117        <activity
+117-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:9-92
+118            android:name="br.edu.fatecgru.Eventos.ui.ParticipantHistoryActivity"
+118-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:19-64
+119            android:exported="false" />
+119-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:65-89
+120        <activity
+120-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:9-85
+121            android:name="br.edu.fatecgru.Eventos.ui.MeusEventosActivity"
+121-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:19-57
+122            android:exported="false" />
+122-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:58-82
+123        <activity
+123-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:9-84
+124            android:name="br.edu.fatecgru.Eventos.ui.UserQRCodeActivity"
+124-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:19-56
+125            android:exported="false" />
+125-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:57-81
+126        <activity
+126-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:9-91
+127            android:name="br.edu.fatecgru.Eventos.ui.ParticipantQRCodeActivity"
+127-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:19-63
+128            android:exported="false" />
+128-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:64-88
+129        <activity
+129-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:9-85
+130            android:name="br.edu.fatecgru.Eventos.ui.EventQRCodeActivity"
+130-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:19-57
+131            android:exported="false" />
+131-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:58-82
+132        <activity
+132-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:9-87
+133            android:name="br.edu.fatecgru.Eventos.ui.GerarPresencaActivity"
+133-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:19-59
+134            android:exported="false" />
+134-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:60-84
+135        <activity
+135-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:54:9-59:63
+136            android:name="br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait"
+136-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:55:13-55
+137            android:screenOrientation="portrait"
+137-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:56:13-49
+138            android:stateNotNeeded="true"
+138-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:57:13-42
+139            android:theme="@style/zxing_CaptureTheme"
+139-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:58:13-54
+140            android:windowSoftInputMode="stateAlwaysHidden" />
+140-->C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:59:13-60
+141        <activity
+141-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:29:9-46:20
+142            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+142-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:30:13-80
+143            android:excludeFromRecents="true"
+143-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:31:13-46
+144            android:exported="true"
+144-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:32:13-36
+145            android:launchMode="singleTask"
+145-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:33:13-44
+146            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+146-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:34:13-72
+147            <intent-filter>
+147-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:35:13-45:29
+148                <action android:name="android.intent.action.VIEW" />
+148-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:17-69
+148-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:25-66
+149
+150                <category android:name="android.intent.category.DEFAULT" />
+150-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:17-76
+150-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:27-73
+151                <category android:name="android.intent.category.BROWSABLE" />
+151-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:17-78
+151-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:27-75
+152
+153                <data
+153-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:41:17-44:51
+154                    android:host="firebase.auth"
+154-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:42:21-49
+155                    android:path="/"
+155-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:43:21-37
+156                    android:scheme="genericidp" />
+156-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:44:21-48
+157            </intent-filter>
+158        </activity>
+159        <activity
+159-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:47:9-64:20
+160            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+160-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:48:13-79
+161            android:excludeFromRecents="true"
+161-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:49:13-46
+162            android:exported="true"
+162-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:50:13-36
+163            android:launchMode="singleTask"
+163-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:51:13-44
+164            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+164-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:52:13-72
+165            <intent-filter>
+165-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:53:13-63:29
+166                <action android:name="android.intent.action.VIEW" />
+166-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:17-69
+166-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:36:25-66
+167
+168                <category android:name="android.intent.category.DEFAULT" />
+168-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:17-76
+168-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:38:27-73
+169                <category android:name="android.intent.category.BROWSABLE" />
+169-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:17-78
+169-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:39:27-75
+170
+171                <data
+171-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:41:17-44:51
+172                    android:host="firebase.auth"
+172-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:42:21-49
+173                    android:path="/"
+173-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:43:21-37
+174                    android:scheme="recaptcha" />
+174-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:44:21-48
+175            </intent-filter>
+176        </activity>
+177
+178        <service
+178-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:66:9-72:19
+179            android:name="com.google.firebase.components.ComponentDiscoveryService"
+179-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:67:13-84
+180            android:directBootAware="true"
+180-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:32:13-43
+181            android:exported="false" >
+181-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:68:13-37
+182            <meta-data
+182-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:69:13-71:85
+183                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+183-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:70:17-109
+184                android:value="com.google.firebase.components.ComponentRegistrar" />
+184-->[com.google.firebase:firebase-auth:23.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8431ea5c8e4f168c21512d509897343e\transformed\firebase-auth-23.0.0\AndroidManifest.xml:71:17-82
+185            <meta-data
+185-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:17:13-19:85
+186                android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar"
+186-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:18:17-122
+187                android:value="com.google.firebase.components.ComponentRegistrar" />
+187-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:19:17-82
+188            <meta-data
+188-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:20:13-22:85
+189                android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar"
+189-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:21:17-111
+190                android:value="com.google.firebase.components.ComponentRegistrar" />
+190-->[com.google.firebase:firebase-firestore:25.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\e36a3ddefd3ec08d3cc2e9f4684626ca\transformed\firebase-firestore-25.0.0\AndroidManifest.xml:22:17-82
+191            <meta-data
+191-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:30:13-32:85
+192                android:name="com.google.firebase.components:com.google.firebase.storage.FirebaseStorageKtxRegistrar"
+192-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:31:17-118
+193                android:value="com.google.firebase.components.ComponentRegistrar" />
+193-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:32:17-82
+194            <meta-data
+194-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:33:13-35:85
+195                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+195-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:34:17-107
+196                android:value="com.google.firebase.components.ComponentRegistrar" />
+196-->[com.google.firebase:firebase-storage:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\5e3f48db5a9398854a1dc01abc7dfa6d\transformed\firebase-storage-21.0.0\AndroidManifest.xml:35:17-82
+197            <meta-data
+197-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:25:13-27:85
+198                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckKtxRegistrar"
+198-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:26:17-120
+199                android:value="com.google.firebase.components.ComponentRegistrar" />
+199-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:27:17-82
+200            <meta-data
+200-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:28:13-30:85
+201                android:name="com.google.firebase.components:com.google.firebase.appcheck.FirebaseAppCheckRegistrar"
+201-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:29:17-117
+202                android:value="com.google.firebase.components.ComponentRegistrar" />
+202-->[com.google.firebase:firebase-appcheck:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\4f18edc4fa4dda9cdca21f3f7a94b162\transformed\firebase-appcheck-18.0.0\AndroidManifest.xml:30:17-82
+203            <meta-data
+203-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:37:13-39:85
+204                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+204-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:38:17-139
+205                android:value="com.google.firebase.components.ComponentRegistrar" />
+205-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:39:17-82
+206            <meta-data
+206-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:15:13-17:85
+207                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar"
+207-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:16:17-130
+208                android:value="com.google.firebase.components.ComponentRegistrar" />
+208-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:17:17-82
+209            <meta-data
+209-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:18:13-20:85
+210                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+210-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:19:17-127
+211                android:value="com.google.firebase.components.ComponentRegistrar" />
+211-->[com.google.firebase:firebase-installations:18.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\1fe666416a5debdbb64a49de421ed230\transformed\firebase-installations-18.0.0\AndroidManifest.xml:20:17-82
+212            <meta-data
+212-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:12:13-14:85
+213                android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar"
+213-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:13:17-116
+214                android:value="com.google.firebase.components.ComponentRegistrar" />
+214-->[com.google.firebase:firebase-common-ktx:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\0f62dd77dafce2b8b2f05f982cecbfe2\transformed\firebase-common-ktx-21.0.0\AndroidManifest.xml:14:17-82
+215            <meta-data
+215-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:35:13-37:85
+216                android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar"
+216-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:36:17-109
+217                android:value="com.google.firebase.components.ComponentRegistrar" />
+217-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:37:17-82
+218        </service>
+219        <service
+219-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:24:9-32:19
+220            android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder"
+220-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:25:13-94
+221            android:enabled="true"
+221-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:26:13-35
+222            android:exported="false" >
+222-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:27:13-37
+223            <meta-data
+223-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:29:13-31:104
+224                android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY"
+224-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:30:17-76
+225                android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl" />
+225-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:31:17-101
+226        </service>
+227
+228        <activity
+228-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:34:9-41:20
+229            android:name="androidx.credentials.playservices.HiddenActivity"
+229-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:35:13-76
+230            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+230-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:36:13-87
+231            android:enabled="true"
+231-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:37:13-35
+232            android:exported="false"
+232-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:38:13-37
+233            android:fitsSystemWindows="true"
+233-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:39:13-45
+234            android:theme="@style/Theme.Hidden" >
+234-->[androidx.credentials:credentials-play-services-auth:1.2.0-rc01] C:\Users\Edgle\.gradle\caches\8.13\transforms\95a78788cd55cb379212849284e66528\transformed\credentials-play-services-auth-1.2.0-rc01\AndroidManifest.xml:40:13-48
+235        </activity>
+236        <activity
+236-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:23:9-27:75
+237            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+237-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:24:13-93
+238            android:excludeFromRecents="true"
+238-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:25:13-46
+239            android:exported="false"
+239-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:26:13-37
+240            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+240-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:27:13-72
+241        <!--
+242            Service handling Google Sign-In user revocation. For apps that do not integrate with
+243            Google Sign-In, this service will never be started.
+244        -->
+245        <service
+245-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:33:9-37:51
+246            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+246-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:34:13-89
+247            android:exported="true"
+247-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:35:13-36
+248            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+248-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:36:13-107
+249            android:visibleToInstantApps="true" />
+249-->[com.google.android.gms:play-services-auth:21.2.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\3f793e1772fe495d141d1d05c6f545af\transformed\play-services-auth-21.2.0\AndroidManifest.xml:37:13-48
+250
+251        <activity
+251-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+252            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+252-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+253            android:exported="false"
+253-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+254            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+254-->[com.google.android.gms:play-services-base:18.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\25dfbd6a5a9168bbbc7bd0f728db764f\transformed\play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+255
+256        <receiver
+256-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:29:9-33:20
+257            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+257-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:30:13-85
+258            android:enabled="true"
+258-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:31:13-35
+259            android:exported="false" >
+259-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:32:13-37
+260        </receiver>
+261
 262        <service
-262-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:39:9-43:72
-263            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-263-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:40:13-87
+262-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:35:9-38:40
+263            android:name="com.google.android.gms.measurement.AppMeasurementService"
+263-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:36:13-84
 264            android:enabled="true"
-264-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:41:13-35
-265            android:exported="false"
-265-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:42:13-37
-266            android:permission="android.permission.BIND_JOB_SERVICE" />
-266-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:43:13-69
-267
-268        <property
-268-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:30:9-32:61
-269            android:name="android.adservices.AD_SERVICES_CONFIG"
-269-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:31:13-65
-270            android:resource="@xml/ga_ad_services_config" />
-270-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:32:13-58
+264-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:37:13-35
+265            android:exported="false" />
+265-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:38:13-37
+266        <service
+266-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:39:9-43:72
+267            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+267-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:40:13-87
+268            android:enabled="true"
+268-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:41:13-35
+269            android:exported="false"
+269-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:42:13-37
+270            android:permission="android.permission.BIND_JOB_SERVICE" />
+270-->[com.google.android.gms:play-services-measurement:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\c7c86e9c1f167c3b0a4f39134727aac3\transformed\play-services-measurement-22.0.2\AndroidManifest.xml:43:13-69
 271
-272        <provider
-272-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
-273            android:name="com.google.firebase.provider.FirebaseInitProvider"
-273-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
-274            android:authorities="br.edu.fatecgru.Eventos.firebaseinitprovider"
-274-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
-275            android:directBootAware="true"
-275-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
-276            android:exported="false"
-276-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
-277            android:initOrder="100" />
-277-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
-278
-279        <uses-library
-279-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
-280            android:name="android.ext.adservices"
-280-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
-281            android:required="false" />
-281-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
+272        <property
+272-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:30:9-32:61
+273            android:name="android.adservices.AD_SERVICES_CONFIG"
+273-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:31:13-65
+274            android:resource="@xml/ga_ad_services_config" />
+274-->[com.google.android.gms:play-services-measurement-api:22.0.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\d07109debe01f1a4a4c492c28617a105\transformed\play-services-measurement-api-22.0.2\AndroidManifest.xml:32:13-58
+275
+276        <provider
+276-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:23:9-28:39
+277            android:name="com.google.firebase.provider.FirebaseInitProvider"
+277-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:24:13-77
+278            android:authorities="br.edu.fatecgru.Eventos.firebaseinitprovider"
+278-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:25:13-72
+279            android:directBootAware="true"
+279-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:26:13-43
+280            android:exported="false"
+280-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:27:13-37
+281            android:initOrder="100" />
+281-->[com.google.firebase:firebase-common:21.0.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\cda2032afdd2c17c8ba68aac05855593\transformed\firebase-common-21.0.0\AndroidManifest.xml:28:13-36
 282
-283        <provider
-283-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
-284            android:name="androidx.startup.InitializationProvider"
-284-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
-285            android:authorities="br.edu.fatecgru.Eventos.androidx-startup"
-285-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
-286            android:exported="false" >
-286-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
-287            <meta-data
-287-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
-288                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-288-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
-289                android:value="androidx.startup" />
-289-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
-290            <meta-data
-290-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
-291                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-291-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
-292                android:value="androidx.startup" />
-292-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
-293            <meta-data
-293-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
-294                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-294-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
-295                android:value="androidx.startup" />
-295-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
-296        </provider>
-297
-298        <meta-data
-298-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
-299            android:name="com.google.android.gms.version"
-299-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
-300            android:value="@integer/google_play_services_version" />
-300-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+283        <uses-library
+283-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
+284            android:name="android.ext.adservices"
+284-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
+285            android:required="false" />
+285-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Edgle\.gradle\caches\8.13\transforms\866dc42ffa4639f46ffb48b21293fff1\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
+286
+287        <provider
+287-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+288            android:name="androidx.startup.InitializationProvider"
+288-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:25:13-67
+289            android:authorities="br.edu.fatecgru.Eventos.androidx-startup"
+289-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:26:13-68
+290            android:exported="false" >
+290-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:27:13-37
+291            <meta-data
+291-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+292                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+292-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+293                android:value="androidx.startup" />
+293-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\41da49521b43b3f188840b80cefdf316\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+294            <meta-data
+294-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+295                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+295-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+296                android:value="androidx.startup" />
+296-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\Edgle\.gradle\caches\8.13\transforms\3e7a7e9da005f28cd006566c8991d950\transformed\lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+297            <meta-data
+297-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+298                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+298-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+299                android:value="androidx.startup" />
+299-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+300        </provider>
 301
-302        <activity
-302-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
-303            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-303-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
-304            android:clearTaskOnLaunch="true"
-304-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
-305            android:screenOrientation="sensorLandscape"
-305-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
-306            android:stateNotNeeded="true"
-306-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
-307            android:theme="@style/zxing_CaptureTheme"
-307-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
-308            android:windowSoftInputMode="stateAlwaysHidden" />
-308-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
-309
-310        <receiver
-310-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
-311            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-311-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
-312            android:directBootAware="false"
-312-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
-313            android:enabled="true"
-313-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
-314            android:exported="true"
-314-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
-315            android:permission="android.permission.DUMP" >
-315-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
-316            <intent-filter>
-316-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
-317                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-317-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
-317-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
-318            </intent-filter>
-319            <intent-filter>
-319-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
-320                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-320-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
-320-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
-321            </intent-filter>
-322            <intent-filter>
-322-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
-323                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-323-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
-323-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
-324            </intent-filter>
-325            <intent-filter>
-325-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
-326                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-326-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
-326-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
-327            </intent-filter>
-328        </receiver>
-329    </application>
-330
-331</manifest>
+302        <meta-data
+302-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:9-122
+303            android:name="com.google.android.gms.version"
+303-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:20-65
+304            android:value="@integer/google_play_services_version" />
+304-->[com.google.android.gms:play-services-basement:18.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\287024d793e77243fa0ae6201311299a\transformed\play-services-basement-18.4.0\AndroidManifest.xml:6:66-119
+305
+306        <activity
+306-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+307            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+307-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+308            android:clearTaskOnLaunch="true"
+308-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+309            android:screenOrientation="sensorLandscape"
+309-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+310            android:stateNotNeeded="true"
+310-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+311            android:theme="@style/zxing_CaptureTheme"
+311-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+312            android:windowSoftInputMode="stateAlwaysHidden" />
+312-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\d95fa074dcef59f6193e792f097429e5\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+313
+314        <receiver
+314-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+315            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+315-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+316            android:directBootAware="false"
+316-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+317            android:enabled="true"
+317-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+318            android:exported="true"
+318-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+319            android:permission="android.permission.DUMP" >
+319-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+320            <intent-filter>
+320-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+321                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+321-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+321-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+322            </intent-filter>
+323            <intent-filter>
+323-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+324                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+324-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+324-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+325            </intent-filter>
+326            <intent-filter>
+326-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+327                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+327-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+327-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+328            </intent-filter>
+329            <intent-filter>
+329-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+330                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+330-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+330-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\8eb03f1d1525b321dcefea480f5dca1e\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+331            </intent-filter>
+332        </receiver>
+333    </application>
+334
+335</manifest>

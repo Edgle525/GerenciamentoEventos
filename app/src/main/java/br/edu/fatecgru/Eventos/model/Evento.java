@@ -1,5 +1,7 @@
 package br.edu.fatecgru.Eventos.model;
 
+import java.util.List;
+
 /**
  * Representa a estrutura de dados de um evento.
  * Esta classe (POJO - Plain Old Java Object) serve como um modelo para armazenar
@@ -16,6 +18,7 @@ public class Evento {
     private String local;
     private String descricao;
     private int tempoMinimo;
+    private List<String> cursosPermitidos;
 
     /**
      * Construtor vazio necessário para o Firebase Firestore.
@@ -95,5 +98,13 @@ public class Evento {
 
     public void setTempoMinimo(int tempoMinimo) {
         this.tempoMinimo = tempoMinimo;
+    }
+
+    public List<String> getCursosPermitidos() {
+        return cursosPermitidos;
+    }
+
+    public void setCursosPermitidos(List<String> cursosPermitidos) {
+        this.cursosPermitidos = cursosPermitidos;
     }
 }

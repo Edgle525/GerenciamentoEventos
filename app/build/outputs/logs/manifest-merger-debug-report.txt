@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-61:12
-INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-61:12
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-63:12
+INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:2:1-63:12
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\563a6c159d8fd3915fd763565296341b\transformed\material-1.13.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\Edgle\.gradle\caches\8.13\transforms\73fb79504d1b666be533476478a61851\transformed\constraintlayout-2.2.1\AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.1] C:\Users\Edgle\.gradle\caches\8.13\transforms\862c04705ebe81803adedaf13e478685\transformed\appcompat-resources-1.7.1\AndroidManifest.xml:2:1-7:12
@@ -182,9 +182,15 @@ ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidMan
 		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:13:78-104
 	android:name
 		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:13:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:5-107
+	android:maxSdkVersion
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:79-105
+	android:name
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:14:22-78
 application
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:15:5-59:19
-INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:15:5-59:19
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:16:5-61:19
+INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:16:5-61:19
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\563a6c159d8fd3915fd763565296341b\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\563a6c159d8fd3915fd763565296341b\transformed\material-1.13.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] C:\Users\Edgle\.gradle\caches\8.13\transforms\73fb79504d1b666be533476478a61851\transformed\constraintlayout-2.2.1\AndroidManifest.xml:7:5-20
@@ -263,154 +269,156 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ed
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Edgle\.gradle\caches\8.13\transforms\01e236ee60ca7abc017202c047ac8dfd\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 	android:extractNativeLibs
 		INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml
+	android:requestLegacyExternalStorage
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:24:9-52
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.0] C:\Users\Edgle\.gradle\caches\8.13\transforms\89a043b05e46f56931d4c2eb5c630def\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:22:9-35
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:23:9-35
 	android:label
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:20:9-41
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:21:9-41
 	android:fullBackupContent
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:18:9-54
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:19:9-54
 	android:roundIcon
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:21:9-54
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:22:9-54
 	android:icon
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:19:9-43
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:20:9-43
 	android:allowBackup
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:16:9-35
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:17:9-35
 	android:theme
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:23:9-58
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:25:9-58
 	android:dataExtractionRules
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:17:9-65
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:18:9-65
 activity#br.edu.fatecgru.Eventos.ui.MainActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:25:9-32:20
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:27:9-34:20
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:27:13-36
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:13-36
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:26:13-44
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:28:13-44
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:28:13-31:29
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:13-33:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:17-69
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:31:17-69
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:29:25-66
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:31:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:17-77
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:32:17-77
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:30:27-74
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:32:27-74
 activity#br.edu.fatecgru.Eventos.ui.CadastroActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:9-82
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:9-82
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:55-79
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:55-79
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:34:19-54
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:19-54
 activity#br.edu.fatecgru.Eventos.ui.AdminActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:9-79
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:9-79
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:52-76
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:52-76
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:35:19-51
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:19-51
 activity#br.edu.fatecgru.Eventos.ui.UserActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:9-78
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:9-78
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:51-75
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:51-75
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:36:19-50
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:19-50
 activity#br.edu.fatecgru.Eventos.ui.MeuPerfilActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:9-83
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:9-83
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:56-80
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:56-80
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:37:19-55
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:19-55
 activity#br.edu.fatecgru.Eventos.ui.CadastroEventoActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:9-88
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:9-88
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:61-85
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:61-85
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:38:19-60
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:19-60
 activity#br.edu.fatecgru.Eventos.ui.ListarEventosAdminActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:9-92
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:9-92
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:65-89
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:65-89
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:39:19-64
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:19-64
 activity#br.edu.fatecgru.Eventos.ui.EditarEventoActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:9-86
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:9-86
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:59-83
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:59-83
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:40:19-58
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:19-58
 activity#br.edu.fatecgru.Eventos.ui.ComprovanteActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:9-85
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:9-85
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:58-82
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:58-82
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:41:19-57
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:19-57
 activity#br.edu.fatecgru.Eventos.ui.HistoricoActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:9-83
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:9-83
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:56-80
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:56-80
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:42:19-55
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:19-55
 activity#br.edu.fatecgru.Eventos.ui.ViewParticipantsActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:9-90
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:9-90
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:63-87
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:63-87
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:43:19-62
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:19-62
 activity#br.edu.fatecgru.Eventos.ui.EventParticipantsActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:9-91
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:9-91
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:64-88
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:64-88
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:44:19-63
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:19-63
 activity#br.edu.fatecgru.Eventos.ui.ParticipantHistoryActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:9-92
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:9-92
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:65-89
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:65-89
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:45:19-64
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:19-64
 activity#br.edu.fatecgru.Eventos.ui.MeusEventosActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:9-85
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:9-85
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:58-82
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:58-82
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:46:19-57
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:19-57
 activity#br.edu.fatecgru.Eventos.ui.UserQRCodeActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:9-84
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:9-84
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:57-81
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:57-81
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:47:19-56
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:19-56
 activity#br.edu.fatecgru.Eventos.ui.ParticipantQRCodeActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:9-91
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:9-91
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:64-88
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:64-88
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:48:19-63
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:19-63
 activity#br.edu.fatecgru.Eventos.ui.EventQRCodeActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:9-85
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:9-85
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:58-82
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:58-82
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:49:19-57
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:51:19-57
 activity#br.edu.fatecgru.Eventos.ui.GerarPresencaActivity
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:9-87
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:9-87
 	android:exported
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:60-84
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:60-84
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:50:19-59
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:19-59
 activity#br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait
-ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:52:9-57:63
+ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:54:9-59:63
 	android:screenOrientation
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:54:13-49
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:56:13-49
 	android:stateNotNeeded
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:55:13-42
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:57:13-42
 	android:windowSoftInputMode
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:57:13-60
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:59:13-60
 	android:theme
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:56:13-54
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:58:13-54
 	android:name
-		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:53:13-55
+		ADDED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml:55:13-55
 uses-sdk
 INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Edgle\Downloads\GerenciamentoEventos\app\src\main\AndroidManifest.xml

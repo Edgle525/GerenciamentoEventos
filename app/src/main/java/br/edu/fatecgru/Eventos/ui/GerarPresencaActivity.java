@@ -8,8 +8,12 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,15 +36,19 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
 import br.edu.fatecgru.Eventos.R;
+import br.edu.fatecgru.Eventos.model.Evento;
 import br.edu.fatecgru.Eventos.model.Inscricao;
 import br.edu.fatecgru.Eventos.model.Usuario;
 
@@ -48,15 +56,18 @@ public class GerarPresencaActivity extends BaseActivity {
 
     private Spinner spinnerCurso, spinnerSemestre;
     private ListView listViewPresenca;
-    private Button btnImprimirLista;
+    private Button btnImprimirLista, btnGerarPdf;
 
     private FirebaseFirestore db;
     private String eventoId;
+    private Evento evento;
 
     private List<Usuario> allParticipants = new ArrayList<>();
     private List<Inscricao> allInscricoes = new ArrayList<>();
     private List<String> displayedParticipants = new ArrayList<>();
     private ArrayAdapter<String> adapter;
+
+    private static final int REQUEST_STORAGE_PERMISSION = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +88,7 @@ public class GerarPresencaActivity extends BaseActivity {
         spinnerSemestre = findViewById(R.id.spinnerFiltroSemestre);
         listViewPresenca = findViewById(R.id.listViewPresenca);
         btnImprimirLista = findViewById(R.id.btnImprimirLista);
+        btnGerarPdf = findViewById(R.id.btnGerarPdf);
 
         setupSpinners();
 
@@ -86,6 +98,11 @@ public class GerarPresencaActivity extends BaseActivity {
         fetchEventData();
 
         btnImprimirLista.setOnClickListener(v -> selectPrinterAndPrint());
+        btnGerarPdf.setOnClickListener(v -> {
+            if (checkAndRequestStoragePermission()) {
+                gerarPdf();
+            }
+        });
     }
 
     @Override
@@ -95,15 +112,18 @@ public class GerarPresencaActivity extends BaseActivity {
     }
 
     private void setupSpinners() {
-        ArrayAdapter<CharSequence> cursoAdapter = ArrayAdapter.createFromResource(this,
-                R.array.cursos_array, android.R.layout.simple_spinner_item);
+        List<String> cursos = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.cursos_array)));
+        cursos.remove("Selecione o Curso");
+        ArrayAdapter<String> cursoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cursos);
         cursoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCurso.setAdapter(cursoAdapter);
 
-        ArrayAdapter<CharSequence> semestreAdapter = ArrayAdapter.createFromResource(this,
-                R.array.semestres_array, android.R.layout.simple_spinner_item);
+        List<String> semestres = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.semestres_array)));
+        semestres.remove("Selecione o Semestre");
+        ArrayAdapter<String> semestreAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, semestres);
         semestreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerSemestre.setAdapter(semestreAdapter);
+        spinnerSemestre.setSelection(semestres.indexOf("Geral"));
 
         AdapterView.OnItemSelectedListener filterListener = new AdapterView.OnItemSelectedListener() {
             @Override
@@ -121,17 +141,26 @@ public class GerarPresencaActivity extends BaseActivity {
     private void fetchEventData() {
         if (eventoId == null) return;
 
+        Task<DocumentSnapshot> eventoTask = db.collection("eventos").document(eventoId).get();
         Task<QuerySnapshot> inscricoesTask = db.collection("inscricoes").whereEqualTo("idEvento", eventoId).get();
         Task<QuerySnapshot> usuariosTask = db.collection("usuarios").get();
 
-        Tasks.whenAllSuccess(inscricoesTask, usuariosTask).addOnSuccessListener(results -> {
+        Tasks.whenAllSuccess(eventoTask, inscricoesTask, usuariosTask).addOnSuccessListener(results -> {
+            DocumentSnapshot eventoDoc = (DocumentSnapshot) results.get(0);
+            if (eventoDoc.exists()) {
+                evento = eventoDoc.toObject(Evento.class);
+                if (evento != null) {
+                    evento.setId(eventoDoc.getId());
+                }
+            }
+            
             allInscricoes.clear();
-            for (DocumentSnapshot doc : (QuerySnapshot) results.get(0)) {
+            for (DocumentSnapshot doc : (QuerySnapshot) results.get(1)) {
                 allInscricoes.add(doc.toObject(Inscricao.class));
             }
 
             allParticipants.clear();
-            for (DocumentSnapshot doc : (QuerySnapshot) results.get(1)) {
+            for (DocumentSnapshot doc : (QuerySnapshot) results.get(2)) {
                 Usuario u = doc.toObject(Usuario.class);
                 u.setId(doc.getId());
                 allParticipants.add(u);
@@ -142,6 +171,8 @@ public class GerarPresencaActivity extends BaseActivity {
     }
 
     private void filterAndDisplayParticipants() {
+        if (spinnerCurso.getSelectedItem() == null || spinnerSemestre.getSelectedItem() == null) return;
+
         String cursoFiltro = spinnerCurso.getSelectedItem().toString();
         String semestreFiltro = spinnerSemestre.getSelectedItem().toString();
 
@@ -151,8 +182,8 @@ public class GerarPresencaActivity extends BaseActivity {
             for (Usuario usuario : allParticipants) {
                 if (inscricao.getIdUsuario().equals(usuario.getId())) {
                     
-                    boolean cursoMatch = cursoFiltro.equals("Geral") || cursoFiltro.equals("Selecione o Curso") || (usuario.getCurso() != null && usuario.getCurso().equals(cursoFiltro));
-                    boolean semestreMatch = semestreFiltro.equals("Geral") || semestreFiltro.equals("Selecione o Semestre") || (usuario.getSemestre() != null && usuario.getSemestre().equals(semestreFiltro));
+                    boolean cursoMatch = cursoFiltro.equals("Geral") || (usuario.getCurso() != null && usuario.getCurso().equals(cursoFiltro));
+                    boolean semestreMatch = semestreFiltro.equals("Geral") || (usuario.getSemestre() != null && usuario.getSemestre().equals(semestreFiltro));
 
                     if (cursoMatch && semestreMatch) {
                         String status = "Status: Cadastrado";
@@ -175,18 +206,76 @@ public class GerarPresencaActivity extends BaseActivity {
 
     private String buildPrintableString() {
         StringBuilder builder = new StringBuilder();
-        String cursoFiltro = spinnerCurso.getSelectedItem().toString();
-        String semestreFiltro = spinnerSemestre.getSelectedItem().toString();
+        
+        if (evento != null) {
+            builder.append("Evento: ").append(evento.getNome()).append("\n");
+            builder.append("Descrição: ").append(evento.getDescricao()).append("\n");
+            builder.append("Data Início: ").append(evento.getData()).append("\n");
+            builder.append("Data Fim: ").append(evento.getDataTermino()).append("\n");
+            builder.append("Horário: ").append(evento.getHorario()).append("\n");
+            builder.append("Sala: ").append(evento.getLocal()).append("\n\n");
+        } else {
+             builder.append("Lista de Presença\n\n");
+        }
 
-        builder.append("Lista de Presenca\n");
-        builder.append("Curso: ").append(cursoFiltro).append("\n");
-        builder.append("Semestre: ").append(semestreFiltro).append("\n\n");
+        builder.append("--- PARTICIPANTES ---\n\n");
 
-        for(String userInfo : displayedParticipants){
-            builder.append(userInfo).append("\n");
-            builder.append("--------------------------------\n");
+        if (displayedParticipants.isEmpty()) {
+            builder.append("Nenhum participante encontrado.\n");
+        } else {
+            for(String userInfo : displayedParticipants){
+                builder.append(userInfo).append("\n");
+                builder.append("--------------------------------\n");
+            }
         }
         return builder.toString();
+    }
+
+    private void gerarPdf() {
+        String text = buildPrintableString();
+        if (text.isEmpty()) {
+            Toast.makeText(this, "A lista está vazia.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        createPdfFromString(text);
+    }
+
+    private void createPdfFromString(String text) {
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+        Paint paint = new Paint();
+        paint.setTextSize(12);
+
+        float y = 40;
+        for (String line : text.split("\n")) {
+            canvas.drawText(line, 40, y, paint);
+            y += paint.descent() - paint.ascent();
+        }
+
+        document.finishPage(page);
+
+        try {
+            File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            String baseName = "ListaPresenca-" + evento.getNome().replaceAll("[^a-zA-Z0-9]", "-");
+            File file = new File(downloadsDir, baseName + ".pdf");
+            int count = 1;
+            while(file.exists()){
+                file = new File(downloadsDir, baseName + "-" + count + ".pdf");
+                count++;
+            }
+
+            FileOutputStream fos = new FileOutputStream(file);
+            document.writeTo(fos);
+            document.close();
+            fos.close();
+            Toast.makeText(this, "PDF salvo em Downloads!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao salvar PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void selectPrinterAndPrint() {
@@ -249,6 +338,16 @@ public class GerarPresencaActivity extends BaseActivity {
                 return false;
             }
         } 
+        return true;
+    }
+
+    private boolean checkAndRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+                return false;
+            }
+        }
         return true;
     }
 

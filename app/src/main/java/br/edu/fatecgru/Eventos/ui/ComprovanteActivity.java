@@ -138,7 +138,8 @@ public class ComprovanteActivity extends BaseActivity {
 
         String observacao = "";
         if (diffMinutes < tempoMinimoEvento) {
-            observacao = "\nObservação: O usuário não cumpriu o tempo minimo de permanência no evento.\n";
+            observacao = String.format("\nObservação: A participação neste evento exigia um tempo mínimo de %d minutos." +
+                    " O participante não atingiu o tempo necessário para receber o certificado de conclusão, mas sua presença foi registrada.\n", tempoMinimoEvento);
         }
 
         return "--- COMPROVANTE DE PARTICIPACAO ---\n\n" +
@@ -220,7 +221,14 @@ public class ComprovanteActivity extends BaseActivity {
 
         try {
             File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-            File file = new File(downloadsDir, "Comprovante-" + nomeEvento.replaceAll("[^a-zA-Z0-9]", "-") + ".pdf");
+            String baseName = "Comprovante-" + nomeEvento.replaceAll("[^a-zA-Z0-9]", "-");
+            File file = new File(downloadsDir, baseName + ".pdf");
+            int count = 1;
+            while(file.exists()){
+                file = new File(downloadsDir, baseName + "-" + count + ".pdf");
+                count++;
+            }
+
             FileOutputStream fos = new FileOutputStream(file);
             document.writeTo(fos);
             document.close();
@@ -288,41 +296,22 @@ public class ComprovanteActivity extends BaseActivity {
                             try (BluetoothSocket socket = printerDevice.createRfcommSocketToServiceRecord(uuid)) {
                                 socket.connect();
                                 try (OutputStream outputStream = socket.getOutputStream()) {
-                                    outputStream.write(new byte[]{0x1B, 0x74, 2});
-                                    outputStream.write(proofText.getBytes("CP850"));
+                                    outputStream.write(proofText.getBytes());
                                     outputStream.flush();
                                 }
                                 runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Comprovante enviado para impressão!", Toast.LENGTH_SHORT).show());
                             }
                         } catch (IOException e) {
-                            e.printStackTrace();
-                            runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao conectar ou imprimir: " + e.getMessage(), Toast.LENGTH_LONG).show());
+                            runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao imprimir: " + e.getMessage(), Toast.LENGTH_LONG).show());
                         }
                     }).start();
                 })
-                .addOnFailureListener(e -> runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao buscar inscrição: " + e.getMessage(), Toast.LENGTH_LONG).show()));
+                .addOnFailureListener(e -> runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao buscar inscrição para impressão.", Toast.LENGTH_LONG).show()));
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_BLUETOOTH_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                selectPrinterAndPrint();
-            } else {
-                Toast.makeText(this, "Permissão de Bluetooth negada. Não é possível imprimir.", Toast.LENGTH_SHORT).show();
-            }
-        } else if (requestCode == REQUEST_STORAGE_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                gerarPdf();
-            } else {
-                Toast.makeText(this, "Permissão de armazenamento negada. Não é possível salvar o PDF.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
             return true;

@@ -23,13 +23,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Filtrar por:" />
+            android:text="Selecione o curso" />
 
         <Spinner
             android:id="@+id/spinnerFiltroCurso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Selecione o semestre" />
 
         <Spinner
             android:id="@+id/spinnerFiltroSemestre"
@@ -44,11 +50,27 @@
             android:layout_weight="1"
             android:layout_marginTop="16dp" />
 
-        <Button
-            android:id="@+id/btnImprimirLista"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Imprimir Lista" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnImprimirLista"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Imprimir Lista"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnGerarPdf"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gerar PDF"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>
