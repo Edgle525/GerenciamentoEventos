@@ -4,7 +4,7 @@
             "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,5,9,13,16,19,22,25,28,32",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -34,7 +34,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\0e7364ea4ce3b44764008eb74b795b61\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\0e7364ea4ce3b44764008eb74b795b61\\transformed\\cardview-1.0.0\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

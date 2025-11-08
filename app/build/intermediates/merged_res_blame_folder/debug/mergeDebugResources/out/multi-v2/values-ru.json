@@ -4,7 +4,7 @@
             "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-ru/values-ru.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\27e4757ff6a12648868d134dd9cc1798\\transformed\\credentials-1.2.0-rc01\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\27e4757ff6a12648868d134dd9cc1798\\transformed\\credentials-1.2.0-rc01\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\25dfbd6a5a9168bbbc7bd0f728db764f\\transformed\\play-services-base-18.3.0\\res\\values-ru\\values.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\25dfbd6a5a9168bbbc7bd0f728db764f\\transformed\\play-services-base-18.3.0\\res\\values-ru\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\d95fa074dcef59f6193e792f097429e5\\transformed\\zxing-android-embedded-4.3.0\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\d95fa074dcef59f6193e792f097429e5\\transformed\\zxing-android-embedded-4.3.0\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -55,24 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\287024d793e77243fa0ae6201311299a\\transformed\\play-services-basement-18.4.0\\res\\values-ru\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "152",
-                        "endOffsets": "347"
-                    },
-                    "to": {
-                        "startLines": "59",
-                        "startColumns": "4",
-                        "startOffsets": "5760",
-                        "endColumns": "156",
-                        "endOffsets": "5912"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -91,7 +74,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\296ef8a78def3800e00c738c6e9bf017\\transformed\\browser-1.4.0\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\296ef8a78def3800e00c738c6e9bf017\\transformed\\browser-1.4.0\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -108,7 +91,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -125,7 +108,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\89a043b05e46f56931d4c2eb5c630def\\transformed\\core-1.13.0\\res\\values-ru\\values-ru.xml",
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\89a043b05e46f56931d4c2eb5c630def\\transformed\\core-1.13.0\\res\\values-ru\\values-ru.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -139,6 +122,23 @@
                         "startOffsets": "3708,3806,3908,4009,4110,4215,4318,13365",
                         "endColumns": "97,101,100,100,104,102,116,100",
                         "endOffsets": "3801,3903,4004,4105,4210,4313,4430,13461"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\287024d793e77243fa0ae6201311299a\\transformed\\play-services-basement-18.4.0\\res\\values-ru\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "152",
+                        "endOffsets": "347"
+                    },
+                    "to": {
+                        "startLines": "59",
+                        "startColumns": "4",
+                        "startOffsets": "5760",
+                        "endColumns": "156",
+                        "endOffsets": "5912"
                     }
                 }
             ]
