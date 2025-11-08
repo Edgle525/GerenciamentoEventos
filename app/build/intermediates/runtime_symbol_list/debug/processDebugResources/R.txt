@@ -3845,6 +3845,7 @@ int id browser_actions_menu_item_text 0x7f09006f
 int id browser_actions_menu_items 0x7f090070
 int id browser_actions_menu_view 0x7f090071
 int id btnAcessar 0x7f090072
+int id btnBaixarPdf 0x7f09028c
 int id btnCadastrarEvento 0x7f090073
 int id btnCadastrarUsuario 0x7f090074
 int id btnExcluirEvento 0x7f090075

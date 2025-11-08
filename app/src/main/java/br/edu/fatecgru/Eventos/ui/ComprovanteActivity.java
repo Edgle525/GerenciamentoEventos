@@ -7,8 +7,12 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +23,8 @@ import androidx.core.content.ContextCompat;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
@@ -36,7 +42,9 @@ import br.edu.fatecgru.Eventos.model.Inscricao;
 public class ComprovanteActivity extends BaseActivity {
 
     private static final int REQUEST_BLUETOOTH_PERMISSION = 1;
-    private Button btnImprimir;
+    private static final int REQUEST_STORAGE_PERMISSION = 2;
+
+    private Button btnImprimir, btnBaixarPdf;
     private FirebaseFirestore db;
     private String eventoId, userIdLogado, nomeEvento, dataEvento, horarioEvento, nomeParticipante, emailParticipante;
     private String curso, semestre;
@@ -53,6 +61,7 @@ public class ComprovanteActivity extends BaseActivity {
         }
 
         btnImprimir = findViewById(R.id.btnImprimirComprovante);
+        btnBaixarPdf = findViewById(R.id.btnBaixarPdf);
         db = FirebaseFirestore.getInstance();
 
         getIntentData();
@@ -62,6 +71,12 @@ public class ComprovanteActivity extends BaseActivity {
         btnImprimir.setOnClickListener(v -> {
             if (checkAndRequestBluetoothPermission()) {
                 selectPrinterAndPrint();
+            }
+        });
+
+        btnBaixarPdf.setOnClickListener(v -> {
+            if (checkAndRequestStoragePermission()) {
+                gerarPdf();
             }
         });
     }
@@ -123,7 +138,7 @@ public class ComprovanteActivity extends BaseActivity {
 
         String observacao = "";
         if (diffMinutes < tempoMinimoEvento) {
-            observacao = "\nObservação: O usuário não cumpriu o tempo mínimo de permanência, porém sua presença foi registrada.\n";
+            observacao = "\nObservação: O usuário não cumpriu o tempo minimo de permanência no evento.\n";
         }
 
         return "--- COMPROVANTE DE PARTICIPACAO ---\n\n" +
@@ -154,6 +169,67 @@ public class ComprovanteActivity extends BaseActivity {
             }
         }
         return true;
+    }
+
+    private boolean checkAndRequestStoragePermission() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_STORAGE_PERMISSION);
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void gerarPdf() {
+        db.collection("inscricoes").document(userIdLogado + "_" + eventoId).get()
+            .addOnSuccessListener(documentSnapshot -> {
+                if (documentSnapshot.exists()) {
+                    Inscricao inscricao = documentSnapshot.toObject(Inscricao.class);
+                    if (inscricao != null && inscricao.getHoraEntrada() != null && inscricao.getHoraSaida() != null) {
+                        String proofText = buildProof(inscricao);
+                        if (proofText != null) {
+                            createPdfFromString(proofText);
+                        }
+                    } else {
+                        Toast.makeText(this, "Registro de entrada e/ou saída incompleto.", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Inscrição não encontrada.", Toast.LENGTH_LONG).show();
+                }
+            })
+            .addOnFailureListener(e -> Toast.makeText(this, "Erro ao buscar inscrição.", Toast.LENGTH_LONG).show());
+    }
+
+    private void createPdfFromString(String text) {
+        PdfDocument document = new PdfDocument();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(595, 842, 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+        Paint paint = new Paint();
+        paint.setTextSize(12);
+
+        float y = 40;
+        for (String line : text.split("\n")) {
+            canvas.drawText(line, 40, y, paint);
+            y += paint.descent() - paint.ascent();
+        }
+
+        document.finishPage(page);
+
+        try {
+            File downloadsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+            File file = new File(downloadsDir, "Comprovante-" + nomeEvento.replaceAll("[^a-zA-Z0-9]", "-") + ".pdf");
+            FileOutputStream fos = new FileOutputStream(file);
+            document.writeTo(fos);
+            document.close();
+            fos.close();
+            Toast.makeText(this, "PDF salvo em Downloads!", Toast.LENGTH_LONG).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Erro ao salvar PDF: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -212,8 +288,7 @@ public class ComprovanteActivity extends BaseActivity {
                             try (BluetoothSocket socket = printerDevice.createRfcommSocketToServiceRecord(uuid)) {
                                 socket.connect();
                                 try (OutputStream outputStream = socket.getOutputStream()) {
-                                    // Adiciona o comando para usar a página de códigos correta para caracteres especiais em português
-                                    outputStream.write(new byte[]{0x1B, 0x74, 2}); // ESC t n com n=2 para PC850
+                                    outputStream.write(new byte[]{0x1B, 0x74, 2});
                                     outputStream.write(proofText.getBytes("CP850"));
                                     outputStream.flush();
                                 }
@@ -236,6 +311,12 @@ public class ComprovanteActivity extends BaseActivity {
                 selectPrinterAndPrint();
             } else {
                 Toast.makeText(this, "Permissão de Bluetooth negada. Não é possível imprimir.", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == REQUEST_STORAGE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                gerarPdf();
+            } else {
+                Toast.makeText(this, "Permissão de armazenamento negada. Não é possível salvar o PDF.", Toast.LENGTH_SHORT).show();
             }
         }
     }

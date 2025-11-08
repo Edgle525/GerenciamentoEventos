@@ -15,6 +15,7 @@ drawable texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview
 id action_search
 id action_toggle_night_mode
 id btnAcessar
+id btnBaixarPdf
 id btnCadastrarEvento
 id btnCadastrarUsuario
 id btnExcluirEvento
