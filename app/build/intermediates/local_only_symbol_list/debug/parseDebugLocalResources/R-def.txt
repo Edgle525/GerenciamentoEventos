@@ -34,8 +34,10 @@ id btnImprimirQRCodes
 id btnImprimirUserQR
 id btnSalvarEdicaoEvento
 id btnSalvarPerfil
+id btn_cadastrar_novo_evento
+id card_total_eventos
+id card_total_usuarios
 id cbTempoTotal
-id content_frame_admin
 id drawer_layout_admin
 id drawer_layout_user
 id edtConfirmarSenhaCadastro
@@ -100,6 +102,7 @@ id nav_view_participants
 id nav_view_user
 id offline_banner_textview
 id profile_image
+id searchViewEventosAdmin
 id searchViewParticipants
 id spinnerCurso
 id spinnerCursoPerfil
@@ -123,9 +126,14 @@ id toolbar_view_participants
 id tvCadastrar
 id tvCursosPermitidos
 id tvCursosPermitidosEditar
+id tvDataEventoAtivo
 id tvDataEventoHistorico
+id tvDataTermino
 id tvEventName
 id tvEventNameQRCode
+id tvLocalEventoAtivo
+id tvNomeEvento
+id tvNomeEventoAtivo
 id tvNomeEventoHistorico
 id tvParticipantCourse
 id tvParticipantCpf
@@ -135,6 +143,8 @@ id tvParticipantSemester
 id tvProfileWarning
 id tvStatusHistorico
 id tvUserNameForQR
+id tv_total_eventos
+id tv_total_usuarios
 layout activity_admin
 layout activity_base
 layout activity_cadastro
@@ -158,6 +168,8 @@ layout activity_user
 layout activity_user_qrcode
 layout activity_view_participants
 layout dialog_offline
+layout list_item_evento_ativo
+layout list_item_evento_finalizado
 layout list_item_historico
 layout list_item_participant
 layout nav_header_main

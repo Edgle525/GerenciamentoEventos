@@ -14,13 +14,23 @@
         android:background="?attr/colorPrimary"
         app:titleTextColor="@android:color/white" />
 
+    <SearchView
+        android:id="@+id/searchViewEventosAdmin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Pesquisar por nome ou data"
+        android:iconifiedByDefault="false"
+        android:layout_margin="8dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Eventos Ativos"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:padding="16dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"/>
 
     <ListView
         android:id="@+id/listViewEventosAtivosAdmin"
@@ -34,7 +44,9 @@
         android:text="Eventos Finalizados"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:padding="16dp"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="16dp"/>
 
     <ListView
         android:id="@+id/listViewEventosFinalizadosAdmin"

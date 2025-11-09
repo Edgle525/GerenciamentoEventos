@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -18,6 +20,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import br.edu.fatecgru.Eventos.R;
 
@@ -27,6 +32,11 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
     private NavigationView navigationView;
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseFirestore db;
+
+    private TextView tvTotalEventos, tvTotalUsuarios;
+    private Button btnCadastrarNovoEvento;
+    private CardView cardTotalEventos, cardTotalUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +44,7 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_admin);
 
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -53,7 +64,35 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        tvTotalEventos = findViewById(R.id.tv_total_eventos);
+        tvTotalUsuarios = findViewById(R.id.tv_total_usuarios);
+        btnCadastrarNovoEvento = findViewById(R.id.btn_cadastrar_novo_evento);
+        cardTotalEventos = findViewById(R.id.card_total_eventos);
+        cardTotalUsuarios = findViewById(R.id.card_total_usuarios);
+
+        btnCadastrarNovoEvento.setOnClickListener(v -> startActivity(new Intent(this, CadastroEventoActivity.class)));
+        cardTotalEventos.setOnClickListener(v -> startActivity(new Intent(this, ListarEventosAdminActivity.class)));
+        cardTotalUsuarios.setOnClickListener(v -> startActivity(new Intent(this, ViewParticipantsActivity.class)));
+
+        updateDashboard();
         updateNavHeader();
+    }
+
+    private void updateDashboard() {
+        db.collection("eventos").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            tvTotalEventos.setText(String.valueOf(queryDocumentSnapshots.size()));
+        });
+
+        db.collection("usuarios").get().addOnSuccessListener(queryDocumentSnapshots -> {
+            int userCount = 0;
+            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                String email = document.getString("email");
+                if (email != null && !email.equals("admin@example.com")) {
+                    userCount++;
+                }
+            }
+            tvTotalUsuarios.setText(String.valueOf(userCount));
+        });
     }
 
     private void updateNavHeader() {

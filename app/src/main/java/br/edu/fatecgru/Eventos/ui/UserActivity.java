@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +37,6 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
@@ -68,8 +66,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
     private GoogleSignInClient mGoogleSignInClient;
 
     private List<Evento> eventosList = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
-    private List<String> nomesEventos = new ArrayList<>();
+    private EventoAtivoAdapter adapter;
     private String userIdLogado;
     private boolean isProfileComplete = false;
 
@@ -117,7 +114,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
 
         tvProfileWarning = findViewById(R.id.tvProfileWarning);
         listViewEventos = findViewById(R.id.listViewEventosUser);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventos);
+        adapter = new EventoAtivoAdapter(this, eventosList);
         listViewEventos.setAdapter(adapter);
 
         updateNavHeader();
@@ -217,7 +214,6 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         db.collection("eventos").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 eventosList.clear();
-                nomesEventos.clear();
                 boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
@@ -245,7 +241,6 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                                 if (isEventoVisivel) {
                                     evento.setId(document.getId());
                                     eventosList.add(evento);
-                                    nomesEventos.add(evento.getNome());
                                 }
                             }
                         }
@@ -440,7 +435,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                                                 .setNegativeButton("Agora não", null)
                                                 .show();
                                     } else {
-                                        Toast.makeText(this, "Entrada registrada com sucesso!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UserActivity.this, "Entrada registrada com sucesso!", Toast.LENGTH_SHORT).show();
                                     }
                                 })
                                 .addOnFailureListener(e -> Toast.makeText(this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());

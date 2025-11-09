@@ -3,7 +3,6 @@ package br.edu.fatecgru.Eventos.ui;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,8 +29,8 @@ public class EventosFinalizadosActivity extends BaseActivity {
     private ListView listViewEventosFinalizados;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
-    private ArrayAdapter<String> adapter;
-    private List<String> nomesEventos = new ArrayList<>();
+    private EventoFinalizadoAdapter adapter;
+    private List<Evento> eventosFinalizados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class EventosFinalizadosActivity extends BaseActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         listViewEventosFinalizados = findViewById(R.id.listViewEventosFinalizados);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventos);
+        adapter = new EventoFinalizadoAdapter(this, eventosFinalizados);
         listViewEventosFinalizados.setAdapter(adapter);
 
         fetchUserCourseAndLoadEvents();
@@ -75,7 +74,7 @@ public class EventosFinalizadosActivity extends BaseActivity {
     private void loadEventosFinalizados(String cursoUsuario) {
         db.collection("eventos").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                nomesEventos.clear();
+                eventosFinalizados.clear();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
                 boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
@@ -105,7 +104,7 @@ public class EventosFinalizadosActivity extends BaseActivity {
                                 }
 
                                 if (isEventoVisivel) {
-                                    nomesEventos.add(evento.getNome());
+                                    eventosFinalizados.add(evento);
                                 }
                             }
                         }

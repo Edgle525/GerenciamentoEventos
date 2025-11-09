@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- COMENTÁRIO: Layout atualizado para a tela de Admin com Toolbar e Navigation Drawer. -->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,9 +7,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start"
-    tools:context=".AdminActivity">
+    tools:context=".ui.AdminActivity">
 
-    <!-- COMENTÁRIO: Conteúdo principal, incluindo a AppBar e o conteúdo da tela. -->
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -27,26 +25,107 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- COMENTÁRIO: O conteúdo da sua tela fica aqui. -->
-        <FrameLayout
-            android:id="@+id/content_frame_admin"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bem-vindo, Administrador!"
-                android:textSize="20sp"
-                android:layout_gravity="center"/>
+                android:text="Dashboard"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
 
-        </FrameLayout>
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="2"
+                android:rowCount="1"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_total_eventos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total de Eventos"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_total_eventos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="36sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_total_usuarios"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_rowWeight="1"
+                    app:cardElevation="6dp"
+                    app:cardCornerRadius="12dp"
+                    android:layout_margin="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total de Usuários"
+                            android:textSize="18sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_total_usuarios"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="36sp"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </GridLayout>
+
+            <Button
+                android:id="@+id/btn_cadastrar_novo_evento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastrar Novo Evento"
+                android:layout_marginTop="24dp"/>
+
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <!-- COMENTÁRIO: Menu de navegação lateral. -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view_admin"
         android:layout_width="wrap_content"

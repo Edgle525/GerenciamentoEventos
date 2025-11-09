@@ -3865,10 +3865,13 @@ id btnImprimirQRCodes
 id btnImprimirUserQR
 id btnSalvarEdicaoEvento
 id btnSalvarPerfil
+id btn_cadastrar_novo_evento
 id buttonPanel
 id cache_measures
 id callMeasure
 id cancel_button
+id card_total_eventos
+id card_total_usuarios
 id carryVelocity
 id cbTempoTotal
 id center
@@ -3895,7 +3898,6 @@ id constraint
 id container
 id content
 id contentPanel
-id content_frame_admin
 id contiguous
 id continuousVelocity
 id coordinator
@@ -4223,6 +4225,7 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchViewEventosAdmin
 id searchViewParticipants
 id search_badge
 id search_bar
@@ -4348,9 +4351,14 @@ id triangle
 id tvCadastrar
 id tvCursosPermitidos
 id tvCursosPermitidosEditar
+id tvDataEventoAtivo
 id tvDataEventoHistorico
+id tvDataTermino
 id tvEventName
 id tvEventNameQRCode
+id tvLocalEventoAtivo
+id tvNomeEvento
+id tvNomeEventoAtivo
 id tvNomeEventoHistorico
 id tvParticipantCourse
 id tvParticipantCpf
@@ -4360,6 +4368,8 @@ id tvParticipantSemester
 id tvProfileWarning
 id tvStatusHistorico
 id tvUserNameForQR
+id tv_total_eventos
+id tv_total_usuarios
 id unchecked
 id uniform
 id unlabeled
@@ -4560,6 +4570,8 @@ layout design_text_input_start_icon
 layout dialog_offline
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout list_item_evento_ativo
+layout list_item_evento_finalizado
 layout list_item_historico
 layout list_item_participant
 layout m3_alert_dialog

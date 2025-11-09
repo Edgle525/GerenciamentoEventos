@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,14 +30,15 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private static final String TAG = "ListarEventosAdmin";
     private ListView listViewEventosAtivos;
     private ListView listViewEventosFinalizados;
+    private SearchView searchView;
     private FirebaseFirestore db;
 
-    private List<Evento> eventosAtivos = new ArrayList<>();
-    private List<Evento> eventosFinalizados = new ArrayList<>();
-    private ArrayAdapter<String> adapterAtivos;
-    private ArrayAdapter<String> adapterFinalizados;
-    private List<String> nomesEventosAtivos = new ArrayList<>();
-    private List<String> nomesEventosFinalizados = new ArrayList<>();
+    private List<Evento> allEventosAtivos = new ArrayList<>();
+    private List<Evento> allEventosFinalizados = new ArrayList<>();
+    private List<Evento> displayedEventosAtivos = new ArrayList<>();
+    private List<Evento> displayedEventosFinalizados = new ArrayList<>();
+    private EventoAtivoAdapter adapterAtivos;
+    private EventoFinalizadoAdapter adapterFinalizados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +54,30 @@ public class ListarEventosAdminActivity extends BaseActivity {
 
         listViewEventosAtivos = findViewById(R.id.listViewEventosAtivosAdmin);
         listViewEventosFinalizados = findViewById(R.id.listViewEventosFinalizadosAdmin);
+        searchView = findViewById(R.id.searchViewEventosAdmin);
         db = FirebaseFirestore.getInstance();
 
-        adapterAtivos = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosAtivos);
+        adapterAtivos = new EventoAtivoAdapter(this, displayedEventosAtivos);
         listViewEventosAtivos.setAdapter(adapterAtivos);
 
-        adapterFinalizados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosFinalizados);
+        adapterFinalizados = new EventoFinalizadoAdapter(this, displayedEventosFinalizados);
         listViewEventosFinalizados.setAdapter(adapterFinalizados);
 
-        setupListViewListeners(listViewEventosAtivos, eventosAtivos);
-        setupListViewListeners(listViewEventosFinalizados, eventosFinalizados);
+        setupListViewListeners(listViewEventosAtivos, displayedEventosAtivos);
+        setupListViewListeners(listViewEventosFinalizados, displayedEventosFinalizados);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
+            }
+        });
     }
 
     private void setupListViewListeners(ListView listView, List<Evento> eventosList) {
@@ -110,10 +125,8 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private void loadEventos() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                eventosAtivos.clear();
-                nomesEventosAtivos.clear();
-                eventosFinalizados.clear();
-                nomesEventosFinalizados.clear();
+                allEventosAtivos.clear();
+                allEventosFinalizados.clear();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
@@ -130,27 +143,48 @@ public class ListarEventosAdminActivity extends BaseActivity {
                         if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
                             Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
                             if (agora.getTime() > dataTermino.getTime() + dezMinutos) {
-                                eventosFinalizados.add(evento);
-                                nomesEventosFinalizados.add(evento.getNome());
+                                allEventosFinalizados.add(evento);
                             } else {
-                                eventosAtivos.add(evento);
-                                nomesEventosAtivos.add(evento.getNome());
+                                allEventosAtivos.add(evento);
                             }
                         } else {
-                            eventosAtivos.add(evento);
-                            nomesEventosAtivos.add(evento.getNome());
+                            allEventosAtivos.add(evento);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
-                adapterAtivos.notifyDataSetChanged();
-                adapterFinalizados.notifyDataSetChanged();
+                filter("");
             } else {
                 Log.e(TAG, "Erro ao carregar eventos.", task.getException());
                 Toast.makeText(this, "Falha ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void filter(String query) {
+        displayedEventosAtivos.clear();
+        displayedEventosFinalizados.clear();
+
+        if (query.isEmpty()) {
+            displayedEventosAtivos.addAll(allEventosAtivos);
+            displayedEventosFinalizados.addAll(allEventosFinalizados);
+        } else {
+            String lowerCaseQuery = query.toLowerCase(Locale.ROOT);
+            for (Evento evento : allEventosAtivos) {
+                if (evento.getNome().toLowerCase(Locale.ROOT).contains(lowerCaseQuery) || evento.getData().contains(query)) {
+                    displayedEventosAtivos.add(evento);
+                }
+            }
+            for (Evento evento : allEventosFinalizados) {
+                if (evento.getNome().toLowerCase(Locale.ROOT).contains(lowerCaseQuery) || evento.getData().contains(query)) {
+                    displayedEventosFinalizados.add(evento);
+                }
+            }
+        }
+
+        adapterAtivos.notifyDataSetChanged();
+        adapterFinalizados.notifyDataSetChanged();
     }
 
     private void deletarEventoEInscricoes(final Evento evento) {
