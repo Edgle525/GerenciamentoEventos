@@ -87,6 +87,12 @@
                 android:hint="Tempo Mínimo de Permanência (minutos)"
                 android:inputType="number"/>
 
+            <CheckBox
+                android:id="@+id/cbTempoTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tempo de permanência total" />
+
             <TextView
                 android:id="@+id/tvCursosPermitidos"
                 android:layout_width="match_parent"

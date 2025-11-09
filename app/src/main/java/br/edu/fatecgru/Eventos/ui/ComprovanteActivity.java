@@ -53,6 +53,7 @@ public class ComprovanteActivity extends BaseActivity {
     private String curso, semestre;
     private BluetoothAdapter bluetoothAdapter;
     private int tempoMinimoEvento = 0;
+    private boolean participacaoCompleta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class ComprovanteActivity extends BaseActivity {
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Comprovante");
         }
 
         btnImprimir = findViewById(R.id.btnImprimirComprovante);
@@ -92,6 +94,7 @@ public class ComprovanteActivity extends BaseActivity {
         horarioEvento = getIntent().getStringExtra("horario_evento");
         nomeParticipante = getIntent().getStringExtra("nome_participante");
         emailParticipante = getIntent().getStringExtra("email_participante");
+        participacaoCompleta = getIntent().getBooleanExtra("participacao_completa", false);
     }
 
     private void fetchUserData(){
@@ -140,7 +143,7 @@ public class ComprovanteActivity extends BaseActivity {
         String tempoPermanencia = String.format(Locale.getDefault(), "%d minutos", diffMinutes);
 
         String observacao = "";
-        if (diffMinutes < tempoMinimoEvento) {
+        if (!participacaoCompleta) {
             observacao = String.format("\nObservação: A participação neste evento exigia um tempo mínimo de %d minutos. " +
                     "O participante não atingiu o tempo necessário para receber o certificado de conclusão, mas sua presença foi registrada.\n", tempoMinimoEvento);
         }

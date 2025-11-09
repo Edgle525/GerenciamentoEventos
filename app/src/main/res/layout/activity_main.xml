@@ -68,6 +68,8 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="afafafaewfa" />
+        android:fontFamily="sans-serif-black"
+        android:text="ⒸPowered By Fatecos"
+        android:textSize="10sp" />
 
 </LinearLayout>

@@ -16,9 +16,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.WriteBatch;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
@@ -26,11 +28,16 @@ import br.edu.fatecgru.Eventos.model.Evento;
 public class ListarEventosAdminActivity extends BaseActivity {
 
     private static final String TAG = "ListarEventosAdmin";
-    private ListView listViewEventos;
+    private ListView listViewEventosAtivos;
+    private ListView listViewEventosFinalizados;
     private FirebaseFirestore db;
-    private List<Evento> eventos = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
-    private List<String> nomesEventos = new ArrayList<>();
+
+    private List<Evento> eventosAtivos = new ArrayList<>();
+    private List<Evento> eventosFinalizados = new ArrayList<>();
+    private ArrayAdapter<String> adapterAtivos;
+    private ArrayAdapter<String> adapterFinalizados;
+    private List<String> nomesEventosAtivos = new ArrayList<>();
+    private List<String> nomesEventosFinalizados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,14 +51,23 @@ public class ListarEventosAdminActivity extends BaseActivity {
             getSupportActionBar().setTitle("Ver/Editar Eventos");
         }
 
-        listViewEventos = findViewById(R.id.listViewEventosAdmin);
+        listViewEventosAtivos = findViewById(R.id.listViewEventosAtivosAdmin);
+        listViewEventosFinalizados = findViewById(R.id.listViewEventosFinalizadosAdmin);
         db = FirebaseFirestore.getInstance();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventos);
-        listViewEventos.setAdapter(adapter);
+        adapterAtivos = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosAtivos);
+        listViewEventosAtivos.setAdapter(adapterAtivos);
 
-        listViewEventos.setOnItemClickListener((parent, view, position, id) -> {
-            Evento eventoSelecionado = eventos.get(position);
+        adapterFinalizados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosFinalizados);
+        listViewEventosFinalizados.setAdapter(adapterFinalizados);
+
+        setupListViewListeners(listViewEventosAtivos, eventosAtivos);
+        setupListViewListeners(listViewEventosFinalizados, eventosFinalizados);
+    }
+
+    private void setupListViewListeners(ListView listView, List<Evento> eventosList) {
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            Evento eventoSelecionado = eventosList.get(position);
             if (eventoSelecionado == null) return;
 
             final CharSequence[] options = {"Ver QR Codes", "Editar Evento", "Gerar Lista de Presença"};
@@ -79,8 +95,8 @@ public class ListarEventosAdminActivity extends BaseActivity {
                 .show();
         });
 
-        listViewEventos.setOnItemLongClickListener((parent, view, position, id) -> {
-            final Evento eventoParaDeletar = eventos.get(position);
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            final Evento eventoParaDeletar = eventosList.get(position);
             new AlertDialog.Builder(this)
                 .setTitle("Confirmar Exclusão")
                 .setMessage("Tem certeza que deseja excluir o evento '" + eventoParaDeletar.getNome() + "'? Todas as inscrições relacionadas também serão removidas.")
@@ -93,39 +109,46 @@ public class ListarEventosAdminActivity extends BaseActivity {
 
     private void loadEventos() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
-                eventos.clear();
-                nomesEventos.clear();
+            if (task.isSuccessful()) {
+                eventosAtivos.clear();
+                nomesEventosAtivos.clear();
+                eventosFinalizados.clear();
+                nomesEventosFinalizados.clear();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date agora = new Date();
+                long dezMinutos = 10 * 60 * 1000;
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Map<String, Object> data = document.getData();
-
-                        String nome = (data.get("nome") instanceof String) ? (String) data.get("nome") : null;
-                        if (nome == null) {
-                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
-                            continue;
-                        }
-
-                        Evento evento = new Evento();
+                        Evento evento = document.toObject(Evento.class);
                         evento.setId(document.getId());
-                        evento.setNome(nome);
 
-                        if (data.get("data") instanceof String) evento.setData((String) data.get("data"));
-                        if (data.get("horario") instanceof String) evento.setHorario((String) data.get("horario"));
-                        if (data.get("descricao") instanceof String) evento.setDescricao((String) data.get("descricao"));
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
 
-                        eventos.add(evento);
-                        nomesEventos.add(nome);
-
+                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            if (agora.getTime() > dataTermino.getTime() + dezMinutos) {
+                                eventosFinalizados.add(evento);
+                                nomesEventosFinalizados.add(evento.getNome());
+                            } else {
+                                eventosAtivos.add(evento);
+                                nomesEventosAtivos.add(evento.getNome());
+                            }
+                        } else {
+                            eventosAtivos.add(evento);
+                            nomesEventosAtivos.add(evento.getNome());
+                        }
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId(), e);
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
-                adapter.notifyDataSetChanged();
+                adapterAtivos.notifyDataSetChanged();
+                adapterFinalizados.notifyDataSetChanged();
             } else {
                 Log.e(TAG, "Erro ao carregar eventos.", task.getException());
-                Toast.makeText(ListarEventosAdminActivity.this, "Falha ao carregar eventos.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Falha ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
         });
     }

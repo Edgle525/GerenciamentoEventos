@@ -18,6 +18,7 @@ public class Evento {
     private String local;
     private String descricao;
     private int tempoMinimo;
+    private boolean tempoTotal;
     private List<String> cursosPermitidos;
 
     /**
@@ -98,6 +99,14 @@ public class Evento {
 
     public void setTempoMinimo(int tempoMinimo) {
         this.tempoMinimo = tempoMinimo;
+    }
+
+    public boolean isTempoTotal() {
+        return tempoTotal;
+    }
+
+    public void setTempoTotal(boolean tempoTotal) {
+        this.tempoTotal = tempoTotal;
     }
 
     public List<String> getCursosPermitidos() {

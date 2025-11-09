@@ -44,7 +44,7 @@ public class ViewParticipantsActivity extends BaseActivity {
             getSupportActionBar().setTitle("Usuários");
         }
 
-        listViewParticipants = findViewById(R.id.listViewEventosAdmin);
+        listViewParticipants = findViewById(R.id.listViewParticipants);
         searchView = findViewById(R.id.searchViewParticipants);
         db = FirebaseFirestore.getInstance();
 

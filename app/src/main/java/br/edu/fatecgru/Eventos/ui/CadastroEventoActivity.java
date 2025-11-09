@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +20,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +37,7 @@ public class CadastroEventoActivity extends BaseActivity {
     private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento, edtDataTerminoEvento, edtHorarioTerminoEvento, edtLocalEvento, edtTempoMinimoPermanencia;
     private Button btnCadastrarEvento, btnGerarQRCode;
     private TextView tvCursosPermitidos;
+    private CheckBox cbTempoTotal;
     private FirebaseFirestore db;
     private ArrayList<String> cursosSelecionados = new ArrayList<>();
 
@@ -59,6 +63,7 @@ public class CadastroEventoActivity extends BaseActivity {
         edtLocalEvento = findViewById(R.id.edtLocalEvento);
         edtDescricaoEvento = findViewById(R.id.edtDescricaoEvento);
         edtTempoMinimoPermanencia = findViewById(R.id.edtTempoMinimoPermanencia);
+        cbTempoTotal = findViewById(R.id.cbTempoTotal);
         tvCursosPermitidos = findViewById(R.id.tvCursosPermitidos);
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
         btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
@@ -66,8 +71,39 @@ public class CadastroEventoActivity extends BaseActivity {
         setupDateTimePickers();
         cursosSelecionados.add("Todos"); // Default to all courses
 
+        cbTempoTotal.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            edtTempoMinimoPermanencia.setEnabled(!isChecked);
+            if (isChecked) {
+                calculateAndSetTotalTime();
+            } else {
+                edtTempoMinimoPermanencia.setText("");
+            }
+        });
+
         tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnCadastrarEvento.setOnClickListener(v -> cadastrarEvento());
+    }
+
+    private void calculateAndSetTotalTime() {
+        String dataInicioStr = edtDataEvento.getText().toString();
+        String horarioInicioStr = edtHorarioEvento.getText().toString();
+        String dataTerminoStr = edtDataTerminoEvento.getText().toString();
+        String horarioTerminoStr = edtHorarioTerminoEvento.getText().toString();
+
+        if (!dataInicioStr.isEmpty() && !horarioInicioStr.isEmpty() && !dataTerminoStr.isEmpty() && !horarioTerminoStr.isEmpty()) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date dataInicio = sdf.parse(dataInicioStr + " " + horarioInicioStr);
+                Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+
+                long diff = dataTermino.getTime() - dataInicio.getTime();
+                long diffMinutes = diff / (60 * 1000);
+
+                edtTempoMinimoPermanencia.setText(String.valueOf(diffMinutes));
+            } catch (ParseException e) {
+                Toast.makeText(this, "Datas ou horários inválidos.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void setupDateTimePickers() {
@@ -183,6 +219,7 @@ public class CadastroEventoActivity extends BaseActivity {
         novoEvento.setLocal(local);
         novoEvento.setDescricao(descricao);
         novoEvento.setTempoMinimo(tempoMinimo);
+        novoEvento.setTempoTotal(cbTempoTotal.isChecked());
 
         if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
             novoEvento.setCursosPermitidos(Arrays.asList("Todos"));

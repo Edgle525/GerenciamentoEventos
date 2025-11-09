@@ -2,11 +2,12 @@ package br.edu.fatecgru.Eventos.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import br.edu.fatecgru.Eventos.R;
+import br.edu.fatecgru.Eventos.model.Evento;
 
-public class EventosFinalizadosAdminActivity extends AppCompatActivity {
+public class EventosFinalizadosAdminActivity extends BaseActivity {
 
     private static final String TAG = "EventosFinalizadosAdmin";
     private ListView listViewEventosFinalizadosAdmin;
@@ -38,6 +39,7 @@ public class EventosFinalizadosAdminActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Eventos Finalizados");
         }
 
         db = FirebaseFirestore.getInstance();
@@ -50,49 +52,46 @@ public class EventosFinalizadosAdminActivity extends AppCompatActivity {
 
     private void loadEventosFinalizados() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
+            if (task.isSuccessful()) {
                 nomesEventos.clear();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Map<String, Object> data = document.getData();
-
-                        String nome = (data.get("nome") instanceof String) ? (String) data.get("nome") : null;
-                        if (nome == null) {
-                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
+                        Evento evento = document.toObject(Evento.class);
+                        if (evento == null) {
+                            Log.e(TAG, "Evento nulo para o documento: " + document.getId());
                             continue;
                         }
 
-                        String dataTerminoStr = (data.get("dataTermino") instanceof String) ? (String) data.get("dataTermino") : null;
-                        String horarioTerminoStr = (data.get("horarioTermino") instanceof String) ? (String) data.get("horarioTermino") : null;
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
 
                         if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
-                            try {
-                                Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                                if (dataTermino.before(agora)) {
-                                    nomesEventos.add(nome);
-                                }
-                            } catch (Exception e) {
-                                Log.e(TAG, "Erro ao parsear data/hora para o evento: " + document.getId(), e);
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            long dezMinutosApos = 10 * 60 * 1000;
+                            if (agora.getTime() > dataTermino.getTime() + dezMinutosApos) {
+                                nomesEventos.add(evento.getNome());
                             }
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId(), e);
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
                 adapter.notifyDataSetChanged();
             } else {
-                Log.e(TAG, "Erro ao buscar eventos.", task.getException());
-                Toast.makeText(EventosFinalizadosAdminActivity.this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

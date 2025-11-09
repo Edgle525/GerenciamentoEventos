@@ -50,6 +50,8 @@
         <activity android:name=".ui.ParticipantQRCodeActivity" android:exported="false" />
         <activity android:name=".ui.EventQRCodeActivity" android:exported="false" />
         <activity android:name=".ui.GerarPresencaActivity" android:exported="false" />
+        <activity android:name=".ui.EventosFinalizadosActivity" android:exported="false" />
+        <activity android:name=".ui.EventosFinalizadosAdminActivity" android:exported="false" />
 
         <activity
             android:name=".ui.CaptureActivityPortrait"

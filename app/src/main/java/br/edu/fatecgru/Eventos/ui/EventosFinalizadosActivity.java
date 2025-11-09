@@ -2,13 +2,16 @@ package br.edu.fatecgru.Eventos.ui;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -17,15 +20,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import br.edu.fatecgru.Eventos.R;
+import br.edu.fatecgru.Eventos.model.Evento;
 
-public class EventosFinalizadosActivity extends AppCompatActivity {
+public class EventosFinalizadosActivity extends BaseActivity {
 
     private static final String TAG = "EventosFinalizados";
     private ListView listViewEventosFinalizados;
     private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
     private ArrayAdapter<String> adapter;
     private List<String> nomesEventos = new ArrayList<>();
 
@@ -38,74 +42,90 @@ public class EventosFinalizadosActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setTitle("Eventos Finalizados");
         }
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         listViewEventosFinalizados = findViewById(R.id.listViewEventosFinalizados);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventos);
         listViewEventosFinalizados.setAdapter(adapter);
 
-        loadEventosFinalizados();
+        fetchUserCourseAndLoadEvents();
     }
 
-    private void loadEventosFinalizados() {
+    private void fetchUserCourseAndLoadEvents() {
+        String userId = mAuth.getCurrentUser().getUid();
+        db.collection("usuarios").document(userId).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String cursoUsuario = document.getString("curso");
+                    loadEventosFinalizados(cursoUsuario);
+                } else {
+                    Toast.makeText(this, "Perfil de usuário não encontrado.", Toast.LENGTH_SHORT).show();
+                    loadEventosFinalizados(null); // Carrega apenas eventos "Geral"
+                }
+            } else {
+                Toast.makeText(this, "Erro ao buscar perfil do usuário.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void loadEventosFinalizados(String cursoUsuario) {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
+            if (task.isSuccessful()) {
                 nomesEventos.clear();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
+                boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Map<String, Object> data = document.getData();
-
-                        // Leitura segura do nome
-                        String nome = null;
-                        if (data.get("nome") instanceof String) {
-                            nome = (String) data.get("nome");
-                        }
-                        if (nome == null) {
-                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
+                        Evento evento = document.toObject(Evento.class);
+                        if (evento == null) {
+                            Log.e(TAG, "Evento nulo para o documento: " + document.getId());
                             continue;
                         }
 
-                        // Leitura segura da data e hora de término
-                        String dataTerminoStr = null;
-                        if (data.get("dataTermino") instanceof String) {
-                            dataTerminoStr = (String) data.get("dataTermino");
-                        }
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
 
-                        String horarioTerminoStr = null;
-                        if (data.get("horarioTermino") instanceof String) {
-                            horarioTerminoStr = (String) data.get("horarioTermino");
-                        }
-
-                        // Processa apenas se a data e hora de término existirem
                         if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
-                            try {
-                                Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                                if (dataTermino.before(agora)) {
-                                    nomesEventos.add(nome);
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            long dezMinutosApos = 10 * 60 * 1000;
+                            if (agora.getTime() > dataTermino.getTime() + dezMinutosApos) {
+
+                                List<String> cursosPermitidos = evento.getCursosPermitidos();
+                                boolean isEventoVisivel = false;
+                                if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                                    isEventoVisivel = true;
+                                } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                                    isEventoVisivel = true;
                                 }
-                            } catch (Exception e) {
-                                Log.e(TAG, "Erro ao parsear data/hora para o evento: " + document.getId(), e);
+
+                                if (isEventoVisivel) {
+                                    nomesEventos.add(evento.getNome());
+                                }
                             }
                         }
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId() + ". O evento pode estar malformado.", e);
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
                 adapter.notifyDataSetChanged();
             } else {
-                Log.e(TAG, "Erro ao buscar eventos.", task.getException());
-                Toast.makeText(EventosFinalizadosActivity.this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao carregar eventos finalizados.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

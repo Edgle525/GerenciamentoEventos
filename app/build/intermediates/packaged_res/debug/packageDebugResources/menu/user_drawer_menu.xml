@@ -8,6 +8,9 @@
             android:id="@+id/nav_historico"
             android:title="Histórico" />
         <item
+            android:id="@+id/nav_eventos_finalizados"
+            android:title="Eventos Finalizados" />
+        <item
             android:id="@+id/nav_meu_perfil"
             android:title="Meu Perfil" />
         <item

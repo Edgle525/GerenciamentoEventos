@@ -36,7 +36,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -44,6 +43,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -97,14 +97,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_user);
 
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser == null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
-            return;
-        }
-        userIdLogado = currentUser.getUid();
-
+        userIdLogado = mAuth.getCurrentUser().getUid();
         db = FirebaseFirestore.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -222,64 +215,46 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
 
     private void loadEventos(String cursoUsuario) {
         db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
+            if (task.isSuccessful()) {
                 eventosList.clear();
                 nomesEventos.clear();
                 boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
 
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date agora = new Date();
+
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
-                        Map<String, Object> data = document.getData();
+                        Evento evento = document.toObject(Evento.class);
+                        if (evento == null) continue;
 
-                        String nome = (data.get("nome") instanceof String) ? (String) data.get("nome") : null;
-                        if (nome == null) {
-                            Log.w(TAG, "Evento sem nome ou com formato inválido, pulando: " + document.getId());
-                            continue;
-                        }
+                        String dataTerminoStr = evento.getDataTermino();
+                        String horarioTerminoStr = evento.getHorarioTermino();
 
-                        Evento evento = new Evento();
-                        evento.setId(document.getId());
-                        evento.setNome(nome);
+                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            if (dataTermino.after(agora)) {
+                                List<String> cursosPermitidos = evento.getCursosPermitidos();
+                                boolean isEventoVisivel = false;
+                                if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                                    isEventoVisivel = true;
+                                } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                                    isEventoVisivel = true;
+                                }
 
-                        if (data.get("data") instanceof String) evento.setData((String) data.get("data"));
-                        if (data.get("horario") instanceof String) evento.setHorario((String) data.get("horario"));
-                        if (data.get("descricao") instanceof String) evento.setDescricao((String) data.get("descricao"));
-
-                        List<String> cursosPermitidos = new ArrayList<>();
-                        if (data.get("cursosPermitidos") instanceof List) {
-                            for (Object item : (List<?>) data.get("cursosPermitidos")) {
-                                if (item instanceof String) {
-                                    cursosPermitidos.add((String) item);
+                                if (isEventoVisivel) {
+                                    evento.setId(document.getId());
+                                    eventosList.add(evento);
+                                    nomesEventos.add(evento.getNome());
                                 }
                             }
                         }
-                        evento.setCursosPermitidos(cursosPermitidos);
-
-                        boolean isEventoVisivel = false;
-                        if (isCursoValido) {
-                            if (cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral") || cursosPermitidos.contains(cursoUsuario)) {
-                                isEventoVisivel = true;
-                            }
-                        } else {
-                            if (cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
-                                isEventoVisivel = true;
-                            }
-                        }
-
-                        if (isEventoVisivel) {
-                            eventosList.add(evento);
-                            nomesEventos.add(nome);
-                        }
                     } catch (Exception e) {
-                        Log.e(TAG, "Erro crítico ao processar evento: " + document.getId(), e);
+                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
                 }
                 adapter.notifyDataSetChanged();
-                if (nomesEventos.isEmpty()) {
-                    Toast.makeText(UserActivity.this, "Nenhum evento disponível no momento.", Toast.LENGTH_SHORT).show();
-                }
             } else {
-                Log.e(TAG, "Erro ao carregar eventos.", task.getException());
                 Toast.makeText(UserActivity.this, "Erro ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -301,12 +276,12 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         String docId = userIdLogado + "_" + evento.getId();
 
         db.collection("inscricoes").document(docId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null && !task.getResult().exists()) {
+            if (task.isSuccessful() && !task.getResult().exists()) {
                 db.collection("inscricoes").document(docId).set(inscricao)
                         .addOnSuccessListener(aVoid -> Toast.makeText(UserActivity.this, "Inscrição realizada com sucesso!", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(UserActivity.this, "Erro ao se inscrever.", Toast.LENGTH_SHORT).show());
-            } else if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
-                Toast.makeText(UserActivity.this, "Você já está inscrito neste evento.", Toast.LENGTH_SHORT).show();
+            } else if (task.isSuccessful() && task.getResult().exists()) {
+                Toast.makeText(this, "Você já está inscrito neste evento.", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(UserActivity.this, "Erro ao verificar inscrição.", Toast.LENGTH_SHORT).show();
             }
@@ -326,22 +301,36 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
 
         String tipo = parts[0];
         String idEvento = parts[1];
-        String nomeEvento = parts[2];
 
         db.collection("eventos").document(idEvento).get().addOnCompleteListener(eventTask -> {
-            if (eventTask.isSuccessful() && eventTask.getResult() != null && eventTask.getResult().exists()) {
-                verificarInscricaoEProcessar(tipo, idEvento, nomeEvento);
+            if (eventTask.isSuccessful() && eventTask.getResult().exists()) {
+                Evento evento = eventTask.getResult().toObject(Evento.class);
+                if (evento != null) {
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                        Date dataTermino = sdf.parse(evento.getDataTermino() + " " + evento.getHorarioTermino());
+                        if (new Date().after(dataTermino)) {
+                            Toast.makeText(this, "Este evento já foi finalizado.", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                    } catch (ParseException e) {
+                        //
+                    }
+                    verificarInscricaoEProcessar(tipo, idEvento, evento);
+                } else {
+                    Toast.makeText(this, "Evento não encontrado.", Toast.LENGTH_LONG).show();
+                }
             } else {
                 Toast.makeText(this, "Este evento não existe mais ou foi cancelado.", Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    private void verificarInscricaoEProcessar(String tipo, String idEvento, String nomeEvento) {
+    private void verificarInscricaoEProcessar(String tipo, String idEvento, Evento evento) {
         String docId = userIdLogado + "_" + idEvento;
 
         db.collection("inscricoes").document(docId).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult() != null) {
+            if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();
                 if (document.exists()) {
                     if (tipo.equals("ENTRADA") && document.getString("horaEntrada") != null) {
@@ -357,41 +346,109 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                         return;
                     }
 
-                    String fieldToUpdate = tipo.equals("ENTRADA") ? "horaEntrada" : "horaSaida";
-                    String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                        Date agora = new Date();
 
-                    db.collection("inscricoes").document(docId).update(fieldToUpdate, currentTime)
-                            .addOnSuccessListener(aVoid -> {
-                                if (tipo.equals("SAIDA")) {
-                                    new AlertDialog.Builder(UserActivity.this)
-                                            .setTitle("Saída Registrada!")
-                                            .setMessage("Evento concluído com sucesso. Deseja gerar seu comprovante de participação?")
-                                            .setPositiveButton("Gerar Comprovante", (dialog, which) -> {
-                                                db.collection("usuarios").document(userIdLogado).get().addOnSuccessListener(userDoc -> {
-                                                    if(userDoc.exists()){
-                                                        Intent intent = new Intent(UserActivity.this, ComprovanteActivity.class);
-                                                        intent.putExtra("evento_id", idEvento);
-                                                        intent.putExtra("user_id", userIdLogado);
-                                                        intent.putExtra("nome_evento", nomeEvento);
-                                                        intent.putExtra("data_evento", document.getString("dataEvento"));
-                                                        intent.putExtra("horario_evento", "");
-                                                        intent.putExtra("nome_participante", userDoc.getString("nome"));
-                                                        intent.putExtra("email_participante", userDoc.getString("email"));
-                                                        startActivity(intent);
-                                                    } else {
-                                                        Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                            })
-                                            .setNegativeButton("Agora não", null)
-                                            .show();
-                                } else {
-                                    Toast.makeText(UserActivity.this, "Entrada registrada com sucesso!", Toast.LENGTH_SHORT).show();
+                        Date dataInicioEvento = sdf.parse(evento.getData() + " " + evento.getHorario());
+                        Date dataTerminoEvento = sdf.parse(evento.getDataTermino() + " " + evento.getHorarioTermino());
+
+                        long dezMinutos = 10 * 60 * 1000;
+
+                        if (tipo.equals("ENTRADA")) {
+                            if (agora.getTime() > dataInicioEvento.getTime() + dezMinutos) {
+                                Toast.makeText(this, "Fora do horário de entrada.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        } else if (tipo.equals("SAIDA")) {
+                            String horaEntradaStr = document.getString("horaEntrada");
+                            if (horaEntradaStr != null && !evento.isTempoTotal()) {
+                                try {
+                                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                                    Date dateEntrada = format.parse(horaEntradaStr);
+                                    long diff = new Date().getTime() - dateEntrada.getTime();
+                                    long diffMinutes = diff / (60 * 1000);
+                                    if (diffMinutes >= evento.getTempoMinimo()) {
+                                        // Pode registrar a saída
+                                    } else {
+                                        Toast.makeText(this, "Tempo mínimo de permanência ainda não atingido.", Toast.LENGTH_SHORT).show();
+                                        return;
+                                    }
+                                } catch (ParseException e) {
+                                    //
                                 }
-                            })
-                            .addOnFailureListener(e -> Toast.makeText(UserActivity.this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());
+                            }
+                            
+                            if (evento.isTempoTotal()) {
+                                if (agora.getTime() < dataTerminoEvento.getTime() - dezMinutos) {
+                                    Toast.makeText(this, "Ainda não está na hora de registrar a saída.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            } else {
+                                if (agora.getTime() > dataTerminoEvento.getTime() + dezMinutos) {
+                                    Toast.makeText(this, "Fora do horário de saída.", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                            }
+                        }
+
+                        String fieldToUpdate = tipo.equals("ENTRADA") ? "horaEntrada" : "horaSaida";
+                        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+                        db.collection("inscricoes").document(docId).update(fieldToUpdate, currentTime)
+                                .addOnSuccessListener(aVoid -> {
+                                    if (tipo.equals("SAIDA")) {
+                                        String horaEntradaStr = document.getString("horaEntrada");
+                                        boolean participacaoCompleta = true;
+                                        if (horaEntradaStr != null) {
+                                            try {
+                                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                                                Date dateEntrada = format.parse(horaEntradaStr);
+                                                Date dateSaida = format.parse(currentTime);
+                                                long diff = dateSaida.getTime() - dateEntrada.getTime();
+                                                long diffMinutes = diff / (60 * 1000);
+                                                if (diffMinutes < evento.getTempoMinimo()) {
+                                                    participacaoCompleta = false;
+                                                }
+                                            } catch (ParseException e) {
+                                                participacaoCompleta = false; 
+                                            }
+                                        }
+
+                                        boolean finalParticipacaoCompleta = participacaoCompleta;
+                                        new AlertDialog.Builder(UserActivity.this)
+                                                .setTitle("Saída Registrada!")
+                                                .setMessage("Evento concluído com sucesso. Deseja gerar seu comprovante de participação?")
+                                                .setPositiveButton("Gerar Comprovante", (dialog, which) -> {
+                                                    db.collection("usuarios").document(userIdLogado).get().addOnSuccessListener(userDoc -> {
+                                                        if (userDoc.exists()) {
+                                                            Intent intent = new Intent(UserActivity.this, ComprovanteActivity.class);
+                                                            intent.putExtra("evento_id", idEvento);
+                                                            intent.putExtra("user_id", userIdLogado);
+                                                            intent.putExtra("nome_evento", evento.getNome());
+                                                            intent.putExtra("data_evento", evento.getData());
+                                                            intent.putExtra("horario_evento", evento.getHorario());
+                                                            intent.putExtra("nome_participante", userDoc.getString("nome"));
+                                                            intent.putExtra("email_participante", userDoc.getString("email"));
+                                                            intent.putExtra("participacao_completa", finalParticipacaoCompleta);
+                                                            startActivity(intent);
+                                                        } else {
+                                                            Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    });
+                                                })
+                                                .setNegativeButton("Agora não", null)
+                                                .show();
+                                    } else {
+                                        Toast.makeText(this, "Entrada registrada com sucesso!", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(this, "Erro ao registrar ponto.", Toast.LENGTH_SHORT).show());
+                    } catch (ParseException e) {
+                        Toast.makeText(this, "Erro ao processar as datas do evento.", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(this, "Você não está inscrito no evento '" + nomeEvento + "'.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Você não está inscrito no evento '" + evento.getNome() + "'.", Toast.LENGTH_LONG).show();
                 }
             } else {
                 Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_LONG).show();
@@ -406,7 +463,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         CircleImageView navHeaderProfileImage = headerView.findViewById(R.id.nav_header_profile_image);
 
         db.collection("usuarios").document(userIdLogado).get().addOnSuccessListener(documentSnapshot -> {
-            if(documentSnapshot.exists()){
+            if (documentSnapshot.exists()) {
                 navHeaderNome.setText(documentSnapshot.getString("nome"));
                 navHeaderInfo.setText(documentSnapshot.getString("email"));
 
@@ -442,6 +499,8 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             }
         } else if (id == R.id.nav_historico) {
             startActivity(new Intent(this, HistoricoActivity.class));
+        } else if (id == R.id.nav_eventos_finalizados) {
+            startActivity(new Intent(this, EventosFinalizadosActivity.class));
         } else if (id == R.id.nav_meu_perfil) {
             startActivity(new Intent(this, MeuPerfilActivity.class));
         } else if (id == R.id.nav_logout) {

@@ -133,6 +133,12 @@
             android:name="br.edu.fatecgru.Eventos.ui.GerarPresencaActivity"
             android:exported="false" />
         <activity
+            android:name="br.edu.fatecgru.Eventos.ui.EventosFinalizadosActivity"
+            android:exported="false" />
+        <activity
+            android:name="br.edu.fatecgru.Eventos.ui.EventosFinalizadosAdminActivity"
+            android:exported="false" />
+        <activity
             android:name="br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"

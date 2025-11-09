@@ -10,10 +10,15 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_eventos_finalizados"
         android:layout_width="match_parent"
-        android_height="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:title="Eventos Finalizados"
         app:titleTextColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Os eventos aparecem aqui 10 minutos após o horário de saída."
+        android:padding="16dp" />
 
     <ListView
         android:id="@+id/listViewEventosFinalizados"
