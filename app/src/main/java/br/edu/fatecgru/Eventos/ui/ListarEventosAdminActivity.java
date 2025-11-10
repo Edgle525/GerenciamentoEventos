@@ -37,7 +37,7 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private List<Evento> allEventosFinalizados = new ArrayList<>();
     private List<Evento> displayedEventosAtivos = new ArrayList<>();
     private List<Evento> displayedEventosFinalizados = new ArrayList<>();
-    private EventoAtivoAdapter adapterAtivos;
+    private EventoFinalizadoAdapter adapterAtivos;
     private EventoFinalizadoAdapter adapterFinalizados;
 
     @Override
@@ -57,7 +57,7 @@ public class ListarEventosAdminActivity extends BaseActivity {
         searchView = findViewById(R.id.searchViewEventosAdmin);
         db = FirebaseFirestore.getInstance();
 
-        adapterAtivos = new EventoAtivoAdapter(this, displayedEventosAtivos);
+        adapterAtivos = new EventoFinalizadoAdapter(this, displayedEventosAtivos);
         listViewEventosAtivos.setAdapter(adapterAtivos);
 
         adapterFinalizados = new EventoFinalizadoAdapter(this, displayedEventosFinalizados);

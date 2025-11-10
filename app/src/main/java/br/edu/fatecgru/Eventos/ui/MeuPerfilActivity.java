@@ -141,6 +141,11 @@ public class MeuPerfilActivity extends BaseActivity {
     }
 
     private void loadUserProfile() {
+        // Habilita os campos por padrão para garantir que fiquem editáveis no primeiro login
+        edtNome.setEnabled(true);
+        edtCpf.setEnabled(true);
+        spinnerCurso.setEnabled(true);
+
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 edtNome.setText(documentSnapshot.getString("nome"));
@@ -152,18 +157,16 @@ public class MeuPerfilActivity extends BaseActivity {
                 isProfileComplete = !TextUtils.isEmpty(cpf) && !TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso");
 
                 if (isProfileComplete) {
+                    // Se o perfil já está completo, desabilita os campos
                     edtNome.setEnabled(false);
                     edtCpf.setText(MaskUtils.formatCpf(cpf));
                     edtCpf.setEnabled(false);
                     setSpinnerSelection(spinnerCurso, curso);
                     spinnerCurso.setEnabled(false);
                 } else {
-                    edtNome.setEnabled(true);
-                    edtCpf.setEnabled(true);
+                    // Se não, configura para edição
                     edtCpf.setText(cpf);
                     edtCpf.addTextChangedListener(MaskUtils.insert("###.###.###-##", edtCpf));
-
-                    spinnerCurso.setEnabled(true);
                     if (curso != null) {
                         setSpinnerSelection(spinnerCurso, curso);
                     }
