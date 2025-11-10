@@ -5,14 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?android:attr/windowBackground"
     tools:context=".ui.CadastroEventoActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_cadastro_evento"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_cadastro_evento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Cadastrar Evento"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -25,73 +33,132 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Cadastrar Novo Evento"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="24dp"/>
-
-            <EditText
-                android:id="@+id/edtNomeEvento"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nome do Evento"/>
+                android:layout_marginBottom="8dp">
 
-            <EditText
-                android:id="@+id/edtDataEvento"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNomeEvento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome do Evento" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data de Início (DD/MM/AAAA)"
-                android:inputType="date"/>
+                android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/edtHorarioEvento"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDataEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Data de Início"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtHorarioEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horário de Início"
+                        android:inputType="time" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Horário de Início (HH:MM)"
-                android:inputType="time"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/edtDataTerminoEvento"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDataTerminoEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Data de Término"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtHorarioTerminoEvento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horário de Término"
+                        android:inputType="time" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Data de Término (DD/MM/AAAA)"
-                android:inputType="date"/>
+                android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/edtHorarioTerminoEvento"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtLocalEvento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Local do Evento" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Horário de Término (HH:MM)"
-                android:inputType="time"/>
+                android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/edtLocalEvento"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDescricaoEvento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descrição do Evento"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Local do Evento"/>
+                android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/edtDescricaoEvento"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Descrição do Evento"
-                android:inputType="textMultiLine"
-                android:minLines="3"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTempoMinimoPermanencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Tempo Mínimo (minutos)"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/edtTempoMinimoPermanencia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Tempo Mínimo de Permanência (minutos)"
-                android:inputType="number"/>
 
             <CheckBox
                 android:id="@+id/cbTempoTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text="Tempo de permanência total" />
 
             <TextView
@@ -99,8 +166,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cursos Permitidos: Todos"
-                android:padding="12dp"
-                android:background="@android:drawable/btn_dropdown"
+                android:padding="16dp"
+                android:background="@drawable/spinner_background"
                 android:layout_marginTop="16dp"/>
 
             <Button
@@ -108,10 +175,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cadastrar Evento"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/white"
                 android:layout_marginTop="24dp"/>
 
             <Button
                 android:id="@+id/btnGerarQRCode"
+                style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Gerar QR Codes"

@@ -2,10 +2,24 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.GerenciamentoEventos" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        <!-- Window Background -->
+        <item name="android:windowBackground">@color/light_background</item>
+
+        <!-- Text Colors -->
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+
+        <!-- CardView Style -->
+        <item name="cardViewStyle">@style/Widget.App.CardView</item>
     </style>
 
     <style name="Theme.GerenciamentoEventos" parent="Base.Theme.GerenciamentoEventos" />
+
+    <style name="Widget.App.CardView" parent="CardView">
+        <item name="cardBackgroundColor">@color/card_background_light</item>
+    </style>
 </resources>

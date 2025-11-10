@@ -1,98 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?android:attr/windowBackground"
+    tools:context=".ui.EditarEventoActivity">
 
-    <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".ui.EditarEventoActivity">
+        android:background="@color/primary">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar Evento"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_editar_evento"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Editar Evento"
+            app:titleTextColor="@color/white" />
 
-        <EditText
-            android:id="@+id/edtNomeEventoEditar"
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome do Evento"/>
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <EditText
-            android:id="@+id/edtDataEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Data de Início (DD/MM/AAAA)"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp">
 
-        <EditText
-            android:id="@+id/edtHorarioEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Horário de Início (HH:MM)"/>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNomeEventoEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome do Evento" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edtDataTerminoEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Data de Término (DD/MM/AAAA)"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/edtHorarioTerminoEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Horário de Término (HH:MM)"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
 
-        <EditText
-            android:id="@+id/edtLocalEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Local do Evento"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDataEventoEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Data de Início" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/edtDescricaoEventoEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Descrição do Evento"
-            android:inputType="textMultiLine"
-            android:minLines="3"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-        <EditText
-            android:id="@+id/edtTempoMinimoPermanenciaEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Tempo Mínimo de Permanência (minutos)"
-            android:inputType="number"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtHorarioEventoEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horário de Início" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/tvCursosPermitidosEditar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cursos Permitidos: Todos"
-            android:padding="12dp"
-            android:background="@android:drawable/btn_dropdown"
-            android:layout_marginTop="16dp"/>
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSalvarEdicaoEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Salvar Alterações"
-            android:layout_marginTop="24dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
 
-        <Button
-            android:id="@+id/btnExcluirEvento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Excluir Evento"
-            android:backgroundTint="@android:color/holo_red_dark"
-            android:layout_marginTop="16dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
 
-    </LinearLayout>
-</ScrollView>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtDataTerminoEventoEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Data de Término" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edtHorarioTerminoEventoEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Horário de Término" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtLocalEventoEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Local do Evento" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtDescricaoEventoEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Descrição do Evento"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTempoMinimoPermanenciaEditar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Tempo Mínimo (minutos)"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvCursosPermitidosEditar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cursos Permitidos: Todos"
+                android:padding="16dp"
+                android:background="@drawable/spinner_background"
+                android:layout_marginTop="16dp"/>
+
+            <Button
+                android:id="@+id/btnSalvarEdicaoEvento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar Alterações"
+                android:backgroundTint="@color/accent"
+                android:textColor="@color/white"
+                android:layout_marginTop="24dp"/>
+
+            <Button
+                android:id="@+id/btnExcluirEvento"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Excluir Evento"
+                android:textColor="@android:color/holo_red_dark"
+                app:strokeColor="@android:color/holo_red_dark"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

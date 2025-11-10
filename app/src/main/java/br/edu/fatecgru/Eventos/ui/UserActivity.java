@@ -1,7 +1,6 @@
 package br.edu.fatecgru.Eventos.ui;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -265,7 +265,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             } else if (task.isSuccessful() && task.getResult().exists()) {
                 Toast.makeText(this, "Você já está inscrito neste evento.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(UserActivity.this, "Erro ao verificar inscrição.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -398,7 +398,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                                         }
 
                                         boolean finalParticipacaoCompleta = participacaoCompleta;
-                                        new AlertDialog.Builder(UserActivity.this)
+                                        new MaterialAlertDialogBuilder(UserActivity.this)
                                                 .setTitle("Saída Registrada!")
                                                 .setMessage("Evento concluído com sucesso. Deseja gerar seu comprovante de participação?")
                                                 .setPositiveButton("Gerar Comprovante", (dialog, which) -> {
@@ -431,7 +431,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                     }
                 } else {
                     Toast.makeText(this, "Você não está inscrito no evento '" + evento.getNome() + "'.", Toast.LENGTH_LONG).show();
-                }
+                } 
             } else {
                 Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_LONG).show();
             }

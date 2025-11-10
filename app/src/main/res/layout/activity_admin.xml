@@ -11,17 +11,19 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?android:attr/windowBackground">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_admin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary" />
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,6 +49,7 @@
                         android:text="Dashboard"
                         android:textSize="24sp"
                         android:textStyle="bold"
+                        android:textColor="?android:attr/textColorPrimary"
                         android:layout_marginBottom="24dp"/>
 
                     <GridLayout
@@ -59,26 +62,26 @@
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_total_eventos"
+                            style="@style/Widget.App.CardView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_rowWeight="1"
-                            app:cardElevation="6dp"
-                            app:cardCornerRadius="12dp"
-                            android:layout_margin="12dp">
+                            android:layout_margin="8dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="16dp"
+                                android:padding="20dp"
                                 android:gravity="center">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Total de Eventos"
-                                    android:textSize="18sp"/>
+                                    android:textSize="18sp"
+                                    android:textColor="?android:attr/textColorSecondary"/>
 
                                 <TextView
                                     android:id="@+id/tv_total_eventos"
@@ -86,32 +89,33 @@
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="36sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:textColor="?android:attr/textColorPrimary"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_total_usuarios"
+                            style="@style/Widget.App.CardView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_columnWeight="1"
                             android:layout_rowWeight="1"
-                            app:cardElevation="6dp"
-                            app:cardCornerRadius="12dp"
-                            android:layout_margin="12dp">
+                            android:layout_margin="8dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="16dp"
+                                android:padding="20dp"
                                 android:gravity="center">
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Total de Usuários"
-                                    android:textSize="18sp"/>
+                                    android:textSize="18sp"
+                                    android:textColor="?android:attr/textColorSecondary"/>
 
                                 <TextView
                                     android:id="@+id/tv_total_usuarios"
@@ -119,7 +123,8 @@
                                     android:layout_height="wrap_content"
                                     android:text="0"
                                     android:textSize="36sp"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:textColor="?android:attr/textColorPrimary"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
                     </GridLayout>
@@ -131,6 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cadastrar Novo Evento"
+                android:backgroundTint="@color/colorAccent"
+                android:textColor="@color/white"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="16dp" />
 

@@ -1531,6 +1531,7 @@ color abc_tint_edittext
 color abc_tint_seek_thumb
 color abc_tint_spinner
 color abc_tint_switch_track
+color accent
 color accent_material_dark
 color accent_material_light
 color androidx_core_ripple_material_light
@@ -1539,6 +1540,7 @@ color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
 color background_material_light
+color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -1553,6 +1555,8 @@ color button_material_dark
 color button_material_light
 color call_notification_answer_color
 color call_notification_decline_color
+color card_background_dark
+color card_background_light
 color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
@@ -1571,6 +1575,7 @@ color common_google_signin_btn_text_light_disabled
 color common_google_signin_btn_text_light_focused
 color common_google_signin_btn_text_light_pressed
 color common_google_signin_btn_tint
+color dark_background
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1619,6 +1624,7 @@ color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
 color highlighted_text_material_light
+color light_background
 color m3_appbar_overlay_color
 color m3_assist_chip_icon_tint_color
 color m3_assist_chip_stroke_color
@@ -2446,6 +2452,9 @@ color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
+color offline_banner_background
+color primary
+color primary_dark
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -2466,6 +2475,10 @@ color switch_thumb_material_dark
 color switch_thumb_material_light
 color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
+color text_primary_dark
+color text_primary_light
+color text_secondary_dark
+color text_secondary_light
 color tooltip_background_dark
 color tooltip_background_light
 color white
@@ -3653,6 +3666,7 @@ drawable ic_mtrl_chip_close_circle
 drawable ic_other_sign_in
 drawable ic_passkey
 drawable ic_password
+drawable ic_qr_code_scanner
 drawable ic_search_black_24
 drawable imagemapp
 drawable m3_avd_hide_password
@@ -3729,6 +3743,7 @@ drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable outline_arrow_back_white_24dp
+drawable spinner_background
 drawable test_level_drawable
 drawable texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview
 drawable tooltip_frame_dark
@@ -4327,6 +4342,8 @@ id title_template
 id toggle
 id toolbar_admin
 id toolbar_cadastro_evento
+id toolbar_comprovante
+id toolbar_editar_evento
 id toolbar_eventos_finalizados
 id toolbar_eventos_finalizados_admin
 id toolbar_gerar_presenca
@@ -5699,6 +5716,7 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style Widget_App_CardView
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
