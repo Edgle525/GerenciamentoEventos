@@ -379,9 +379,9 @@
     </configuration>
     <list>
       <item itemvalue="Android App.app" />
-      <item itemvalue="Application.GerenciamentoEventos" />
       <item itemvalue="Gradle.GerenciamentoEventos:app [testDebugUnitTest]" />
       <item itemvalue="Gradle.GerenciamentoEventos:app [testReleaseUnitTest]" />
+      <item itemvalue="Application.GerenciamentoEventos" />
     </list>
     <recent_temporary>
       <list>
