@@ -54,7 +54,7 @@ import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class UserActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, EventoAtivoAdapter.OnInscreverClickListener {
 
     private static final String TAG = "UserActivity";
     private DrawerLayout drawerLayout;
@@ -114,29 +114,11 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
 
         tvProfileWarning = findViewById(R.id.tvProfileWarning);
         listViewEventos = findViewById(R.id.listViewEventosUser);
-        adapter = new EventoAtivoAdapter(this, eventosList);
+        adapter = new EventoAtivoAdapter(this, eventosList, this);
         listViewEventos.setAdapter(adapter);
 
         updateNavHeader();
         checkProfileCompleteness();
-
-        listViewEventos.setOnItemClickListener((parent, view, position, id) -> {
-            Evento eventoClicado = eventosList.get(position);
-            if (!isProfileComplete) {
-                Toast.makeText(this, "Por favor, complete seu perfil para se inscrever em eventos.", Toast.LENGTH_LONG).show();
-                return;
-            }
-            new AlertDialog.Builder(UserActivity.this)
-                    .setTitle(eventoClicado.getNome())
-                    .setMessage(
-                            "Data: " + eventoClicado.getData() + "\n" +
-                                    "Horário: " + eventoClicado.getHorario() + "\n" +
-                                    "Descrição: " + eventoClicado.getDescricao()
-                    )
-                    .setPositiveButton("Inscrever-se", (dialog, which) -> inscreverUsuario(eventoClicado))
-                    .setNegativeButton("Fechar", null)
-                    .show();
-        });
 
         FloatingActionButton fabScan = findViewById(R.id.fab_scan);
         fabScan.setOnClickListener(v -> {
@@ -151,6 +133,15 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             Intent intent = new Intent(this, MeuPerfilActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public void onInscreverClick(Evento evento) {
+        if (!isProfileComplete) {
+            Toast.makeText(this, "Por favor, complete seu perfil para se inscrever em eventos.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        inscreverUsuario(evento);
     }
 
     @Override
@@ -278,7 +269,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             } else if (task.isSuccessful() && task.getResult().exists()) {
                 Toast.makeText(this, "Você já está inscrito neste evento.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(UserActivity.this, "Erro ao verificar inscrição.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_SHORT).show();
             }
         });
     }

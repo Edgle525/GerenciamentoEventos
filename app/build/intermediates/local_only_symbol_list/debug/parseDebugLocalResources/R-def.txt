@@ -9,6 +9,8 @@ color colorPrimary
 color colorPrimaryDark
 color white
 drawable cps_transparente
+drawable ic_default_profile
+drawable ic_expand_more
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable imagemapp
@@ -32,6 +34,7 @@ id btnImprimirComprovante
 id btnImprimirLista
 id btnImprimirQRCodes
 id btnImprimirUserQR
+id btnInscrever
 id btnSalvarEdicaoEvento
 id btnSalvarPerfil
 id btn_cadastrar_novo_evento
@@ -68,8 +71,10 @@ id edtTelefonePerfil
 id edtTempoMinimoPermanencia
 id edtTempoMinimoPermanenciaEditar
 id edtUsuario
+id expand_icon
 id fab_edit_photo
 id fab_scan
+id hidden_part
 id imageView2
 id item_historico_layout
 id ivQRCodeEntrada
@@ -86,6 +91,7 @@ id listViewParticipantHistory
 id listViewParticipants
 id listViewPresenca
 id main
+id main_content
 id nav_cadastrar_evento
 id nav_escanear
 id nav_eventos_finalizados
@@ -129,8 +135,11 @@ id tvCursosPermitidosEditar
 id tvDataEventoAtivo
 id tvDataEventoHistorico
 id tvDataTermino
+id tvDescricaoEvento
 id tvEventName
 id tvEventNameQRCode
+id tvHorarioInicio
+id tvHorarioTermino
 id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
@@ -145,6 +154,7 @@ id tvStatusHistorico
 id tvUserNameForQR
 id tv_total_eventos
 id tv_total_usuarios
+id visible_part
 layout activity_admin
 layout activity_base
 layout activity_cadastro

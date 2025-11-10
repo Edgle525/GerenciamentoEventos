@@ -3637,7 +3637,9 @@ drawable ic_call_decline
 drawable ic_call_decline_low
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
+drawable ic_default_profile
 drawable ic_expand_less_22px
+drawable ic_expand_more
 drawable ic_expand_more_22px
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
@@ -3863,6 +3865,7 @@ id btnImprimirComprovante
 id btnImprimirLista
 id btnImprimirQRCodes
 id btnImprimirUserQR
+id btnInscrever
 id btnSalvarEdicaoEvento
 id btnSalvarPerfil
 id btn_cadastrar_novo_evento
@@ -3985,6 +3988,7 @@ id entireSpace
 id escape
 id exitUntilCollapsed
 id expand_activities_button
+id expand_icon
 id expanded_menu
 id fab_edit_photo
 id fab_scan
@@ -4016,6 +4020,7 @@ id grouping
 id groups
 id header_title
 id hidden
+id hidden_part
 id hide_ime_id
 id hideable
 id home
@@ -4068,6 +4073,7 @@ id listViewPresenca
 id list_item
 id m3_side_sheet
 id main
+id main_content
 id marquee
 id masked
 id match_constraint
@@ -4354,8 +4360,11 @@ id tvCursosPermitidosEditar
 id tvDataEventoAtivo
 id tvDataEventoHistorico
 id tvDataTermino
+id tvDescricaoEvento
 id tvEventName
 id tvEventNameQRCode
+id tvHorarioInicio
+id tvHorarioTermino
 id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
@@ -4385,6 +4394,7 @@ id view_tree_on_back_pressed_dispatcher_owner
 id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
+id visible_part
 id visible_removing_fragment_view_tag
 id west
 id wide

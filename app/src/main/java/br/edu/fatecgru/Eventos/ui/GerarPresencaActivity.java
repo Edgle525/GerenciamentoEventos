@@ -43,10 +43,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
@@ -174,7 +178,7 @@ public class GerarPresencaActivity extends BaseActivity {
     }
 
     private void filterAndDisplayParticipants() {
-        if (spinnerCurso.getSelectedItem() == null || spinnerSemestre.getSelectedItem() == null) return;
+        if (spinnerCurso.getSelectedItem() == null || spinnerSemestre.getSelectedItem() == null || evento == null) return;
 
         String cursoFiltro = spinnerCurso.getSelectedItem().toString();
         String semestreFiltro = spinnerSemestre.getSelectedItem().toString();
@@ -190,12 +194,30 @@ public class GerarPresencaActivity extends BaseActivity {
 
                     if (cursoMatch && semestreMatch) {
                         String status = "Status: Cadastrado";
+                        String observacao = "";
+
                         if (inscricao.getHoraEntrada() != null && inscricao.getHoraSaida() != null) {
                             status = "Status: Completo";
+                            
+                            if (!evento.isTempoTotal()) {
+                                try {
+                                    SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
+                                    Date dateEntrada = format.parse(inscricao.getHoraEntrada());
+                                    Date dateSaida = format.parse(inscricao.getHoraSaida());
+                                    long diff = dateSaida.getTime() - dateEntrada.getTime();
+                                    long diffMinutes = diff / (60 * 1000);
+
+                                    if (diffMinutes < evento.getTempoMinimo()) {
+                                        observacao = " (tempo mínimo não atingido)";
+                                    }
+                                } catch (ParseException e) {
+                                    observacao = " (erro ao calcular tempo)";
+                                }
+                            }
                         } else if (inscricao.getHoraEntrada() != null) {
                             status = "Status: Incompleto";
                         }
-                        displayedParticipants.add("Nome: " + usuario.getNome() + "\n" + status);
+                        displayedParticipants.add("Nome: " + usuario.getNome() + "\n" + status + observacao);
                     }
                     break;
                 }
@@ -213,10 +235,16 @@ public class GerarPresencaActivity extends BaseActivity {
         if (evento != null) {
             builder.append("Evento: ").append(evento.getNome()).append("\n");
             builder.append("Descrição: ").append(evento.getDescricao()).append("\n");
-            builder.append("Data Início: ").append(evento.getData()).append("\n");
-            builder.append("Data Fim: ").append(evento.getDataTermino()).append("\n");
-            builder.append("Horário: ").append(evento.getHorario()).append("\n");
-            builder.append("Sala: ").append(evento.getLocal()).append("\n\n");
+
+            if (evento.getData() != null && evento.getData().equals(evento.getDataTermino())) {
+                builder.append("Data: ").append(evento.getData()).append("\n");
+                builder.append("Horário: ").append(evento.getHorario()).append(" às ").append(evento.getHorarioTermino()).append("\n");
+            } else {
+                builder.append("Início: ").append(evento.getData()).append(" às ").append(evento.getHorario()).append("\n");
+                builder.append("Término: ").append(evento.getDataTermino()).append(" às ").append(evento.getHorarioTermino()).append("\n");
+            }
+
+            builder.append("Local: ").append(evento.getLocal()).append("\n\n");
         } else {
              builder.append("Lista de Presença\n\n");
         }
@@ -366,7 +394,7 @@ public class GerarPresencaActivity extends BaseActivity {
                 try (BluetoothSocket socket = printerDevice.createRfcommSocketToServiceRecord(uuid)) {
                     socket.connect();
                     try (OutputStream outputStream = socket.getOutputStream()) {
-                        outputStream.write(text.getBytes(StandardCharsets.UTF_8));
+                        outputStream.write(text.getBytes(Charset.forName("IBM850")));
                         outputStream.flush();
                     }
                     runOnUiThread(() -> Toast.makeText(GerarPresencaActivity.this, "Lista enviada para impressão!", Toast.LENGTH_SHORT).show());

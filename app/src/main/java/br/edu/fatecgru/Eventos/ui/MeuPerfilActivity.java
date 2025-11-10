@@ -3,6 +3,7 @@ package br.edu.fatecgru.Eventos.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -15,6 +16,8 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +37,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
@@ -49,7 +53,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MeuPerfilActivity extends BaseActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 200;
-    private static final int MAX_IMAGE_DIMENSION = 400; // Max dimension for profile photo
+    private static final int MAX_IMAGE_DIMENSION = 400;
 
     private EditText edtNome, edtCpf, edtTelefone, edtEmail;
     private Spinner spinnerCurso, spinnerSemestre;
@@ -61,7 +65,8 @@ public class MeuPerfilActivity extends BaseActivity {
     private DocumentReference userRef;
     private FirebaseUser currentUser;
 
-    private String imageBase64; // Will hold the Base64 string of the image
+    private String imageBase64;
+    private boolean isProfileComplete = false;
 
     private final ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -69,20 +74,13 @@ public class MeuPerfilActivity extends BaseActivity {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Uri imageUri = result.getData().getData();
                     if (imageUri == null) return;
-
                     try {
-                        // Get bitmap from URI, correctly handling orientation and size
                         Bitmap processedBitmap = processImage(imageUri);
-                        
-                        // Convert to Base64
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         processedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
                         byte[] byteArray = byteArrayOutputStream.toByteArray();
                         imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-                        // Display the new image
                         Glide.with(this).load(processedBitmap).into(profileImageView);
-
                     } catch (IOException e) {
                         e.printStackTrace();
                         Toast.makeText(this, "Falha ao processar a imagem.", Toast.LENGTH_SHORT).show();
@@ -148,6 +146,29 @@ public class MeuPerfilActivity extends BaseActivity {
                 edtNome.setText(documentSnapshot.getString("nome"));
                 edtEmail.setText(documentSnapshot.getString("email"));
 
+                String cpf = documentSnapshot.getString("cpf");
+                String curso = documentSnapshot.getString("curso");
+
+                isProfileComplete = !TextUtils.isEmpty(cpf) && !TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso");
+
+                if (isProfileComplete) {
+                    edtNome.setEnabled(false);
+                    edtCpf.setText(MaskUtils.formatCpf(cpf));
+                    edtCpf.setEnabled(false);
+                    setSpinnerSelection(spinnerCurso, curso);
+                    spinnerCurso.setEnabled(false);
+                } else {
+                    edtNome.setEnabled(true);
+                    edtCpf.setEnabled(true);
+                    edtCpf.setText(cpf);
+                    edtCpf.addTextChangedListener(MaskUtils.insert("###.###.###-##", edtCpf));
+
+                    spinnerCurso.setEnabled(true);
+                    if (curso != null) {
+                        setSpinnerSelection(spinnerCurso, curso);
+                    }
+                }
+
                 if (documentSnapshot.contains("profileImageBase64")) {
                     String base64 = documentSnapshot.getString("profileImageBase64");
                     if (base64 != null && !base64.isEmpty()) {
@@ -157,22 +178,9 @@ public class MeuPerfilActivity extends BaseActivity {
                     }
                 }
 
-                String cpf = documentSnapshot.getString("cpf");
-                if (!TextUtils.isEmpty(cpf)) {
-                    edtCpf.setText(MaskUtils.formatCpf(cpf));
-                    edtCpf.setEnabled(false);
-                } else {
-                    edtCpf.addTextChangedListener(MaskUtils.insert("###.###.###-##", edtCpf));
-                }
-
-                edtTelefone.setText(documentSnapshot.getString("telefone"));
+                String telefone = documentSnapshot.getString("telefone");
+                edtTelefone.setText(telefone);
                 edtTelefone.addTextChangedListener(MaskUtils.insert("(##) #####-####", edtTelefone));
-
-                String curso = documentSnapshot.getString("curso");
-                if (!TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso")) {
-                    setSpinnerSelection(spinnerCurso, curso);
-                    spinnerCurso.setEnabled(false);
-                }
 
                 String semestre = documentSnapshot.getString("semestre");
                 if (!TextUtils.isEmpty(semestre)) {
@@ -185,32 +193,117 @@ public class MeuPerfilActivity extends BaseActivity {
         }).addOnFailureListener(e -> Toast.makeText(this, "Erro ao carregar o perfil.", Toast.LENGTH_SHORT).show());
     }
 
+    private void showKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private boolean validateInputs() {
+        if (edtNome.isEnabled() && TextUtils.isEmpty(edtNome.getText().toString().trim())) {
+            edtNome.setError("Nome é obrigatório.");
+            showKeyboard(edtNome);
+            return false;
+        }
+
+        if (edtCpf.isEnabled()) {
+            String unmaskedCpf = MaskUtils.unmask(edtCpf.getText().toString());
+            if (TextUtils.isEmpty(unmaskedCpf)) {
+                edtCpf.setError("CPF é obrigatório.");
+                showKeyboard(edtCpf);
+                return false;
+            }
+            if (unmaskedCpf.length() != 11) {
+                edtCpf.setError("CPF inválido. Deve conter 11 dígitos.");
+                showKeyboard(edtCpf);
+                return false;
+            }
+        }
+
+        String unmaskedTelefone = MaskUtils.unmask(edtTelefone.getText().toString());
+        if (TextUtils.isEmpty(unmaskedTelefone)) {
+            edtTelefone.setError("Telefone é obrigatório.");
+            showKeyboard(edtTelefone);
+            return false;
+        }
+        if (unmaskedTelefone.length() < 10) { // (##)####-#### (10) or (##)#####-#### (11)
+            edtTelefone.setError("Telefone inválido.");
+            showKeyboard(edtTelefone);
+            return false;
+        }
+
+        if (spinnerCurso.isEnabled() && spinnerCurso.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, "Selecione um curso válido.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (spinnerSemestre.getSelectedItemPosition() == 0) {
+            Toast.makeText(this, "Selecione um semestre válido.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
     private void saveUserProfile() {
-        if (edtCpf.isEnabled() && !edtCpf.getText().toString().isEmpty()) {
+        hideKeyboard();
+
+        if (!validateInputs()) {
+            return;
+        }
+
+        if (isProfileComplete) {
+            proceedWithUpdate();
+        } else {
             String unmaskedCpf = MaskUtils.unmask(edtCpf.getText().toString());
             db.collection("usuarios").whereEqualTo("cpf", unmaskedCpf).get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                            edtCpf.setError("Este CPF já está em uso.");
-                            edtCpf.requestFocus();
-                        } else if (task.isSuccessful()) {
-                            proceedWithUpdate();
-                        } else {
-                            Toast.makeText(this, "Erro ao verificar CPF.", Toast.LENGTH_SHORT).show();
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        boolean cpfInUseByOther = false;
+                        for (DocumentSnapshot doc : task.getResult()) {
+                            if (!doc.getId().equals(currentUser.getUid())) {
+                                cpfInUseByOther = true;
+                                break;
+                            }
                         }
-                    });
-        } else {
-            proceedWithUpdate();
+
+                        if (cpfInUseByOther) {
+                            edtCpf.setError("Este CPF já está em uso.");
+                            showKeyboard(edtCpf);
+                        } else {
+                            showConfirmationDialog();
+                        }
+                    } else {
+                        Toast.makeText(this, "Erro ao verificar CPF.", Toast.LENGTH_SHORT).show();
+                    }
+                });
         }
+    }
+
+    private void showConfirmationDialog() {
+        new AlertDialog.Builder(this)
+            .setTitle("Confirmar Finalização do Cadastro")
+            .setMessage("Você está prestes a finalizar seu cadastro. Após salvar, o Nome, CPF e Curso não poderão ser alterados. Deseja continuar?")
+            .setPositiveButton("Confirmar", (dialog, which) -> proceedWithUpdate())
+            .setNegativeButton("Cancelar", null)
+            .show();
     }
 
     private void proceedWithUpdate() {
         Map<String, Object> updates = new HashMap<>();
 
-        if (edtCpf.isEnabled() && !edtCpf.getText().toString().isEmpty()) {
+        if (!isProfileComplete) {
+            updates.put("nome", edtNome.getText().toString().trim());
             updates.put("cpf", MaskUtils.unmask(edtCpf.getText().toString()));
-        }
-        if (spinnerCurso.isEnabled() && spinnerCurso.getSelectedItemPosition() > 0) {
             updates.put("curso", spinnerCurso.getSelectedItem().toString());
         }
 
@@ -218,6 +311,11 @@ public class MeuPerfilActivity extends BaseActivity {
         updates.put("telefone", MaskUtils.unmask(edtTelefone.getText().toString()));
         if (imageBase64 != null && !imageBase64.isEmpty()) {
             updates.put("profileImageBase64", imageBase64);
+        }
+
+        if (updates.isEmpty()) {
+            Toast.makeText(this, "Nenhuma alteração para salvar.", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         userRef.update(updates).addOnSuccessListener(aVoid -> {
