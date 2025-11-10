@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +70,8 @@ public class CadastroEventoActivity extends BaseActivity {
         btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
         setupDateTimePickers();
-        cursosSelecionados.add("Todos"); // Default to all courses
+        cursosSelecionados.add("Geral"); // Default to all courses
+        tvCursosPermitidos.setText("Cursos Permitidos: Geral");
 
         cbTempoTotal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             edtTempoMinimoPermanencia.setEnabled(!isChecked);
@@ -154,45 +156,87 @@ public class CadastroEventoActivity extends BaseActivity {
     }
 
     private void showCursosDialog() {
-        String[] cursos = getResources().getStringArray(R.array.cursos_array);
-        List<String> cursosDialogList = new ArrayList<>(Arrays.asList(cursos));
+        String[] cursosArray = getResources().getStringArray(R.array.cursos_array);
+        final List<String> cursosDialogList = new ArrayList<>(Arrays.asList(cursosArray));
         cursosDialogList.remove("Selecione o Curso");
-        String[] cursosDialog = cursosDialogList.toArray(new String[0]);
-        boolean[] checkedItems = new boolean[cursosDialog.length];
 
-        ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
+        final String geralOption = "Geral";
+        if (!cursosDialogList.contains(geralOption)) {
+            cursosDialogList.add(0, geralOption);
+        }
 
-        for (int i = 0; i < cursosDialog.length; i++) {
-            if (tempCursosSelecionados.contains(cursosDialog[i])) {
-                checkedItems[i] = true;
+        final String[] cursosDialog = cursosDialogList.toArray(new String[0]);
+        final boolean[] checkedItems = new boolean[cursosDialog.length];
+
+        final ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
+
+        if (tempCursosSelecionados.contains(geralOption)) {
+            Arrays.fill(checkedItems, true);
+        } else {
+            for (int i = 0; i < cursosDialog.length; i++) {
+                checkedItems[i] = tempCursosSelecionados.contains(cursosDialog[i]);
             }
         }
 
         new AlertDialog.Builder(this)
-            .setTitle("Selecione os Cursos")
-            .setMultiChoiceItems(cursosDialog, checkedItems, (dialog, which, isChecked) -> {
-                if (isChecked) {
-                    tempCursosSelecionados.add(cursosDialog[which]);
-                } else {
-                    tempCursosSelecionados.remove(cursosDialog[which]);
-                }
-            })
-            .setPositiveButton("OK", (dialog, which) -> {
-                cursosSelecionados.clear();
-                cursosSelecionados.addAll(tempCursosSelecionados);
+                .setTitle("Selecione os Cursos")
+                .setMultiChoiceItems(cursosDialog, checkedItems, (dialog, which, isChecked) -> {
+                    final AlertDialog alertDialog = (AlertDialog) dialog;
+                    final ListView listView = alertDialog.getListView();
+                    final int geralIndex = cursosDialogList.indexOf(geralOption);
 
-                if (cursosSelecionados.isEmpty() || cursosSelecionados.size() == cursosDialog.length) {
-                    cursosSelecionados.clear(); 
-                    cursosSelecionados.add("Todos");
-                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
-                } else {
-                    cursosSelecionados.remove("Todos");
-                    tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
-                }
-            })
-            .setNegativeButton("Cancelar", null)
-            .show();
+                    if (which == geralIndex) {
+                        for (int i = 0; i < cursosDialog.length; i++) {
+                            listView.setItemChecked(i, isChecked);
+                        }
+                    } else {
+                        if (!isChecked) {
+                            listView.setItemChecked(geralIndex, false);
+                        } else {
+                            boolean allOthersChecked = true;
+                            for (int i = 0; i < cursosDialog.length; i++) {
+                                if (i == geralIndex) continue;
+                                if (!listView.isItemChecked(i)) {
+                                    allOthersChecked = false;
+                                    break;
+                                }
+                            }
+                            if (allOthersChecked) {
+                                listView.setItemChecked(geralIndex, true);
+                            }
+                        }
+                    }
+                })
+                .setPositiveButton("OK", (dialog, which) -> {
+                    final AlertDialog alertDialog = (AlertDialog) dialog;
+                    final ListView listView = alertDialog.getListView();
+                    final int geralIndex = cursosDialogList.indexOf(geralOption);
+
+                    cursosSelecionados.clear();
+
+                    if (listView.isItemChecked(geralIndex)) {
+                        cursosSelecionados.add(geralOption);
+                        tvCursosPermitidos.setText("Cursos Permitidos: " + geralOption);
+                    } else {
+                        for (int i = 0; i < cursosDialog.length; i++) {
+                            if (i == geralIndex) continue;
+                            if (listView.isItemChecked(i)) {
+                                cursosSelecionados.add(cursosDialog[i]);
+                            }
+                        }
+
+                        if (cursosSelecionados.isEmpty()) {
+                            cursosSelecionados.add(geralOption);
+                            tvCursosPermitidos.setText("Cursos Permitidos: " + geralOption);
+                        } else {
+                            tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
+                        }
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
+
 
     private void cadastrarEvento() {
         String nome = edtNomeEvento.getText().toString().trim();
@@ -221,8 +265,8 @@ public class CadastroEventoActivity extends BaseActivity {
         novoEvento.setTempoMinimo(tempoMinimo);
         novoEvento.setTempoTotal(cbTempoTotal.isChecked());
 
-        if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
-            novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
+        if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Geral"))){
+            novoEvento.setCursosPermitidos(Arrays.asList("Geral"));
         } else {
             novoEvento.setCursosPermitidos(cursosSelecionados);
         }
