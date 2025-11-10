@@ -84,8 +84,8 @@
                 android:id="@+id/edtTempoMinimoPermanencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tempo Mínimo de Permanência (minutos)"
-                android:inputType="number"/>
+                android:hint="Tempo Mínimo de Permanência (HH:MM)"
+                android:focusable="false" />
 
             <CheckBox
                 android:id="@+id/cbTempoTotal"

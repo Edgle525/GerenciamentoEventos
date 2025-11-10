@@ -107,6 +107,8 @@ id nav_view_admin
 id nav_view_participants
 id nav_view_user
 id offline_banner_textview
+id picker_horas
+id picker_minutos
 id profile_image
 id searchViewEventosAdmin
 id searchViewParticipants
@@ -177,6 +179,7 @@ layout activity_qrcode
 layout activity_user
 layout activity_user_qrcode
 layout activity_view_participants
+layout dialog_duration_picker
 layout dialog_offline
 layout list_item_evento_ativo
 layout list_item_evento_finalizado

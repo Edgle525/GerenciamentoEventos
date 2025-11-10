@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,8 +72,10 @@ public class CadastroEventoActivity extends BaseActivity {
         btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
         setupDateTimePickers();
-        cursosSelecionados.add("Geral"); // Default to all courses
+        cursosSelecionados.add("Geral");
         tvCursosPermitidos.setText("Cursos Permitidos: Geral");
+
+        edtTempoMinimoPermanencia.setOnClickListener(v -> showDurationPickerDialog());
 
         cbTempoTotal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             edtTempoMinimoPermanencia.setEnabled(!isChecked);
@@ -84,6 +88,41 @@ public class CadastroEventoActivity extends BaseActivity {
 
         tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnCadastrarEvento.setOnClickListener(v -> cadastrarEvento());
+    }
+
+    private void showDurationPickerDialog() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.dialog_duration_picker, null);
+
+        NumberPicker pickerHoras = view.findViewById(R.id.picker_horas);
+        NumberPicker pickerMinutos = view.findViewById(R.id.picker_minutos);
+
+        pickerHoras.setMinValue(0);
+        pickerHoras.setMaxValue(23);
+
+        pickerMinutos.setMinValue(0);
+        pickerMinutos.setMaxValue(59);
+
+        String currentTime = edtTempoMinimoPermanencia.getText().toString();
+        if (!currentTime.isEmpty()) {
+            try {
+                String[] parts = currentTime.split(":");
+                pickerHoras.setValue(Integer.parseInt(parts[0]));
+                pickerMinutos.setValue(Integer.parseInt(parts[1]));
+            } catch (Exception e) {
+                // ignore
+            }
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Selecionar Duração")
+                .setView(view)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String duracao = String.format(Locale.getDefault(), "%02d:%02d", pickerHoras.getValue(), pickerMinutos.getValue());
+                    edtTempoMinimoPermanencia.setText(duracao);
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 
     private void calculateAndSetTotalTime() {
@@ -101,7 +140,11 @@ public class CadastroEventoActivity extends BaseActivity {
                 long diff = dataTermino.getTime() - dataInicio.getTime();
                 long diffMinutes = diff / (60 * 1000);
 
-                edtTempoMinimoPermanencia.setText(String.valueOf(diffMinutes));
+                int horas = (int) diffMinutes / 60;
+                int minutos = (int) diffMinutes % 60;
+                String tempoFormatado = String.format(Locale.getDefault(), "%02d:%02d", horas, minutos);
+
+                edtTempoMinimoPermanencia.setText(tempoFormatado);
             } catch (ParseException e) {
                 Toast.makeText(this, "Datas ou horários inválidos.", Toast.LENGTH_SHORT).show();
             }
@@ -252,7 +295,16 @@ public class CadastroEventoActivity extends BaseActivity {
             return;
         }
 
-        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
+        int tempoMinimoEmMinutos;
+        try {
+            String[] parts = tempoMinimoStr.split(":");
+            int horas = Integer.parseInt(parts[0]);
+            int minutos = Integer.parseInt(parts[1]);
+            tempoMinimoEmMinutos = (horas * 60) + minutos;
+        } catch (Exception e) {
+            Toast.makeText(this, "Formato de tempo mínimo inválido.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Evento novoEvento = new Evento();
         novoEvento.setNome(nome);
@@ -262,7 +314,7 @@ public class CadastroEventoActivity extends BaseActivity {
         novoEvento.setHorarioTermino(horarioTermino);
         novoEvento.setLocal(local);
         novoEvento.setDescricao(descricao);
-        novoEvento.setTempoMinimo(tempoMinimo);
+        novoEvento.setTempoMinimo(tempoMinimoEmMinutos);
         novoEvento.setTempoTotal(cbTempoTotal.isChecked());
 
         if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Geral"))){

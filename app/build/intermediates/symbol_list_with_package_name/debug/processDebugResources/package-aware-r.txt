@@ -4202,6 +4202,8 @@ id path
 id pathRelative
 id peekHeight
 id percent
+id picker_horas
+id picker_minutos
 id pin
 id position
 id postLayout
@@ -4577,6 +4579,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout dialog_duration_picker
 layout dialog_offline
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity

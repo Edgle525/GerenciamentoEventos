@@ -4201,6 +4201,8 @@ int id path 0x7f0901cf
 int id pathRelative 0x7f0901d0
 int id peekHeight 0x7f0901d1
 int id percent 0x7f0901d2
+int id picker_horas 0x7f0902ac
+int id picker_minutos 0x7f0902ad
 int id pin 0x7f0901d3
 int id position 0x7f0901d4
 int id postLayout 0x7f0901d5
@@ -4576,6 +4578,7 @@ int layout design_navigation_menu 0x7f0c0040
 int layout design_navigation_menu_item 0x7f0c0041
 int layout design_text_input_end_icon 0x7f0c0042
 int layout design_text_input_start_icon 0x7f0c0043
+int layout dialog_duration_picker 0x7f0c008e
 int layout dialog_offline 0x7f0c0044
 int layout ime_base_split_test_activity 0x7f0c0045
 int layout ime_secondary_split_test_activity 0x7f0c0046

@@ -4,12 +4,12 @@
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\imagemapp.jpg"
     },
     {
-        "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_list_item_participant.xml.flat",
-        "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\list_item_participant.xml"
-    },
-    {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\drawable_user_icon_eps10_by_kanggraphic.jpg.flat",
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\drawable\\user_icon_eps10_by_kanggraphic.jpg"
+    },
+    {
+        "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_list_item_participant.xml.flat",
+        "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\list_item_participant.xml"
     },
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_cadastro.xml.flat",
@@ -18,10 +18,6 @@
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_nav_header_main.xml.flat",
-        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/nav_header_main.xml"
     },
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_listar_eventos_admin.xml.flat",
@@ -104,6 +100,10 @@
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_dialog_duration_picker.xml.flat",
+        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/dialog_duration_picker.xml"
+    },
+    {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_list_item_evento_finalizado.xml.flat",
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\list_item_evento_finalizado.xml"
     },
@@ -132,8 +132,16 @@
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-xhdpi\\ic_launcher_foreground.webp"
     },
     {
+        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_activity_editar_evento.xml.flat",
+        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/activity_editar_evento.xml"
+    },
+    {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-mdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_list_item_evento_ativo.xml.flat",
+        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/list_item_evento_ativo.xml"
     },
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_activity_meus_eventos.xml.flat",
@@ -150,6 +158,10 @@
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\layout_offline_banner.xml.flat",
         "source": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-main-49:\\layout\\offline_banner.xml"
+    },
+    {
+        "merged": "br.edu.fatecgru.Eventos.app-debug-47:/layout_activity_cadastro_evento.xml.flat",
+        "source": "br.edu.fatecgru.Eventos.app-main-49:/layout/activity_cadastro_evento.xml"
     },
     {
         "merged": "C:\\Users\\pedro\\.gradle\\daemon\\8.13\\br.edu.fatecgru.Eventos.app-debug-47:\\mipmap-mdpi_ic_launcher_round.webp.flat",
