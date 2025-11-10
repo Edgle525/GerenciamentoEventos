@@ -9,97 +9,71 @@
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:id="@+id/main_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:background="?android:attr/selectableItemBackground"
-        android:animateLayoutChanges="true">
+        android:padding="16dp">
 
-        <RelativeLayout
-            android:id="@+id/visible_part"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvNomeEventoAtivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Evento"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorPrimary" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_toStartOf="@+id/expand_icon">
+        <TextView
+            android:id="@+id/tvDataEventoAtivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data: DD/MM/AAAA"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textColor="?android:attr/textColorSecondary" />
 
-                <TextView
-                    android:id="@+id/tvNomeEventoAtivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nome do Evento"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvLocalEventoAtivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Local: A Definir"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textColor="?android:attr/textColorSecondary" />
 
-                <TextView
-                    android:id="@+id/tvDataEventoAtivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data: DD/MM/AAAA"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-
-                <TextView
-                    android:id="@+id/tvLocalEventoAtivo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Local: A Definir"
-                    android:textSize="14sp"
-                    android:layout_marginTop="4dp"/>
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/expand_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_expand_more"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"/>
-        </RelativeLayout>
-
+        <!-- Detalhes do Evento (Inicialmente Oculto) -->
         <LinearLayout
-            android:id="@+id/hidden_part"
+            android:id="@+id/layout_detalhes_evento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/tvHorarioEvento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horário: HH:MM"
+                android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tvDescricaoEvento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="Descrição detalhada do evento."/>
-
-            <TextView
-                android:id="@+id/tvHorarioInicio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="Descrição detalhada do evento..."
                 android:layout_marginTop="8dp"
-                android:text="Início: HH:MM"/>
-
-            <TextView
-                android:id="@+id/tvHorarioTermino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Término: HH:MM"/>
+                android:textSize="14sp"/>
 
             <Button
                 android:id="@+id/btnInscrever"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inscrever-se"
-                android:layout_gravity="end"
                 android:layout_marginTop="16dp"/>
+
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

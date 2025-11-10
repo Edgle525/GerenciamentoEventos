@@ -4,7 +4,7 @@
             "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-v17\\values-v17.xml",
+                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-v17\\values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

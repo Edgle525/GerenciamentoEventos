@@ -9,11 +9,10 @@ color colorPrimary
 color colorPrimaryDark
 color white
 drawable cps_transparente
-drawable ic_default_profile
-drawable ic_expand_more
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable imagemapp
+drawable outline_arrow_back_white_24dp
 drawable texto_do_seu_par_grafo_20251105_175435_0000_removebg_preview
 drawable user_icon_eps10_by_kanggraphic
 id action_search
@@ -37,6 +36,7 @@ id btnImprimirUserQR
 id btnInscrever
 id btnSalvarEdicaoEvento
 id btnSalvarPerfil
+id btn_back
 id btn_cadastrar_novo_evento
 id card_total_eventos
 id card_total_usuarios
@@ -71,16 +71,15 @@ id edtTelefonePerfil
 id edtTempoMinimoPermanencia
 id edtTempoMinimoPermanenciaEditar
 id edtUsuario
-id expand_icon
 id fab_edit_photo
 id fab_scan
-id hidden_part
 id imageView2
 id item_historico_layout
 id ivQRCodeEntrada
 id ivQRCodeSaida
 id ivUserQRCode
 id layout_container
+id layout_detalhes_evento
 id listViewEventosAtivosAdmin
 id listViewEventosFinalizados
 id listViewEventosFinalizadosAdmin
@@ -91,7 +90,6 @@ id listViewParticipantHistory
 id listViewParticipants
 id listViewPresenca
 id main
-id main_content
 id nav_cadastrar_evento
 id nav_escanear
 id nav_eventos_finalizados
@@ -107,8 +105,6 @@ id nav_view_admin
 id nav_view_participants
 id nav_view_user
 id offline_banner_textview
-id picker_horas
-id picker_minutos
 id profile_image
 id searchViewEventosAdmin
 id searchViewParticipants
@@ -140,8 +136,7 @@ id tvDataTermino
 id tvDescricaoEvento
 id tvEventName
 id tvEventNameQRCode
-id tvHorarioInicio
-id tvHorarioTermino
+id tvHorarioEvento
 id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
@@ -156,7 +151,7 @@ id tvStatusHistorico
 id tvUserNameForQR
 id tv_total_eventos
 id tv_total_usuarios
-id visible_part
+id zxing_barcode_scanner
 layout activity_admin
 layout activity_base
 layout activity_cadastro
@@ -179,7 +174,7 @@ layout activity_qrcode
 layout activity_user
 layout activity_user_qrcode
 layout activity_view_participants
-layout dialog_duration_picker
+layout custom_capture_layout
 layout dialog_offline
 layout list_item_evento_ativo
 layout list_item_evento_finalizado

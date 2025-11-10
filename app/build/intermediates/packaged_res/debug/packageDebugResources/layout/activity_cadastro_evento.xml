@@ -16,7 +16,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,8 +85,8 @@
                 android:id="@+id/edtTempoMinimoPermanencia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tempo Mínimo de Permanência (HH:MM)"
-                android:focusable="false" />
+                android:hint="Tempo Mínimo de Permanência (minutos)"
+                android:inputType="number"/>
 
             <CheckBox
                 android:id="@+id/cbTempoTotal"

@@ -35,7 +35,7 @@
 
         <activity android:name=".ui.CadastroActivity" android:exported="false" />
         <activity android:name=".ui.AdminActivity" android:exported="false" />
-        <activity android:name=".ui.UserActivity" android:exported="false" android:label="Home"/>
+        <activity android:name=".ui.UserActivity" android:exported="false" />
         <activity android:name=".ui.MeuPerfilActivity" android:exported="false" />
         <activity android:name=".ui.CadastroEventoActivity" android:exported="false" />
         <activity android:name=".ui.ListarEventosAdminActivity" android:exported="false" />
@@ -52,6 +52,7 @@
         <activity android:name=".ui.GerarPresencaActivity" android:exported="false" />
         <activity android:name=".ui.EventosFinalizadosActivity" android:exported="false" />
         <activity android:name=".ui.EventosFinalizadosAdminActivity" android:exported="false" />
+        <activity android:name=".ui.CustomCaptureActivity" android:exported="false" />
 
         <activity
             android:name=".ui.CaptureActivityPortrait"

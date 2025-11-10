@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
+    android:gravity="bottom"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="48dp"
-    android:paddingRight="16dp"
-    android:paddingBottom="16dp"
+    android:padding="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/nav_header_profile_image"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/ic_default_profile" />
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/user_icon_eps10_by_kanggraphic"
+        app:civ_border_color="@android:color/white"
+        app:civ_border_width="2dp" />
 
     <TextView
         android:id="@+id/nav_header_nome"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
         android:text="Nome do Usuário"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -29,5 +29,6 @@
         android:id="@+id/nav_header_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="email@exemplo.com" />
+        android:text="info@exemplo.com" />
+
 </LinearLayout>

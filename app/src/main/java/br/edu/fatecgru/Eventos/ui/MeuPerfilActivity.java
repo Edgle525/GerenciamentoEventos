@@ -3,7 +3,6 @@ package br.edu.fatecgru.Eventos.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -16,12 +15,9 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,10 +30,10 @@ import androidx.exifinterface.media.ExifInterface;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.ByteArrayOutputStream;
@@ -53,10 +49,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MeuPerfilActivity extends BaseActivity {
 
     private static final int PERMISSION_REQUEST_CODE = 200;
-    private static final int MAX_IMAGE_DIMENSION = 400;
+    private static final int MAX_IMAGE_DIMENSION = 400; // Max dimension for profile photo
 
-    private EditText edtNome, edtCpf, edtTelefone, edtEmail;
-    private Spinner spinnerCurso, spinnerSemestre;
+    private TextInputEditText edtNome, edtCpf, edtTelefone, edtEmail;
+    private AutoCompleteTextView spinnerCurso, spinnerSemestre;
     private Button btnSalvar, btnExcluir;
     private CircleImageView profileImageView;
     private FloatingActionButton fabEditPhoto;
@@ -65,8 +61,7 @@ public class MeuPerfilActivity extends BaseActivity {
     private DocumentReference userRef;
     private FirebaseUser currentUser;
 
-    private String imageBase64;
-    private boolean isProfileComplete = false;
+    private String imageBase64; // Will hold the Base64 string of the image
 
     private final ActivityResultLauncher<Intent> imagePickerLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -74,13 +69,20 @@ public class MeuPerfilActivity extends BaseActivity {
                 if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
                     Uri imageUri = result.getData().getData();
                     if (imageUri == null) return;
+
                     try {
+                        // Get bitmap from URI, correctly handling orientation and size
                         Bitmap processedBitmap = processImage(imageUri);
+                        
+                        // Convert to Base64
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         processedBitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
                         byte[] byteArray = byteArrayOutputStream.toByteArray();
                         imageBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+                        // Display the new image
                         Glide.with(this).load(processedBitmap).into(profileImageView);
+
                     } catch (IOException e) {
                         e.printStackTrace();
                         Toast.makeText(this, "Falha ao processar a imagem.", Toast.LENGTH_SHORT).show();
@@ -131,46 +133,18 @@ public class MeuPerfilActivity extends BaseActivity {
     }
 
     private void setupSpinners() {
-        ArrayAdapter<CharSequence> cursoAdapter = ArrayAdapter.createFromResource(this, R.array.cursos_array_cadastro, android.R.layout.simple_spinner_item);
-        cursoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> cursoAdapter = ArrayAdapter.createFromResource(this, R.array.cursos_array_cadastro, android.R.layout.simple_spinner_dropdown_item);
         spinnerCurso.setAdapter(cursoAdapter);
 
-        ArrayAdapter<CharSequence> semestreAdapter = ArrayAdapter.createFromResource(this, R.array.semestres_array_cadastro, android.R.layout.simple_spinner_item);
-        semestreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> semestreAdapter = ArrayAdapter.createFromResource(this, R.array.semestres_array_cadastro, android.R.layout.simple_spinner_dropdown_item);
         spinnerSemestre.setAdapter(semestreAdapter);
     }
 
     private void loadUserProfile() {
-        // Habilita os campos por padrão para garantir que fiquem editáveis no primeiro login
-        edtNome.setEnabled(true);
-        edtCpf.setEnabled(true);
-        spinnerCurso.setEnabled(true);
-
         userRef.get().addOnSuccessListener(documentSnapshot -> {
             if (documentSnapshot.exists()) {
                 edtNome.setText(documentSnapshot.getString("nome"));
                 edtEmail.setText(documentSnapshot.getString("email"));
-
-                String cpf = documentSnapshot.getString("cpf");
-                String curso = documentSnapshot.getString("curso");
-
-                isProfileComplete = !TextUtils.isEmpty(cpf) && !TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso");
-
-                if (isProfileComplete) {
-                    // Se o perfil já está completo, desabilita os campos
-                    edtNome.setEnabled(false);
-                    edtCpf.setText(MaskUtils.formatCpf(cpf));
-                    edtCpf.setEnabled(false);
-                    setSpinnerSelection(spinnerCurso, curso);
-                    spinnerCurso.setEnabled(false);
-                } else {
-                    // Se não, configura para edição
-                    edtCpf.setText(cpf);
-                    edtCpf.addTextChangedListener(MaskUtils.insert("###.###.###-##", edtCpf));
-                    if (curso != null) {
-                        setSpinnerSelection(spinnerCurso, curso);
-                    }
-                }
 
                 if (documentSnapshot.contains("profileImageBase64")) {
                     String base64 = documentSnapshot.getString("profileImageBase64");
@@ -181,13 +155,26 @@ public class MeuPerfilActivity extends BaseActivity {
                     }
                 }
 
-                String telefone = documentSnapshot.getString("telefone");
-                edtTelefone.setText(telefone);
+                String cpf = documentSnapshot.getString("cpf");
+                if (!TextUtils.isEmpty(cpf)) {
+                    edtCpf.setText(MaskUtils.formatCpf(cpf));
+                    edtCpf.setEnabled(false);
+                } else {
+                    edtCpf.addTextChangedListener(MaskUtils.insert("###.###.###-##", edtCpf));
+                }
+
+                edtTelefone.setText(documentSnapshot.getString("telefone"));
                 edtTelefone.addTextChangedListener(MaskUtils.insert("(##) #####-####", edtTelefone));
+
+                String curso = documentSnapshot.getString("curso");
+                if (!TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso")) {
+                    spinnerCurso.setText(curso, false);
+                    spinnerCurso.setEnabled(false);
+                }
 
                 String semestre = documentSnapshot.getString("semestre");
                 if (!TextUtils.isEmpty(semestre)) {
-                    setSpinnerSelection(spinnerSemestre, semestre);
+                    spinnerSemestre.setText(semestre, false);
                 }
 
             } else {
@@ -196,129 +183,39 @@ public class MeuPerfilActivity extends BaseActivity {
         }).addOnFailureListener(e -> Toast.makeText(this, "Erro ao carregar o perfil.", Toast.LENGTH_SHORT).show());
     }
 
-    private void showKeyboard(View view) {
-        if (view.requestFocus()) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-        }
-    }
-
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    private boolean validateInputs() {
-        if (edtNome.isEnabled() && TextUtils.isEmpty(edtNome.getText().toString().trim())) {
-            edtNome.setError("Nome é obrigatório.");
-            showKeyboard(edtNome);
-            return false;
-        }
-
-        if (edtCpf.isEnabled()) {
-            String unmaskedCpf = MaskUtils.unmask(edtCpf.getText().toString());
-            if (TextUtils.isEmpty(unmaskedCpf)) {
-                edtCpf.setError("CPF é obrigatório.");
-                showKeyboard(edtCpf);
-                return false;
-            }
-            if (unmaskedCpf.length() != 11) {
-                edtCpf.setError("CPF inválido. Deve conter 11 dígitos.");
-                showKeyboard(edtCpf);
-                return false;
-            }
-        }
-
-        String unmaskedTelefone = MaskUtils.unmask(edtTelefone.getText().toString());
-        if (TextUtils.isEmpty(unmaskedTelefone)) {
-            edtTelefone.setError("Telefone é obrigatório.");
-            showKeyboard(edtTelefone);
-            return false;
-        }
-        if (unmaskedTelefone.length() < 10) { // (##)####-#### (10) or (##)#####-#### (11)
-            edtTelefone.setError("Telefone inválido.");
-            showKeyboard(edtTelefone);
-            return false;
-        }
-
-        if (spinnerCurso.isEnabled() && spinnerCurso.getSelectedItemPosition() == 0) {
-            Toast.makeText(this, "Selecione um curso válido.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (spinnerSemestre.getSelectedItemPosition() == 0) {
-            Toast.makeText(this, "Selecione um semestre válido.", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
-    }
-
     private void saveUserProfile() {
-        hideKeyboard();
-
-        if (!validateInputs()) {
-            return;
-        }
-
-        if (isProfileComplete) {
-            proceedWithUpdate();
-        } else {
+        if (edtCpf.isEnabled() && !edtCpf.getText().toString().isEmpty()) {
             String unmaskedCpf = MaskUtils.unmask(edtCpf.getText().toString());
             db.collection("usuarios").whereEqualTo("cpf", unmaskedCpf).get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
-                        boolean cpfInUseByOther = false;
-                        for (DocumentSnapshot doc : task.getResult()) {
-                            if (!doc.getId().equals(currentUser.getUid())) {
-                                cpfInUseByOther = true;
-                                break;
-                            }
-                        }
-
-                        if (cpfInUseByOther) {
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
                             edtCpf.setError("Este CPF já está em uso.");
-                            showKeyboard(edtCpf);
+                            edtCpf.requestFocus();
+                        } else if (task.isSuccessful()) {
+                            proceedWithUpdate();
                         } else {
-                            showConfirmationDialog();
+                            Toast.makeText(this, "Erro ao verificar CPF.", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(this, "Erro ao verificar CPF.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    });
+        } else {
+            proceedWithUpdate();
         }
-    }
-
-    private void showConfirmationDialog() {
-        new AlertDialog.Builder(this)
-            .setTitle("Confirmar Finalização do Cadastro")
-            .setMessage("Você está prestes a finalizar seu cadastro. Após salvar, o Nome, CPF e Curso não poderão ser alterados. Deseja continuar?")
-            .setPositiveButton("Confirmar", (dialog, which) -> proceedWithUpdate())
-            .setNegativeButton("Cancelar", null)
-            .show();
     }
 
     private void proceedWithUpdate() {
         Map<String, Object> updates = new HashMap<>();
 
-        if (!isProfileComplete) {
-            updates.put("nome", edtNome.getText().toString().trim());
+        if (edtCpf.isEnabled() && !edtCpf.getText().toString().isEmpty()) {
             updates.put("cpf", MaskUtils.unmask(edtCpf.getText().toString()));
-            updates.put("curso", spinnerCurso.getSelectedItem().toString());
+        }
+        if (spinnerCurso.isEnabled() && !spinnerCurso.getText().toString().equals("Selecione o Curso")) {
+            updates.put("curso", spinnerCurso.getText().toString());
         }
 
-        updates.put("semestre", spinnerSemestre.getSelectedItem().toString());
+        updates.put("semestre", spinnerSemestre.getText().toString());
         updates.put("telefone", MaskUtils.unmask(edtTelefone.getText().toString()));
         if (imageBase64 != null && !imageBase64.isEmpty()) {
             updates.put("profileImageBase64", imageBase64);
-        }
-
-        if (updates.isEmpty()) {
-            Toast.makeText(this, "Nenhuma alteração para salvar.", Toast.LENGTH_SHORT).show();
-            return;
         }
 
         userRef.update(updates).addOnSuccessListener(aVoid -> {
@@ -426,14 +323,6 @@ public class MeuPerfilActivity extends BaseActivity {
         }
     }
 
-    private void setSpinnerSelection(Spinner spinner, String value) {
-        ArrayAdapter<CharSequence> adapter = (ArrayAdapter<CharSequence>) spinner.getAdapter();
-        if (value != null) {
-            int spinnerPosition = adapter.getPosition(value);
-            spinner.setSelection(spinnerPosition);
-        }
-    }
-
     private void showDeleteConfirmationDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("Confirmar Exclusão")
@@ -470,5 +359,11 @@ public class MeuPerfilActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

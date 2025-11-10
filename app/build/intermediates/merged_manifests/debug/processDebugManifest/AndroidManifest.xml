@@ -89,8 +89,7 @@
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.UserActivity"
-            android:exported="false"
-            android:label="Home" />
+            android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.MeuPerfilActivity"
             android:exported="false" />
@@ -138,6 +137,9 @@
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.EventosFinalizadosAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="br.edu.fatecgru.Eventos.ui.CustomCaptureActivity"
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait"

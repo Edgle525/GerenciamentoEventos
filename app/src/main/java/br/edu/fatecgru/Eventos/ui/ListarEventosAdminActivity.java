@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -37,8 +38,11 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private List<Evento> allEventosFinalizados = new ArrayList<>();
     private List<Evento> displayedEventosAtivos = new ArrayList<>();
     private List<Evento> displayedEventosFinalizados = new ArrayList<>();
-    private EventoFinalizadoAdapter adapterAtivos;
-    private EventoFinalizadoAdapter adapterFinalizados;
+
+    private ArrayAdapter<String> adapterAtivos;
+    private ArrayAdapter<String> adapterFinalizados;
+    private List<String> nomesEventosAtivos = new ArrayList<>();
+    private List<String> nomesEventosFinalizados = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +61,10 @@ public class ListarEventosAdminActivity extends BaseActivity {
         searchView = findViewById(R.id.searchViewEventosAdmin);
         db = FirebaseFirestore.getInstance();
 
-        adapterAtivos = new EventoFinalizadoAdapter(this, displayedEventosAtivos);
+        adapterAtivos = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosAtivos);
         listViewEventosAtivos.setAdapter(adapterAtivos);
 
-        adapterFinalizados = new EventoFinalizadoAdapter(this, displayedEventosFinalizados);
+        adapterFinalizados = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventosFinalizados);
         listViewEventosFinalizados.setAdapter(adapterFinalizados);
 
         setupListViewListeners(listViewEventosAtivos, displayedEventosAtivos);
@@ -165,6 +169,8 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private void filter(String query) {
         displayedEventosAtivos.clear();
         displayedEventosFinalizados.clear();
+        nomesEventosAtivos.clear();
+        nomesEventosFinalizados.clear();
 
         if (query.isEmpty()) {
             displayedEventosAtivos.addAll(allEventosAtivos);
@@ -181,6 +187,13 @@ public class ListarEventosAdminActivity extends BaseActivity {
                     displayedEventosFinalizados.add(evento);
                 }
             }
+        }
+
+        for (Evento evento : displayedEventosAtivos) {
+            nomesEventosAtivos.add(evento.getNome());
+        }
+        for (Evento evento : displayedEventosFinalizados) {
+            nomesEventosFinalizados.add(evento.getNome() + " - " + evento.getDataTermino());
         }
 
         adapterAtivos.notifyDataSetChanged();
@@ -231,5 +244,11 @@ public class ListarEventosAdminActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

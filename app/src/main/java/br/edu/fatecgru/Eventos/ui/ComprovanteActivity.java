@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -145,12 +144,11 @@ public class ComprovanteActivity extends BaseActivity {
 
         String observacao = "";
         if (!participacaoCompleta) {
-            observacao = String.format("\nObservação: O tempo mínimo de permanência para este evento era de %d minutos. " +
-                    "Sua participação foi registrada, mas não atingiu o tempo necessário para o certificado de conclusão.\n", tempoMinimoEvento);
+            observacao = String.format("\nObservação: A participação neste evento exigia um tempo mínimo de %d minutos. " +
+                    "O participante não atingiu o tempo necessário para receber o certificado de conclusão, mas sua presença foi registrada.\n", tempoMinimoEvento);
         }
 
         return "--- COMPROVANTE DE PARTICIPACAO ---\n\n" +
-                "Status: Completo" + (participacaoCompleta ? "" : " (tempo mínimo não atingido)") + "\n\n" +
                 "Participante: " + nomeParticipante + "\n" +
                 "E-mail: " + emailParticipante + "\n" +
                 "Curso: " + (curso != null ? curso : "N/A") + "\n" +
@@ -347,7 +345,7 @@ public class ComprovanteActivity extends BaseActivity {
                             try (BluetoothSocket socket = printerDevice.createRfcommSocketToServiceRecord(uuid)) {
                                 socket.connect();
                                 try (OutputStream outputStream = socket.getOutputStream()) {
-                                    outputStream.write(proofText.getBytes(Charset.forName("IBM850")));
+                                    outputStream.write(proofText.getBytes());
                                     outputStream.flush();
                                 }
                                 runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Comprovante enviado para impressão!", Toast.LENGTH_SHORT).show());
