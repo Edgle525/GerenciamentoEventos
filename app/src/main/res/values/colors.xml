@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Palette -->
-    <color name="primary">#1A237E</color> <!-- Navy Blue -->
-    <color name="primary_dark">#000051</color> <!-- Darker Navy Blue -->
-    <color name="accent">#616161</color> <!-- Grey -->
+    <!-- Palette from Logo -->
+    <color name="primary">#304FFE</color> <!-- Strong Blue -->
+    <color name="primary_dark">#0026CA</color> <!-- Darker Blue -->
+    <color name="accent">#FFC107</color> <!-- Gold -->
 
     <!-- Old Palette (for reference, can be removed) -->
-    <color name="colorPrimary">#1A237E</color>
-    <color name="colorPrimaryDark">#000051</color>
-    <color name="colorAccent">#616161</color>
+    <color name="colorPrimary">#304FFE</color>
+    <color name="colorPrimaryDark">#0026CA</color>
+    <color name="colorAccent">#FFC107</color>
 
     <!-- General Colors -->
     <color name="white">#FFFFFF</color>
@@ -16,8 +16,8 @@
     <color name="offline_banner_background">#E53935</color>
 
     <!-- Light Theme -->
-    <color name="light_background">#FFFFFF</color>
-    <color name="card_background_light">#F5F5F5</color>
+    <color name="light_background">#F5F5F5</color> <!-- Light Grey -->
+    <color name="card_background_light">#FFFFFF</color>
     <color name="text_primary_light">#212121</color>
     <color name="text_secondary_light">#757575</color>
 

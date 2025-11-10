@@ -56,6 +56,7 @@ id btn_cadastrar_novo_evento
 id card_total_eventos
 id card_total_usuarios
 id cbTempoTotal
+id cps_logo
 id drawer_layout_admin
 id drawer_layout_user
 id edtConfirmarSenhaCadastro
@@ -154,6 +155,7 @@ id tvDescricaoEvento
 id tvEventName
 id tvEventNameQRCode
 id tvHorarioEvento
+id tvHorarioTerminoEvento
 id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
@@ -165,6 +167,7 @@ id tvParticipantName
 id tvParticipantSemester
 id tvProfileWarning
 id tvStatusHistorico
+id tvTempoMinimo
 id tvUserNameForQR
 id tv_total_eventos
 id tv_total_usuarios

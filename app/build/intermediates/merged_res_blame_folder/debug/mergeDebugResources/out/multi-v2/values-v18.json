@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-v18/values-v18.xml",
+            "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-42:/values-v18/values-v18.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\115988da9e6799b699f20ac075e5f20f\\transformed\\appcompat-1.7.1\\res\\values-v18\\values-v18.xml",
+                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\990a68d5e2dfdc6735e83304243323e6\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

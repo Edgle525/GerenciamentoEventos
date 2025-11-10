@@ -73,9 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
+            android:src="@android:drawable/ic_menu_camera"
             app:backgroundTint="@color/accent"
-            app:tint="@color/white"
-            android:src="@drawable/ic_qr_code_scanner" />
+            app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

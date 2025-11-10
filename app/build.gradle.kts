@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "br.edu.fatecgru.Eventos"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.edu.fatecgru.Eventos"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -34,14 +34,14 @@ android {
 
 dependencies {
 
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.activity)
-    implementation(libs.constraintlayout)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.activity:activity:1.9.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("com.journeyapps:zxing-android-embedded:4.3.0")
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     // Firebase BoM - Gerencia as versões de todas as bibliotecas Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
@@ -58,9 +58,9 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     // Glide
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 
     // Exifinterface for image orientation
-    implementation("androidx.exifinterface:exifinterface:1.3.6")
+    implementation("androidx.exifinterface:exifinterface:1.3.7")
 }

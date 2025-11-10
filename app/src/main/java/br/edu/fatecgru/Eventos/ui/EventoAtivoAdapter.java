@@ -46,7 +46,11 @@ public class EventoAtivoAdapter extends ArrayAdapter<Evento> {
             TextView tvDataEvento = convertView.findViewById(R.id.tvDataEventoAtivo);
             TextView tvLocalEvento = convertView.findViewById(R.id.tvLocalEventoAtivo);
             LinearLayout layoutDetalhes = convertView.findViewById(R.id.layout_detalhes_evento);
+            
             TextView tvHorarioEvento = convertView.findViewById(R.id.tvHorarioEvento);
+            TextView tvHorarioTerminoEvento = convertView.findViewById(R.id.tvHorarioTerminoEvento);
+            TextView tvTempoMinimo = convertView.findViewById(R.id.tvTempoMinimo);
+            TextView tvCursosPermitidos = convertView.findViewById(R.id.tvCursosPermitidos);
             TextView tvDescricaoEvento = convertView.findViewById(R.id.tvDescricaoEvento);
             Button btnInscrever = convertView.findViewById(R.id.btnInscrever);
 
@@ -57,7 +61,10 @@ public class EventoAtivoAdapter extends ArrayAdapter<Evento> {
             layoutDetalhes.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
 
             if (isExpanded) {
-                tvHorarioEvento.setText("Horário: " + evento.getHorario());
+                tvHorarioEvento.setText("Horário de Início: " + evento.getHorario());
+                tvHorarioTerminoEvento.setText("Horário de Término: " + evento.getHorarioTermino());
+                tvTempoMinimo.setText("Tempo Mínimo: " + evento.getTempoMinimo() + " minutos");
+                tvCursosPermitidos.setText("Cursos: " + String.join(", ", evento.getCursosPermitidos()));
                 tvDescricaoEvento.setText(evento.getDescricao());
                 btnInscrever.setOnClickListener(v -> {
                     if (inscricaoListener != null) {
