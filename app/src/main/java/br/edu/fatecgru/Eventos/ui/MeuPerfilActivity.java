@@ -206,14 +206,25 @@ public class MeuPerfilActivity extends BaseActivity {
         Map<String, Object> updates = new HashMap<>();
 
         if (edtCpf.isEnabled() && !edtCpf.getText().toString().isEmpty()) {
-            updates.put("cpf", MaskUtils.unmask(edtCpf.getText().toString()));
+            String cpf = MaskUtils.unmask(edtCpf.getText().toString());
+            if (cpf.length() != 11) {
+                edtCpf.setError("CPF inválido. Deve conter 11 dígitos.");
+                return;
+            }
+            updates.put("cpf", cpf);
         }
         if (spinnerCurso.isEnabled() && !spinnerCurso.getText().toString().equals("Selecione o Curso")) {
             updates.put("curso", spinnerCurso.getText().toString());
         }
 
+        String telefone = MaskUtils.unmask(edtTelefone.getText().toString());
+        if (telefone.length() != 11) {
+            edtTelefone.setError("Telefone inválido. Deve conter 11 dígitos.");
+            return;
+        }
+
         updates.put("semestre", spinnerSemestre.getText().toString());
-        updates.put("telefone", MaskUtils.unmask(edtTelefone.getText().toString()));
+        updates.put("telefone", telefone);
         if (imageBase64 != null && !imageBase64.isEmpty()) {
             updates.put("profileImageBase64", imageBase64);
         }

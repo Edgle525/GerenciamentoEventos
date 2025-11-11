@@ -17,12 +17,13 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:background="@color/primary">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_admin"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:title="Dashboard"
                 app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -41,93 +42,113 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="8dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dashboard"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:layout_marginBottom="24dp"/>
-
-                    <GridLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:rowCount="1"
-                        android:alignmentMode="alignMargins"
-                        android:columnOrderPreserved="false">
+                        android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
-                            android:id="@+id/card_total_eventos"
+                            android:id="@+id/card_eventos_ativos"
                             style="@style/Widget.App.CardView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_rowWeight="1"
+                            android:layout_weight="1"
                             android:layout_margin="8dp">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="20dp"
+                                android:padding="16dp"
                                 android:gravity="center">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Total de Eventos"
-                                    android:textSize="18sp"
+                                    android:text="Eventos Ativos"
+                                    android:textSize="16sp"
                                     android:textColor="?android:attr/textColorSecondary"/>
-
                                 <TextView
-                                    android:id="@+id/tv_total_eventos"
+                                    android:id="@+id/tv_eventos_ativos"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textSize="36sp"
+                                    android:textSize="32sp"
                                     android:textStyle="bold"
                                     android:textColor="?android:attr/textColorPrimary"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/card_eventos_finalizados"
+                            style="@style/Widget.App.CardView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_margin="8dp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="16dp"
+                                android:gravity="center">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Eventos Finalizados"
+                                    android:textSize="16sp"
+                                    android:textColor="?android:attr/textColorSecondary"/>
+                                <TextView
+                                    android:id="@+id/tv_eventos_finalizados"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textSize="32sp"
+                                    android:textStyle="bold"
+                                    android:textColor="?android:attr/textColorPrimary"/>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_total_usuarios"
                             style="@style/Widget.App.CardView"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_columnWeight="1"
-                            android:layout_rowWeight="1"
+                            android:layout_weight="0.5"
                             android:layout_margin="8dp">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical"
-                                android:padding="20dp"
+                                android:padding="16dp"
                                 android:gravity="center">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Total de Usuários"
-                                    android:textSize="18sp"
+                                    android:textSize="16sp"
                                     android:textColor="?android:attr/textColorSecondary"/>
-
                                 <TextView
                                     android:id="@+id/tv_total_usuarios"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="0"
-                                    android:textSize="36sp"
+                                    android:textSize="32sp"
                                     android:textStyle="bold"
                                     android:textColor="?android:attr/textColorPrimary"/>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
-                    </GridLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
             </ScrollView>
 
@@ -136,7 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Cadastrar Novo Evento"
-                android:backgroundTint="@color/colorAccent"
+                android:backgroundTint="@color/accent"
                 android:textColor="@color/white"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="16dp" />

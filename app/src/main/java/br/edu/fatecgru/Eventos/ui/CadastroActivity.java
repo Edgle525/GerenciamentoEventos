@@ -94,6 +94,16 @@ public class CadastroActivity extends BaseActivity {
             return;
         }
 
+        if (cpf.length() != 11) {
+            edtCpf.setError("CPF inválido. Deve conter 11 dígitos.");
+            return;
+        }
+
+        if (telefone.length() != 11) {
+            edtTelefone.setError("Telefone inválido. Deve conter 11 dígitos.");
+            return;
+        }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             edtEmail.setError("Por favor, insira um e-mail válido");
             return;

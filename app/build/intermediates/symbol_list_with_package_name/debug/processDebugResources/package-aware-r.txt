@@ -3307,7 +3307,8 @@ id buttonPanel
 id cache_measures
 id callMeasure
 id cancel_button
-id card_total_eventos
+id card_eventos_ativos
+id card_eventos_finalizados
 id card_total_usuarios
 id carryVelocity
 id cbTempoTotal
@@ -3491,7 +3492,7 @@ id line1
 id line3
 id linear
 id listMode
-id listViewEventosAtivosAdmin
+id listViewEventosAdmin
 id listViewEventosFinalizados
 id listViewEventosFinalizadosAdmin
 id listViewEventosUser
@@ -3570,6 +3571,8 @@ id nav_header_nome
 id nav_header_profile_image
 id nav_historico
 id nav_listar_eventos
+id nav_listar_eventos_ativos
+id nav_listar_eventos_finalizados
 id nav_logout
 id nav_meu_perfil
 id nav_meus_eventos
@@ -3775,12 +3778,14 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tvCadastrar
+id tvCursoUsuario
 id tvCursosPermitidos
 id tvCursosPermitidosEditar
 id tvDataEventoAtivo
 id tvDataEventoHistorico
 id tvDataTermino
 id tvDescricaoEvento
+id tvEmailUsuario
 id tvEventName
 id tvEventNameQRCode
 id tvHorarioEvento
@@ -3789,6 +3794,7 @@ id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
 id tvNomeEventoHistorico
+id tvNomeUsuario
 id tvParticipantCourse
 id tvParticipantCpf
 id tvParticipantEmail
@@ -3798,7 +3804,8 @@ id tvProfileWarning
 id tvStatusHistorico
 id tvTempoMinimo
 id tvUserNameForQR
-id tv_total_eventos
+id tv_eventos_ativos
+id tv_eventos_finalizados
 id tv_total_usuarios
 id unchecked
 id uniform
@@ -4000,6 +4007,7 @@ layout list_item_evento_ativo
 layout list_item_evento_finalizado
 layout list_item_historico
 layout list_item_participant
+layout list_item_usuario
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

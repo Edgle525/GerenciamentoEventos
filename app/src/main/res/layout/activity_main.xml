@@ -74,6 +74,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <ImageView
+            android:id="@+id/cps_logo"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/cps_transparente"
+            android:contentDescription="Logo do Centro Paula Souza" />
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"

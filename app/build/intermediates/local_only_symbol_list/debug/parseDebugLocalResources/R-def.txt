@@ -53,7 +53,8 @@ id btnSalvarEdicaoEvento
 id btnSalvarPerfil
 id btn_back
 id btn_cadastrar_novo_evento
-id card_total_eventos
+id card_eventos_ativos
+id card_eventos_finalizados
 id card_total_usuarios
 id cbTempoTotal
 id cps_logo
@@ -96,7 +97,7 @@ id ivQRCodeSaida
 id ivUserQRCode
 id layout_container
 id layout_detalhes_evento
-id listViewEventosAtivosAdmin
+id listViewEventosAdmin
 id listViewEventosFinalizados
 id listViewEventosFinalizadosAdmin
 id listViewEventosUser
@@ -114,6 +115,8 @@ id nav_header_nome
 id nav_header_profile_image
 id nav_historico
 id nav_listar_eventos
+id nav_listar_eventos_ativos
+id nav_listar_eventos_finalizados
 id nav_logout
 id nav_meu_perfil
 id nav_meus_eventos
@@ -146,12 +149,14 @@ id toolbar_participant_history
 id toolbar_user
 id toolbar_view_participants
 id tvCadastrar
+id tvCursoUsuario
 id tvCursosPermitidos
 id tvCursosPermitidosEditar
 id tvDataEventoAtivo
 id tvDataEventoHistorico
 id tvDataTermino
 id tvDescricaoEvento
+id tvEmailUsuario
 id tvEventName
 id tvEventNameQRCode
 id tvHorarioEvento
@@ -160,6 +165,7 @@ id tvLocalEventoAtivo
 id tvNomeEvento
 id tvNomeEventoAtivo
 id tvNomeEventoHistorico
+id tvNomeUsuario
 id tvParticipantCourse
 id tvParticipantCpf
 id tvParticipantEmail
@@ -169,7 +175,8 @@ id tvProfileWarning
 id tvStatusHistorico
 id tvTempoMinimo
 id tvUserNameForQR
-id tv_total_eventos
+id tv_eventos_ativos
+id tv_eventos_finalizados
 id tv_total_usuarios
 id zxing_barcode_scanner
 layout activity_admin
@@ -200,6 +207,7 @@ layout list_item_evento_ativo
 layout list_item_evento_finalizado
 layout list_item_historico
 layout list_item_participant
+layout list_item_usuario
 layout nav_header_main
 layout offline_banner
 menu activity_main_drawer

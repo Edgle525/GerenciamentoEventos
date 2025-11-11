@@ -35,7 +35,7 @@ import br.edu.fatecgru.Eventos.model.Evento;
 public class CadastroEventoActivity extends BaseActivity {
 
     private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento, edtDataTerminoEvento, edtHorarioTerminoEvento, edtLocalEvento, edtTempoMinimoPermanencia;
-    private Button btnCadastrarEvento, btnGerarQRCode;
+    private Button btnCadastrarEvento;
     private TextView tvCursosPermitidos;
     private CheckBox cbTempoTotal;
     private FirebaseFirestore db;
@@ -66,7 +66,6 @@ public class CadastroEventoActivity extends BaseActivity {
         cbTempoTotal = findViewById(R.id.cbTempoTotal);
         tvCursosPermitidos = findViewById(R.id.tvCursosPermitidos);
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
-        btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
         setupDateTimePickers();
         cursosSelecionados.add("Todos"); // Default to all courses
@@ -208,45 +207,50 @@ public class CadastroEventoActivity extends BaseActivity {
             return;
         }
 
-        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
+        db.collection("eventos").whereEqualTo("nome", nome).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                Toast.makeText(CadastroEventoActivity.this, "Já existe um evento com este nome. Por favor, escolha outro.", Toast.LENGTH_LONG).show();
+            } else if (task.isSuccessful()) {
+                int tempoMinimo = Integer.parseInt(tempoMinimoStr);
 
-        Evento novoEvento = new Evento();
-        novoEvento.setNome(nome);
-        novoEvento.setData(data);
-        novoEvento.setHorario(horario);
-        novoEvento.setDataTermino(dataTermino);
-        novoEvento.setHorarioTermino(horarioTermino);
-        novoEvento.setLocal(local);
-        novoEvento.setDescricao(descricao);
-        novoEvento.setTempoMinimo(tempoMinimo);
-        novoEvento.setTempoTotal(cbTempoTotal.isChecked());
+                Evento novoEvento = new Evento();
+                novoEvento.setNome(nome);
+                novoEvento.setData(data);
+                novoEvento.setHorario(horario);
+                novoEvento.setDataTermino(dataTermino);
+                novoEvento.setHorarioTermino(horarioTermino);
+                novoEvento.setLocal(local);
+                novoEvento.setDescricao(descricao);
+                novoEvento.setTempoMinimo(tempoMinimo);
+                novoEvento.setTempoTotal(cbTempoTotal.isChecked());
 
-        if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
-            novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
-        } else {
-            novoEvento.setCursosPermitidos(cursosSelecionados);
-        }
+                if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
+                    novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
+                } else {
+                    novoEvento.setCursosPermitidos(cursosSelecionados);
+                }
 
-        db.collection("eventos").add(novoEvento)
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                    String eventoId = documentReference.getId();
+                db.collection("eventos").add(novoEvento)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                            String eventoId = documentReference.getId();
 
-                    btnGerarQRCode.setVisibility(View.VISIBLE);
-                    btnGerarQRCode.setOnClickListener(v -> {
-                        Intent intent = new Intent(CadastroEventoActivity.this, EventQRCodeActivity.class);
-                        intent.putExtra("evento_id", eventoId);
-                        intent.putExtra("nome_evento", nome);
-                        intent.putExtra("data_evento", data);
-                        intent.putExtra("horario_evento", horario);
-                        startActivity(intent);
-                        finish();
-                    });
-                })
-                .addOnFailureListener(e -> {
-                    Log.w("CadastroEvento", "Erro ao cadastrar evento", e);
-                    Toast.makeText(this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+                            Intent intent = new Intent(CadastroEventoActivity.this, EventQRCodeActivity.class);
+                            intent.putExtra("evento_id", eventoId);
+                            intent.putExtra("nome_evento", nome);
+                            intent.putExtra("data_evento", data);
+                            intent.putExtra("horario_evento", horario);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.w("CadastroEvento", "Erro ao cadastrar evento", e);
+                            Toast.makeText(this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+            } else {
+                Toast.makeText(CadastroEventoActivity.this, "Erro ao verificar o nome do evento.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private boolean validateInput(String nome, String data, String horario, String dataTermino, String horarioTermino, String local, String descricao, String tempoMinimoStr) {

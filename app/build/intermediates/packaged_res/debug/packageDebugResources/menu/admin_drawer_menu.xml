@@ -5,8 +5,11 @@
             android:id="@+id/nav_cadastrar_evento"
             android:title="Cadastrar Evento" />
         <item
-            android:id="@+id/nav_listar_eventos"
-            android:title="Ver/Editar Eventos" />
+            android:id="@+id/nav_listar_eventos_ativos"
+            android:title="Eventos Ativos" />
+        <item
+            android:id="@+id/nav_listar_eventos_finalizados"
+            android:title="Eventos Finalizados" />
         <item
             android:id="@+id/nav_view_participants"
             android:title="Visualizar Usuários" />

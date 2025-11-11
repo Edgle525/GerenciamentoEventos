@@ -22,9 +22,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
+import br.edu.fatecgru.Eventos.model.Evento;
 
 public class AdminActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,9 +39,9 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
     private GoogleSignInClient mGoogleSignInClient;
     private FirebaseFirestore db;
 
-    private TextView tvTotalEventos, tvTotalUsuarios;
+    private TextView tvEventosAtivos, tvEventosFinalizados, tvTotalUsuarios;
     private Button btnCadastrarNovoEvento;
-    private CardView cardTotalEventos, cardTotalUsuarios;
+    private CardView cardEventosAtivos, cardEventosFinalizados, cardTotalUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +69,25 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        tvTotalEventos = findViewById(R.id.tv_total_eventos);
+        tvEventosAtivos = findViewById(R.id.tv_eventos_ativos);
+        tvEventosFinalizados = findViewById(R.id.tv_eventos_finalizados);
         tvTotalUsuarios = findViewById(R.id.tv_total_usuarios);
         btnCadastrarNovoEvento = findViewById(R.id.btn_cadastrar_novo_evento);
-        cardTotalEventos = findViewById(R.id.card_total_eventos);
+        cardEventosAtivos = findViewById(R.id.card_eventos_ativos);
+        cardEventosFinalizados = findViewById(R.id.card_eventos_finalizados);
         cardTotalUsuarios = findViewById(R.id.card_total_usuarios);
 
         btnCadastrarNovoEvento.setOnClickListener(v -> startActivity(new Intent(this, CadastroEventoActivity.class)));
-        cardTotalEventos.setOnClickListener(v -> startActivity(new Intent(this, ListarEventosAdminActivity.class)));
+        cardEventosAtivos.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ListarEventosAdminActivity.class);
+            intent.putExtra("TIPO_EVENTO", "ATIVOS");
+            startActivity(intent);
+        });
+        cardEventosFinalizados.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ListarEventosAdminActivity.class);
+            intent.putExtra("TIPO_EVENTO", "FINALIZADOS");
+            startActivity(intent);
+        });
         cardTotalUsuarios.setOnClickListener(v -> startActivity(new Intent(this, ViewParticipantsActivity.class)));
 
         updateDashboard();
@@ -79,19 +95,43 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
     }
 
     private void updateDashboard() {
-        db.collection("eventos").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            tvTotalEventos.setText(String.valueOf(queryDocumentSnapshots.size()));
+        db.collection("eventos").addSnapshotListener((value, error) -> {
+            if (error != null) return;
+            if (value != null) {
+                int eventosAtivos = 0;
+                int eventosFinalizados = 0;
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+                Date agora = new Date();
+
+                for (Evento evento : value.toObjects(Evento.class)) {
+                    try {
+                        Date dataTermino = sdf.parse(evento.getDataTermino() + " " + evento.getHorarioTermino());
+                        if (dataTermino.after(agora)) {
+                            eventosAtivos++;
+                        } else {
+                            eventosFinalizados++;
+                        }
+                    } catch (ParseException e) {
+                        //
+                    }
+                }
+                tvEventosAtivos.setText(String.valueOf(eventosAtivos));
+                tvEventosFinalizados.setText(String.valueOf(eventosFinalizados));
+            }
         });
 
-        db.collection("usuarios").get().addOnSuccessListener(queryDocumentSnapshots -> {
-            int userCount = 0;
-            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                String email = document.getString("email");
-                if (email != null && !email.equals("admin@example.com")) {
-                    userCount++;
+        db.collection("usuarios").addSnapshotListener((value, error) -> {
+            if (error != null) return;
+            if (value != null) {
+                int userCount = 0;
+                for(QueryDocumentSnapshot doc : value) {
+                    String userType = doc.getString("tipo");
+                    if(userType != null && !userType.equals("ADMIN")) {
+                        userCount++;
+                    }
                 }
+                tvTotalUsuarios.setText(String.valueOf(userCount));
             }
-            tvTotalUsuarios.setText(String.valueOf(userCount));
         });
     }
 
@@ -121,8 +161,14 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
         int id = item.getItemId();
         if (id == R.id.nav_cadastrar_evento) {
             startActivity(new Intent(this, CadastroEventoActivity.class));
-        } else if (id == R.id.nav_listar_eventos) {
-            startActivity(new Intent(this, ListarEventosAdminActivity.class));
+        } else if (id == R.id.nav_listar_eventos_ativos) {
+            Intent intent = new Intent(this, ListarEventosAdminActivity.class);
+            intent.putExtra("TIPO_EVENTO", "ATIVOS");
+            startActivity(intent);
+        } else if (id == R.id.nav_listar_eventos_finalizados) {
+            Intent intent = new Intent(this, ListarEventosAdminActivity.class);
+            intent.putExtra("TIPO_EVENTO", "FINALIZADOS");
+            startActivity(intent);
         } else if (id == R.id.nav_view_participants) {
             startActivity(new Intent(this, ViewParticipantsActivity.class));
         } else if (id == R.id.nav_logout) {
