@@ -7,14 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +35,7 @@ import br.edu.fatecgru.Eventos.model.Evento;
 public class CadastroEventoActivity extends BaseActivity {
 
     private EditText edtNomeEvento, edtDataEvento, edtHorarioEvento, edtDescricaoEvento, edtDataTerminoEvento, edtHorarioTerminoEvento, edtLocalEvento, edtTempoMinimoPermanencia;
-    private Button btnCadastrarEvento, btnGerarQRCode;
+    private Button btnCadastrarEvento;
     private TextView tvCursosPermitidos;
     private CheckBox cbTempoTotal;
     private FirebaseFirestore db;
@@ -69,13 +66,9 @@ public class CadastroEventoActivity extends BaseActivity {
         cbTempoTotal = findViewById(R.id.cbTempoTotal);
         tvCursosPermitidos = findViewById(R.id.tvCursosPermitidos);
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
-        btnGerarQRCode = findViewById(R.id.btnGerarQRCode);
 
         setupDateTimePickers();
-        cursosSelecionados.add("Geral");
-        tvCursosPermitidos.setText("Cursos Permitidos: Geral");
-
-        edtTempoMinimoPermanencia.setOnClickListener(v -> showDurationPickerDialog());
+        cursosSelecionados.add("Todos"); // Default to all courses
 
         cbTempoTotal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             edtTempoMinimoPermanencia.setEnabled(!isChecked);
@@ -88,41 +81,6 @@ public class CadastroEventoActivity extends BaseActivity {
 
         tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnCadastrarEvento.setOnClickListener(v -> cadastrarEvento());
-    }
-
-    private void showDurationPickerDialog() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.dialog_duration_picker, null);
-
-        NumberPicker pickerHoras = view.findViewById(R.id.picker_horas);
-        NumberPicker pickerMinutos = view.findViewById(R.id.picker_minutos);
-
-        pickerHoras.setMinValue(0);
-        pickerHoras.setMaxValue(23);
-
-        pickerMinutos.setMinValue(0);
-        pickerMinutos.setMaxValue(59);
-
-        String currentTime = edtTempoMinimoPermanencia.getText().toString();
-        if (!currentTime.isEmpty()) {
-            try {
-                String[] parts = currentTime.split(":");
-                pickerHoras.setValue(Integer.parseInt(parts[0]));
-                pickerMinutos.setValue(Integer.parseInt(parts[1]));
-            } catch (Exception e) {
-                // ignore
-            }
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle("Selecionar Duração")
-                .setView(view)
-                .setPositiveButton("OK", (dialog, which) -> {
-                    String duracao = String.format(Locale.getDefault(), "%02d:%02d", pickerHoras.getValue(), pickerMinutos.getValue());
-                    edtTempoMinimoPermanencia.setText(duracao);
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
     }
 
     private void calculateAndSetTotalTime() {
@@ -140,11 +98,7 @@ public class CadastroEventoActivity extends BaseActivity {
                 long diff = dataTermino.getTime() - dataInicio.getTime();
                 long diffMinutes = diff / (60 * 1000);
 
-                int horas = (int) diffMinutes / 60;
-                int minutos = (int) diffMinutes % 60;
-                String tempoFormatado = String.format(Locale.getDefault(), "%02d:%02d", horas, minutos);
-
-                edtTempoMinimoPermanencia.setText(tempoFormatado);
+                edtTempoMinimoPermanencia.setText(String.valueOf(diffMinutes));
             } catch (ParseException e) {
                 Toast.makeText(this, "Datas ou horários inválidos.", Toast.LENGTH_SHORT).show();
             }
@@ -199,87 +153,45 @@ public class CadastroEventoActivity extends BaseActivity {
     }
 
     private void showCursosDialog() {
-        String[] cursosArray = getResources().getStringArray(R.array.cursos_array);
-        final List<String> cursosDialogList = new ArrayList<>(Arrays.asList(cursosArray));
+        String[] cursos = getResources().getStringArray(R.array.cursos_array);
+        List<String> cursosDialogList = new ArrayList<>(Arrays.asList(cursos));
         cursosDialogList.remove("Selecione o Curso");
+        String[] cursosDialog = cursosDialogList.toArray(new String[0]);
+        boolean[] checkedItems = new boolean[cursosDialog.length];
 
-        final String geralOption = "Geral";
-        if (!cursosDialogList.contains(geralOption)) {
-            cursosDialogList.add(0, geralOption);
-        }
+        ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
 
-        final String[] cursosDialog = cursosDialogList.toArray(new String[0]);
-        final boolean[] checkedItems = new boolean[cursosDialog.length];
-
-        final ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
-
-        if (tempCursosSelecionados.contains(geralOption)) {
-            Arrays.fill(checkedItems, true);
-        } else {
-            for (int i = 0; i < cursosDialog.length; i++) {
-                checkedItems[i] = tempCursosSelecionados.contains(cursosDialog[i]);
+        for (int i = 0; i < cursosDialog.length; i++) {
+            if (tempCursosSelecionados.contains(cursosDialog[i])) {
+                checkedItems[i] = true;
             }
         }
 
         new AlertDialog.Builder(this)
-                .setTitle("Selecione os Cursos")
-                .setMultiChoiceItems(cursosDialog, checkedItems, (dialog, which, isChecked) -> {
-                    final AlertDialog alertDialog = (AlertDialog) dialog;
-                    final ListView listView = alertDialog.getListView();
-                    final int geralIndex = cursosDialogList.indexOf(geralOption);
+            .setTitle("Selecione os Cursos")
+            .setMultiChoiceItems(cursosDialog, checkedItems, (dialog, which, isChecked) -> {
+                if (isChecked) {
+                    tempCursosSelecionados.add(cursosDialog[which]);
+                } else {
+                    tempCursosSelecionados.remove(cursosDialog[which]);
+                }
+            })
+            .setPositiveButton("OK", (dialog, which) -> {
+                cursosSelecionados.clear();
+                cursosSelecionados.addAll(tempCursosSelecionados);
 
-                    if (which == geralIndex) {
-                        for (int i = 0; i < cursosDialog.length; i++) {
-                            listView.setItemChecked(i, isChecked);
-                        }
-                    } else {
-                        if (!isChecked) {
-                            listView.setItemChecked(geralIndex, false);
-                        } else {
-                            boolean allOthersChecked = true;
-                            for (int i = 0; i < cursosDialog.length; i++) {
-                                if (i == geralIndex) continue;
-                                if (!listView.isItemChecked(i)) {
-                                    allOthersChecked = false;
-                                    break;
-                                }
-                            }
-                            if (allOthersChecked) {
-                                listView.setItemChecked(geralIndex, true);
-                            }
-                        }
-                    }
-                })
-                .setPositiveButton("OK", (dialog, which) -> {
-                    final AlertDialog alertDialog = (AlertDialog) dialog;
-                    final ListView listView = alertDialog.getListView();
-                    final int geralIndex = cursosDialogList.indexOf(geralOption);
-
-                    cursosSelecionados.clear();
-
-                    if (listView.isItemChecked(geralIndex)) {
-                        cursosSelecionados.add(geralOption);
-                        tvCursosPermitidos.setText("Cursos Permitidos: " + geralOption);
-                    } else {
-                        for (int i = 0; i < cursosDialog.length; i++) {
-                            if (i == geralIndex) continue;
-                            if (listView.isItemChecked(i)) {
-                                cursosSelecionados.add(cursosDialog[i]);
-                            }
-                        }
-
-                        if (cursosSelecionados.isEmpty()) {
-                            cursosSelecionados.add(geralOption);
-                            tvCursosPermitidos.setText("Cursos Permitidos: " + geralOption);
-                        } else {
-                            tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
-                        }
-                    }
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
+                if (cursosSelecionados.isEmpty() || cursosSelecionados.size() == cursosDialog.length) {
+                    cursosSelecionados.clear(); 
+                    cursosSelecionados.add("Todos");
+                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+                } else {
+                    cursosSelecionados.remove("Todos");
+                    tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
+                }
+            })
+            .setNegativeButton("Cancelar", null)
+            .show();
     }
-
 
     private void cadastrarEvento() {
         String nome = edtNomeEvento.getText().toString().trim();
@@ -295,54 +207,50 @@ public class CadastroEventoActivity extends BaseActivity {
             return;
         }
 
-        int tempoMinimoEmMinutos;
-        try {
-            String[] parts = tempoMinimoStr.split(":");
-            int horas = Integer.parseInt(parts[0]);
-            int minutos = Integer.parseInt(parts[1]);
-            tempoMinimoEmMinutos = (horas * 60) + minutos;
-        } catch (Exception e) {
-            Toast.makeText(this, "Formato de tempo mínimo inválido.", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        db.collection("eventos").whereEqualTo("nome", nome).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                Toast.makeText(CadastroEventoActivity.this, "Já existe um evento com este nome. Por favor, escolha outro.", Toast.LENGTH_LONG).show();
+            } else if (task.isSuccessful()) {
+                int tempoMinimo = Integer.parseInt(tempoMinimoStr);
 
-        Evento novoEvento = new Evento();
-        novoEvento.setNome(nome);
-        novoEvento.setData(data);
-        novoEvento.setHorario(horario);
-        novoEvento.setDataTermino(dataTermino);
-        novoEvento.setHorarioTermino(horarioTermino);
-        novoEvento.setLocal(local);
-        novoEvento.setDescricao(descricao);
-        novoEvento.setTempoMinimo(tempoMinimoEmMinutos);
-        novoEvento.setTempoTotal(cbTempoTotal.isChecked());
+                Evento novoEvento = new Evento();
+                novoEvento.setNome(nome);
+                novoEvento.setData(data);
+                novoEvento.setHorario(horario);
+                novoEvento.setDataTermino(dataTermino);
+                novoEvento.setHorarioTermino(horarioTermino);
+                novoEvento.setLocal(local);
+                novoEvento.setDescricao(descricao);
+                novoEvento.setTempoMinimo(tempoMinimo);
+                novoEvento.setTempoTotal(cbTempoTotal.isChecked());
 
-        if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Geral"))){
-            novoEvento.setCursosPermitidos(Arrays.asList("Geral"));
-        } else {
-            novoEvento.setCursosPermitidos(cursosSelecionados);
-        }
+                if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
+                    novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
+                } else {
+                    novoEvento.setCursosPermitidos(cursosSelecionados);
+                }
 
-        db.collection("eventos").add(novoEvento)
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
-                    String eventoId = documentReference.getId();
+                db.collection("eventos").add(novoEvento)
+                        .addOnSuccessListener(documentReference -> {
+                            Toast.makeText(this, "Evento cadastrado com sucesso!", Toast.LENGTH_LONG).show();
+                            String eventoId = documentReference.getId();
 
-                    btnGerarQRCode.setVisibility(View.VISIBLE);
-                    btnGerarQRCode.setOnClickListener(v -> {
-                        Intent intent = new Intent(CadastroEventoActivity.this, EventQRCodeActivity.class);
-                        intent.putExtra("evento_id", eventoId);
-                        intent.putExtra("nome_evento", nome);
-                        intent.putExtra("data_evento", data);
-                        intent.putExtra("horario_evento", horario);
-                        startActivity(intent);
-                        finish();
-                    });
-                })
-                .addOnFailureListener(e -> {
-                    Log.w("CadastroEvento", "Erro ao cadastrar evento", e);
-                    Toast.makeText(this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+                            Intent intent = new Intent(CadastroEventoActivity.this, EventQRCodeActivity.class);
+                            intent.putExtra("evento_id", eventoId);
+                            intent.putExtra("nome_evento", nome);
+                            intent.putExtra("data_evento", data);
+                            intent.putExtra("horario_evento", horario);
+                            startActivity(intent);
+                            finish();
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.w("CadastroEvento", "Erro ao cadastrar evento", e);
+                            Toast.makeText(this, "Erro ao cadastrar evento: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+            } else {
+                Toast.makeText(CadastroEventoActivity.this, "Erro ao verificar o nome do evento.", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private boolean validateInput(String nome, String data, String horario, String dataTermino, String horarioTermino, String local, String descricao, String tempoMinimoStr) {

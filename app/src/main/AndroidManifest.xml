@@ -4,10 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
@@ -35,7 +31,7 @@
 
         <activity android:name=".ui.CadastroActivity" android:exported="false" />
         <activity android:name=".ui.AdminActivity" android:exported="false" />
-        <activity android:name=".ui.UserActivity" android:exported="false" android:label="Home"/>
+        <activity android:name=".ui.UserActivity" android:exported="false" />
         <activity android:name=".ui.MeuPerfilActivity" android:exported="false" />
         <activity android:name=".ui.CadastroEventoActivity" android:exported="false" />
         <activity android:name=".ui.ListarEventosAdminActivity" android:exported="false" />
@@ -52,6 +48,7 @@
         <activity android:name=".ui.GerarPresencaActivity" android:exported="false" />
         <activity android:name=".ui.EventosFinalizadosActivity" android:exported="false" />
         <activity android:name=".ui.EventosFinalizadosAdminActivity" android:exported="false" />
+        <activity android:name=".ui.CustomCaptureActivity" android:exported="false" />
 
         <activity
             android:name=".ui.CaptureActivityPortrait"

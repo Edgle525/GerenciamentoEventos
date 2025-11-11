@@ -6,7 +6,6 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,8 +26,7 @@ import br.edu.fatecgru.Eventos.util.MaskUtils;
 
 public class CadastroActivity extends BaseActivity {
 
-    private EditText edtNome, edtCpf, edtTelefone, edtEmail;
-    private TextInputEditText edtSenha, edtConfirmarSenha;
+    private TextInputEditText edtNome, edtCpf, edtTelefone, edtEmail, edtSenha, edtConfirmarSenha;
     private Spinner spinnerCurso, spinnerSemestre;
     private Button btnCadastrar;
 
@@ -96,6 +94,16 @@ public class CadastroActivity extends BaseActivity {
             return;
         }
 
+        if (cpf.length() != 11) {
+            edtCpf.setError("CPF inválido. Deve conter 11 dígitos.");
+            return;
+        }
+
+        if (telefone.length() != 11) {
+            edtTelefone.setError("Telefone inválido. Deve conter 11 dígitos.");
+            return;
+        }
+
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             edtEmail.setError("Por favor, insira um e-mail válido");
             return;
@@ -159,5 +167,11 @@ public class CadastroActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

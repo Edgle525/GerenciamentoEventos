@@ -44,93 +44,114 @@
                     android:layout_height="wrap_content"
                     android:layout_alignEnd="@id/profile_image"
                     android:layout_alignBottom="@id/profile_image"
-                    app:backgroundTint="@android:color/transparent"
-                    app:elevation="0dp"
+                    app:backgroundTint="@color/colorPrimary"
+                    app:tint="@android:color/white"
                     app:fabSize="mini"
-                    app:shapeAppearance="@null"
                     app:srcCompat="@android:drawable/ic_menu_edit" />
 
             </RelativeLayout>
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="E-mail" />
-            <EditText
-                android:id="@+id/edtEmailPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:enabled="false"
-                android:focusable="false"/>
+                android:layout_marginBottom="8dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Nome Completo" />
-            <EditText
-                android:id="@+id/edtNomePerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtEmailPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="E-mail"
+                    android:enabled="false"
+                    android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="CPF" />
-            <EditText
-                android:id="@+id/edtCpfPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Preencha seu CPF"
-                android:inputType="number"/>
+                android:layout_marginBottom="8dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Curso" />
-            <Spinner
-                android:id="@+id/spinnerCursoPerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtNomePerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nome Completo"
+                    android:enabled="false"
+                    android:focusable="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Semestre" />
-            <Spinner
-                android:id="@+id/spinnerSemestrePerfil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_marginBottom="8dp">
 
-            <TextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtCpfPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Preencha seu CPF"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Telefone" />
-            <EditText
-                android:id="@+id/edtTelefonePerfil"
+                android:layout_marginBottom="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerCursoPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="Curso"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Telefone"
-                android:inputType="phone"/>
+                android:layout_marginBottom="8dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinnerSemestrePerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:hint="Semestre"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTelefonePerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Telefone"
+                    android:inputType="phone"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnSalvarPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Salvar Alterações"
-                android:layout_marginTop="24dp"/>
+                android:layout_marginTop="16dp"/>
 
             <Button
                 android:id="@+id/btnExcluirPerfil"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Excluir Perfil"
-                android:backgroundTint="@android:color/holo_red_dark"
-                android:layout_marginTop="16dp"/>
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

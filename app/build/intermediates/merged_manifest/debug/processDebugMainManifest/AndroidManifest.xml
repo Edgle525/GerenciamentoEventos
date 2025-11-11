@@ -6,18 +6,10 @@
 
     <uses-sdk
         android:minSdkVersion="24"
-        android:targetSdkVersion="36" />
+        android:targetSdkVersion="34" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH"
-        android:maxSdkVersion="30" />
-    <uses-permission
-        android:name="android.permission.BLUETOOTH_ADMIN"
-        android:maxSdkVersion="30" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission
@@ -88,8 +80,7 @@
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.UserActivity"
-            android:exported="false"
-            android:label="Home" />
+            android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.MeuPerfilActivity"
             android:exported="false" />
@@ -137,6 +128,9 @@
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.EventosFinalizadosAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="br.edu.fatecgru.Eventos.ui.CustomCaptureActivity"
             android:exported="false" />
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.CaptureActivityPortrait"
@@ -285,11 +279,6 @@
             android:directBootAware="true"
             android:exported="false"
             android:initOrder="100" />
-
-        <uses-library
-            android:name="android.ext.adservices"
-            android:required="false" />
-
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="br.edu.fatecgru.Eventos.androidx-startup"
@@ -304,6 +293,10 @@
                 android:name="androidx.profileinstaller.ProfileInstallerInitializer"
                 android:value="androidx.startup" />
         </provider>
+
+        <uses-library
+            android:name="android.ext.adservices"
+            android:required="false" />
 
         <meta-data
             android:name="com.google.android.gms.version"

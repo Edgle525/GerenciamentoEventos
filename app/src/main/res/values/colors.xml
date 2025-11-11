@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- Palette from Logo -->
+    <color name="primary">#304FFE</color> <!-- Strong Blue -->
+    <color name="primary_dark">#0026CA</color> <!-- Darker Blue -->
+    <color name="accent">#FFC107</color> <!-- Gold -->
+
+    <!-- Old Palette (for reference, can be removed) -->
+    <color name="colorPrimary">#304FFE</color>
+    <color name="colorPrimaryDark">#0026CA</color>
+    <color name="colorAccent">#FFC107</color>
+
+    <!-- General Colors -->
     <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="offline_banner_background">#E53935</color>
+
+    <!-- Light Theme -->
+    <color name="light_background">#F5F5F5</color> <!-- Light Grey -->
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="text_primary_light">#212121</color>
+    <color name="text_secondary_light">#757575</color>
+
+    <!-- Dark Theme -->
+    <color name="dark_background">#121212</color>
+    <color name="card_background_dark">#1E1E1E</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#BDBDBD</color>
 </resources>

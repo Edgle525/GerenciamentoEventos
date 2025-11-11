@@ -8,10 +8,9 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
@@ -27,11 +26,12 @@
             android:id="@+id/tvDataTermino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Finalizado em: DD/MM/AAAA"
+            android:text="DD/MM/AAAA"
             android:textSize="14sp"
-            android:layout_marginTop="4dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:textColor="?android:attr/textColorSecondary" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

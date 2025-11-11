@@ -11,17 +11,19 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?android:attr/windowBackground">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/primary">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar_user"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary" />
+                app:titleTextColor="@color/white" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -29,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp"
+            android:padding="8dp"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <TextView
@@ -39,11 +41,11 @@
                 android:text="Seu perfil está incompleto. Toque aqui para atualizar."
                 android:drawableStart="@android:drawable/ic_dialog_alert"
                 android:drawablePadding="8dp"
-                android:background="#FFC107" 
-                android:textColor="@android:color/black"
+                android:background="@color/card_background_light"
+                android:textColor="?android:attr/textColorPrimary"
                 android:padding="12dp"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="8dp"
                 android:visibility="gone" 
                 tools:visibility="visible"/>
 
@@ -53,12 +55,15 @@
                 android:text="Eventos Disponíveis"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="16dp"/>
+                android:textColor="?android:attr/textColorPrimary"
+                android:layout_margin="8dp"/>
 
             <ListView
                 android:id="@+id/listViewEventosUser"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="8dp" />
 
         </LinearLayout>
 
@@ -68,7 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="16dp"
-            android:src="@android:drawable/ic_menu_camera" />
+            android:src="@android:drawable/ic_menu_camera"
+            app:backgroundTint="@color/accent"
+            app:tint="@color/white" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -25,6 +25,7 @@ public class MaskUtils {
                         mascara += m;
                         continue;
                     } else if (m != '#' && str.length() < old.length() && str.length() != i) {
+                        // Mantém o caractere da máscara se não for o final da string
                         mascara += m;
                     } else {
                         try {
@@ -41,61 +42,6 @@ public class MaskUtils {
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            public void afterTextChanged(Editable s) {}
-        };
-    }
-
-    public static TextWatcher timeMask(final EditText ediTxt) {
-        return new TextWatcher() {
-            private String current = "";
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(current)) {
-                    String clean = s.toString().replaceAll("[^\\d]", "");
-                    String cleanC = current.replaceAll("[^\\d]", "");
-
-                    int cl = clean.length();
-                    int sel = cl;
-                    for (int i = 2; i <= cl && i < 6; i += 2) {
-                        sel++;
-                    }
-                    //Fix for pressing delete next to a forward slash
-                    if (clean.equals(cleanC)) sel--;
-
-                    if (clean.length() < 4) {
-                        clean = clean + "0000".substring(clean.length());
-                    }
-
-                    if (clean.length() > 3) {
-                        char h1 = clean.charAt(0);
-                        char h2 = clean.charAt(1);
-                        char m1 = clean.charAt(2);
-                        char m2 = clean.charAt(3);
-
-                        int h = Integer.parseInt("" + h1 + h2);
-                        int m = Integer.parseInt("" + m1 + m2);
-
-                        if (m > 59) {
-                            m = 59;
-                            clean = "" + h1 + h2 + m1 + '9';
-                        }
-
-                        current = String.format("%02d:%02d", h, m);
-
-                    } else {
-                        current = clean;
-                    }
-
-                    ediTxt.setText(current);
-                    ediTxt.setSelection(Math.min(sel, ediTxt.length()));
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
             public void afterTextChanged(Editable s) {}
         };
     }

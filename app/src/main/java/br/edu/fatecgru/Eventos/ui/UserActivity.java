@@ -1,7 +1,6 @@
 package br.edu.fatecgru.Eventos.ui;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -32,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,7 +54,7 @@ import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class UserActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, EventoAtivoAdapter.OnInscreverClickListener {
+public class UserActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, EventoAtivoAdapter.InscricaoListener {
 
     private static final String TAG = "UserActivity";
     private DrawerLayout drawerLayout;
@@ -133,15 +133,6 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
             Intent intent = new Intent(this, MeuPerfilActivity.class);
             startActivity(intent);
         });
-    }
-
-    @Override
-    public void onInscreverClick(Evento evento) {
-        if (!isProfileComplete) {
-            Toast.makeText(this, "Por favor, complete seu perfil para se inscrever em eventos.", Toast.LENGTH_LONG).show();
-            return;
-        }
-        inscreverUsuario(evento);
     }
 
     @Override
@@ -244,6 +235,11 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                 Toast.makeText(UserActivity.this, "Erro ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onInscreverClick(Evento evento) {
+        inscreverUsuario(evento);
     }
 
     private void inscreverUsuario(Evento evento) {
@@ -402,7 +398,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                                         }
 
                                         boolean finalParticipacaoCompleta = participacaoCompleta;
-                                        new AlertDialog.Builder(UserActivity.this)
+                                        new MaterialAlertDialogBuilder(UserActivity.this)
                                                 .setTitle("Saída Registrada!")
                                                 .setMessage("Evento concluído com sucesso. Deseja gerar seu comprovante de participação?")
                                                 .setPositiveButton("Gerar Comprovante", (dialog, which) -> {
@@ -435,7 +431,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
                     }
                 } else {
                     Toast.makeText(this, "Você não está inscrito no evento '" + evento.getNome() + "'.", Toast.LENGTH_LONG).show();
-                }
+                } 
             } else {
                 Toast.makeText(this, "Erro ao verificar inscrição.", Toast.LENGTH_LONG).show();
             }
@@ -469,7 +465,7 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         ScanOptions options = new ScanOptions();
         options.setPrompt("Aponte para o QR Code");
         options.setBeepEnabled(true);
-        options.setCaptureActivity(CaptureActivityPortrait.class);
+        options.setCaptureActivity(CustomCaptureActivity.class);
         options.setOrientationLocked(false);
         barcodeLauncher.launch(options);
     }

@@ -35,7 +35,7 @@ public class EventoFinalizadoAdapter extends ArrayAdapter<Evento> {
             TextView tvDataTermino = convertView.findViewById(R.id.tvDataTermino);
 
             tvNomeEvento.setText(evento.getNome());
-            tvDataTermino.setText("Finalizado em: " + evento.getDataTermino());
+            tvDataTermino.setText(evento.getDataTermino() + " " + evento.getHorarioTermino());
         }
 
         return convertView;

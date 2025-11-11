@@ -38,9 +38,22 @@
         <item>5º Semestre</item>
         <item>6º Semestre</item>
     </string-array>
-    <color name="colorAccent">#FF4081</color>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="accent">#FFC107</color>
+    <color name="black">#000000</color>
+    <color name="card_background_dark">#1E1E1E</color>
+    <color name="card_background_light">#FFFFFF</color>
+    <color name="colorAccent">#FFC107</color>
+    <color name="colorPrimary">#304FFE</color>
+    <color name="colorPrimaryDark">#0026CA</color>
+    <color name="dark_background">#121212</color>
+    <color name="light_background">#F5F5F5</color>
+    <color name="offline_banner_background">#E53935</color>
+    <color name="primary">#304FFE</color>
+    <color name="primary_dark">#0026CA</color>
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_primary_light">#212121</color>
+    <color name="text_secondary_dark">#BDBDBD</color>
+    <color name="text_secondary_light">#757575</color>
     <color name="white">#FFFFFF</color>
     <string name="app_name">GerenciamentoEventos</string>
     <string name="default_web_client_id">957847679183-fl11ru3uis7l596knfmd423aqe2bjuv6.apps.googleusercontent.com</string>
@@ -54,9 +67,22 @@
     <string name="project_id" translatable="false">controle-de-presenca-2cdbe</string>
     <style name="Base.Theme.GerenciamentoEventos" parent="Theme.Material3.DayNight.NoActionBar">
         
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+
+        
+        <item name="android:windowBackground">@color/light_background</item>
+
+        
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_secondary_light</item>
+
+        
+        <item name="cardViewStyle">@style/Widget.App.CardView</item>
     </style>
     <style name="Theme.GerenciamentoEventos" parent="Base.Theme.GerenciamentoEventos"/>
+    <style name="Widget.App.CardView" parent="CardView">
+        <item name="cardBackgroundColor">@color/card_background_light</item>
+    </style>
 </resources>

@@ -3,7 +3,6 @@ package br.edu.fatecgru.Eventos.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -29,8 +28,7 @@ public class ViewParticipantsActivity extends BaseActivity {
 
     private List<Usuario> allUsersList = new ArrayList<>();
     private List<Usuario> displayedUsersList = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
-    private List<String> userNames = new ArrayList<>();
+    private UsuarioAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public class ViewParticipantsActivity extends BaseActivity {
         searchView = findViewById(R.id.searchViewParticipants);
         db = FirebaseFirestore.getInstance();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
+        adapter = new UsuarioAdapter(this, displayedUsersList);
         listViewParticipants.setAdapter(adapter);
 
         loadAllUsers();
@@ -95,7 +93,6 @@ public class ViewParticipantsActivity extends BaseActivity {
 
     private void filterUsers(String query) {
         displayedUsersList.clear();
-        userNames.clear();
 
         if (query.isEmpty()) {
             displayedUsersList.addAll(allUsersList);
@@ -107,9 +104,6 @@ public class ViewParticipantsActivity extends BaseActivity {
             }
         }
 
-        for (Usuario usuario : displayedUsersList) {
-            userNames.add(usuario.getNome());
-        }
         adapter.notifyDataSetChanged();
     }
 
@@ -120,5 +114,11 @@ public class ViewParticipantsActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

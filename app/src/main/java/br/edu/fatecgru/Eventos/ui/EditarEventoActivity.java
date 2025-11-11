@@ -4,12 +4,9 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +19,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
@@ -62,48 +58,11 @@ public class EditarEventoActivity extends BaseActivity {
         btnSalvar = findViewById(R.id.btnSalvarEdicaoEvento);
         btnExcluir = findViewById(R.id.btnExcluirEvento);
 
-        edtTempoMinimo.setOnClickListener(v -> showDurationPickerDialog());
-
         loadEvento();
 
         tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnSalvar.setOnClickListener(v -> salvarAlteracoes());
         btnExcluir.setOnClickListener(v -> confirmarExclusao());
-    }
-
-    private void showDurationPickerDialog() {
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.dialog_duration_picker, null);
-
-        NumberPicker pickerHoras = view.findViewById(R.id.picker_horas);
-        NumberPicker pickerMinutos = view.findViewById(R.id.picker_minutos);
-
-        pickerHoras.setMinValue(0);
-        pickerHoras.setMaxValue(23);
-
-        pickerMinutos.setMinValue(0);
-        pickerMinutos.setMaxValue(59);
-
-        String currentTime = edtTempoMinimo.getText().toString();
-        if (!currentTime.isEmpty()) {
-            try {
-                String[] parts = currentTime.split(":");
-                pickerHoras.setValue(Integer.parseInt(parts[0]));
-                pickerMinutos.setValue(Integer.parseInt(parts[1]));
-            } catch (Exception e) {
-                // ignore
-            }
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle("Selecionar Duração")
-                .setView(view)
-                .setPositiveButton("OK", (dialog, which) -> {
-                    String duracao = String.format(Locale.getDefault(), "%02d:%02d", pickerHoras.getValue(), pickerMinutos.getValue());
-                    edtTempoMinimo.setText(duracao);
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
     }
 
     private void loadEvento() {
@@ -121,15 +80,10 @@ public class EditarEventoActivity extends BaseActivity {
                             edtHorarioTermino.setText(evento.getHorarioTermino());
                             edtLocal.setText(evento.getLocal());
                             edtDescricao.setText(evento.getDescricao());
-
-                            int totalMinutos = evento.getTempoMinimo();
-                            int horas = totalMinutos / 60;
-                            int minutos = totalMinutos % 60;
-                            String tempoFormatado = String.format(Locale.getDefault(), "%02d:%02d", horas, minutos);
-                            edtTempoMinimo.setText(tempoFormatado);
+                            edtTempoMinimo.setText(String.valueOf(evento.getTempoMinimo()));
 
                             if (evento.getCursosPermitidos() != null && !evento.getCursosPermitidos().isEmpty()) {
-                                cursosSelecionados.clear();
+                                cursosSelecionados.clear(); // Clear before loading
                                 cursosSelecionados.addAll(evento.getCursosPermitidos());
                                 if (cursosSelecionados.contains("Todos")) {
                                     tvCursosPermitidos.setText("Cursos Permitidos: Todos");
@@ -152,6 +106,7 @@ public class EditarEventoActivity extends BaseActivity {
         String[] cursosDialog = cursosDialogList.toArray(new String[0]);
         boolean[] checkedItems = new boolean[cursosDialog.length];
 
+        // Create a temporary list for selections in the dialog
         ArrayList<String> tempCursosSelecionados = new ArrayList<>(cursosSelecionados);
 
         for (int i = 0; i < cursosDialog.length; i++) {
@@ -178,11 +133,12 @@ public class EditarEventoActivity extends BaseActivity {
                     cursosSelecionados.add("Todos");
                     tvCursosPermitidos.setText("Cursos Permitidos: Todos");
                 } else {
-                    cursosSelecionados.remove("Todos");
+                    cursosSelecionados.remove("Todos"); // Ensure "Todos" is not mixed with specific courses
                     tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
                 }
             })
             .setNeutralButton("Todos", (dialog, which) -> {
+                // This button will now just select all items in the dialog
                 for(int i=0; i<checkedItems.length; i++){
                     ((AlertDialog) dialog).getListView().setItemChecked(i, true);
                     if(!tempCursosSelecionados.contains(cursosDialog[i])){
@@ -208,18 +164,8 @@ public class EditarEventoActivity extends BaseActivity {
             Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        int tempoMinimoEmMinutos;
-        try {
-            String[] parts = tempoMinimoStr.split(":");
-            int horas = Integer.parseInt(parts[0]);
-            int minutos = Integer.parseInt(parts[1]);
-            tempoMinimoEmMinutos = (horas * 60) + minutos;
-        } catch (Exception e) {
-            Toast.makeText(this, "Formato de tempo mínimo inválido.", Toast.LENGTH_SHORT).show();
-            return;
-        }
         
+        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
         List<String> finalCursos = new ArrayList<>();
         if (cursosSelecionados.isEmpty() || cursosSelecionados.contains("Todos")) {
             finalCursos.add("Todos");
@@ -235,7 +181,7 @@ public class EditarEventoActivity extends BaseActivity {
                         "horarioTermino", horarioTermino, 
                         "local", local, 
                         "descricao", descricao, 
-                        "tempoMinimo", tempoMinimoEmMinutos,
+                        "tempoMinimo", tempoMinimo,
                         "cursosPermitidos", finalCursos)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Evento atualizado com sucesso!", Toast.LENGTH_SHORT).show();
@@ -282,5 +228,11 @@ public class EditarEventoActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

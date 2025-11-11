@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -28,43 +29,43 @@ import br.edu.fatecgru.Eventos.model.Evento;
 public class ListarEventosAdminActivity extends BaseActivity {
 
     private static final String TAG = "ListarEventosAdmin";
-    private ListView listViewEventosAtivos;
-    private ListView listViewEventosFinalizados;
+    private ListView listViewEventos;
     private SearchView searchView;
     private FirebaseFirestore db;
 
-    private List<Evento> allEventosAtivos = new ArrayList<>();
-    private List<Evento> allEventosFinalizados = new ArrayList<>();
-    private List<Evento> displayedEventosAtivos = new ArrayList<>();
-    private List<Evento> displayedEventosFinalizados = new ArrayList<>();
-    private EventoFinalizadoAdapter adapterAtivos;
-    private EventoFinalizadoAdapter adapterFinalizados;
+    private List<Evento> allEventos = new ArrayList<>();
+    private List<Evento> displayedEventos = new ArrayList<>();
+
+    private ArrayAdapter<String> adapter;
+    private List<String> nomesEventos = new ArrayList<>();
+    private String tipoEvento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_eventos_admin);
 
+        tipoEvento = getIntent().getStringExtra("TIPO_EVENTO");
+
         Toolbar toolbar = findViewById(R.id.toolbar_listar_eventos);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle("Ver/Editar Eventos");
+            if ("ATIVOS".equals(tipoEvento)) {
+                getSupportActionBar().setTitle("Eventos Ativos");
+            } else {
+                getSupportActionBar().setTitle("Eventos Finalizados");
+            }
         }
 
-        listViewEventosAtivos = findViewById(R.id.listViewEventosAtivosAdmin);
-        listViewEventosFinalizados = findViewById(R.id.listViewEventosFinalizadosAdmin);
+        listViewEventos = findViewById(R.id.listViewEventosAdmin);
         searchView = findViewById(R.id.searchViewEventosAdmin);
         db = FirebaseFirestore.getInstance();
 
-        adapterAtivos = new EventoFinalizadoAdapter(this, displayedEventosAtivos);
-        listViewEventosAtivos.setAdapter(adapterAtivos);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, nomesEventos);
+        listViewEventos.setAdapter(adapter);
 
-        adapterFinalizados = new EventoFinalizadoAdapter(this, displayedEventosFinalizados);
-        listViewEventosFinalizados.setAdapter(adapterFinalizados);
-
-        setupListViewListeners(listViewEventosAtivos, displayedEventosAtivos);
-        setupListViewListeners(listViewEventosFinalizados, displayedEventosFinalizados);
+        setupListViewListeners();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -80,9 +81,9 @@ public class ListarEventosAdminActivity extends BaseActivity {
         });
     }
 
-    private void setupListViewListeners(ListView listView, List<Evento> eventosList) {
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            Evento eventoSelecionado = eventosList.get(position);
+    private void setupListViewListeners() {
+        listViewEventos.setOnItemClickListener((parent, view, position, id) -> {
+            Evento eventoSelecionado = displayedEventos.get(position);
             if (eventoSelecionado == null) return;
 
             final CharSequence[] options = {"Ver QR Codes", "Editar Evento", "Gerar Lista de Presença"};
@@ -110,8 +111,8 @@ public class ListarEventosAdminActivity extends BaseActivity {
                 .show();
         });
 
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            final Evento eventoParaDeletar = eventosList.get(position);
+        listViewEventos.setOnItemLongClickListener((parent, view, position, id) -> {
+            final Evento eventoParaDeletar = displayedEventos.get(position);
             new AlertDialog.Builder(this)
                 .setTitle("Confirmar Exclusão")
                 .setMessage("Tem certeza que deseja excluir o evento '" + eventoParaDeletar.getNome() + "'? Todas as inscrições relacionadas também serão removidas.")
@@ -125,12 +126,10 @@ public class ListarEventosAdminActivity extends BaseActivity {
     private void loadEventos() {
         db.collection("eventos").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                allEventosAtivos.clear();
-                allEventosFinalizados.clear();
+                allEventos.clear();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
-                long dezMinutos = 10 * 60 * 1000;
 
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
@@ -142,13 +141,13 @@ public class ListarEventosAdminActivity extends BaseActivity {
 
                         if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
                             Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                            if (agora.getTime() > dataTermino.getTime() + dezMinutos) {
-                                allEventosFinalizados.add(evento);
-                            } else {
-                                allEventosAtivos.add(evento);
+                            if ("ATIVOS".equals(tipoEvento) && dataTermino.after(agora)) {
+                                allEventos.add(evento);
+                            } else if ("FINALIZADOS".equals(tipoEvento) && !dataTermino.after(agora)){
+                                allEventos.add(evento);
                             }
-                        } else {
-                            allEventosAtivos.add(evento);
+                        } else if ("ATIVOS".equals(tipoEvento)){
+                            allEventos.add(evento);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
@@ -163,28 +162,25 @@ public class ListarEventosAdminActivity extends BaseActivity {
     }
 
     private void filter(String query) {
-        displayedEventosAtivos.clear();
-        displayedEventosFinalizados.clear();
+        displayedEventos.clear();
+        nomesEventos.clear();
 
         if (query.isEmpty()) {
-            displayedEventosAtivos.addAll(allEventosAtivos);
-            displayedEventosFinalizados.addAll(allEventosFinalizados);
+            displayedEventos.addAll(allEventos);
         } else {
             String lowerCaseQuery = query.toLowerCase(Locale.ROOT);
-            for (Evento evento : allEventosAtivos) {
+            for (Evento evento : allEventos) {
                 if (evento.getNome().toLowerCase(Locale.ROOT).contains(lowerCaseQuery) || evento.getData().contains(query)) {
-                    displayedEventosAtivos.add(evento);
-                }
-            }
-            for (Evento evento : allEventosFinalizados) {
-                if (evento.getNome().toLowerCase(Locale.ROOT).contains(lowerCaseQuery) || evento.getData().contains(query)) {
-                    displayedEventosFinalizados.add(evento);
+                    displayedEventos.add(evento);
                 }
             }
         }
 
-        adapterAtivos.notifyDataSetChanged();
-        adapterFinalizados.notifyDataSetChanged();
+        for (Evento evento : displayedEventos) {
+            nomesEventos.add(evento.getNome());
+        }
+
+        adapter.notifyDataSetChanged();
     }
 
     private void deletarEventoEInscricoes(final Evento evento) {
@@ -231,5 +227,11 @@ public class ListarEventosAdminActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

@@ -3,7 +3,7 @@
     android:id="@+id/offline_banner_textview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#E53935" 
+    android:background="@color/offline_banner_background"
     android:padding="12dp"
     android:gravity="center"
     android:text="Falha ao conectar-se com a internet, por favor verifique a conexão"

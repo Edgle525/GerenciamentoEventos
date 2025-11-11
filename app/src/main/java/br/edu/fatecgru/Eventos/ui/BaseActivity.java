@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import br.edu.fatecgru.Eventos.R;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -25,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void setupOfflineDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_offline, null);
         builder.setView(dialogView);

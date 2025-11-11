@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-45:/values-h480dp-land-v13/values-h480dp-land-v13.xml",
+            "outputFile": "br.edu.fatecgru.Eventos.app-mergeDebugResources-42:/values-h480dp-land-v13/values-h480dp-land-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\pedro\\.gradle\\caches\\8.13\\transforms\\563a6c159d8fd3915fd763565296341b\\transformed\\material-1.13.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
+                    "source": "C:\\Users\\Edgle\\.gradle\\caches\\8.13\\transforms\\f8df9a482dc776dd9486edc294c6a3c2\\transformed\\material-1.11.0\\res\\values-h480dp-land-v13\\values-h480dp-land-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",
