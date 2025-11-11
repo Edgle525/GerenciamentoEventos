@@ -82,8 +82,8 @@ public class EventosFinalizadosActivity extends BaseActivity {
                 for (QueryDocumentSnapshot document : task.getResult()) {
                     try {
                         Evento evento = document.toObject(Evento.class);
-                        if (evento == null) {
-                            Log.e(TAG, "Evento nulo para o documento: " + document.getId());
+                        if (evento == null || evento.isArquivado()) {
+                            Log.e(TAG, "Evento nulo ou arquivado para o documento: " + document.getId());
                             continue;
                         }
 

@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -104,6 +103,7 @@ public class HistoricoActivity extends BaseActivity {
             intent.putExtra("horario_evento", ""); 
             intent.putExtra("nome_participante", nomeParticipante);
             intent.putExtra("email_participante", emailParticipante);
+            intent.putExtra("participacao_completa", true); // Assumindo que se pode gerar comprovante, a participação foi completa
             startActivity(intent);
 
         }).addOnFailureListener(e -> Toast.makeText(this, "Erro ao buscar dados do usuário.", Toast.LENGTH_SHORT).show());

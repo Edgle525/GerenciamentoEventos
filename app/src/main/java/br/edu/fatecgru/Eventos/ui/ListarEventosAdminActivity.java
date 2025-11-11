@@ -15,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.WriteBatch;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,7 +85,12 @@ public class ListarEventosAdminActivity extends BaseActivity {
             Evento eventoSelecionado = displayedEventos.get(position);
             if (eventoSelecionado == null) return;
 
-            final CharSequence[] options = {"Ver QR Codes", "Editar Evento", "Gerar Lista de Presença"};
+            final CharSequence[] options;
+            if ("FINALIZADOS".equals(tipoEvento)) {
+                options = new CharSequence[]{"Ver QR Codes", "Excluir Evento", "Gerar Lista de Presença"};
+            } else {
+                options = new CharSequence[]{"Ver QR Codes", "Editar Evento", "Gerar Lista de Presença"};
+            }
 
             new AlertDialog.Builder(this)
                 .setTitle("Opções para '" + eventoSelecionado.getNome() + "'")
@@ -98,10 +102,14 @@ public class ListarEventosAdminActivity extends BaseActivity {
                         intent.putExtra("data_evento", eventoSelecionado.getData());
                         intent.putExtra("horario_evento", eventoSelecionado.getHorario());
                         startActivity(intent);
-                    } else if (which == 1){ // Editar Evento
-                        Intent intent = new Intent(ListarEventosAdminActivity.this, EditarEventoActivity.class);
-                        intent.putExtra("EVENTO_ID", eventoSelecionado.getId());
-                        startActivity(intent);
+                    } else if (which == 1){ // Editar or Excluir (Archive) Evento
+                        if ("FINALIZADOS".equals(tipoEvento)) {
+                            arquivarEvento(eventoSelecionado, "O evento '" + eventoSelecionado.getNome() + "' será arquivado e não aparecerá mais na lista de finalizados. Deseja continuar?");
+                        } else { // ATIVOS
+                            Intent intent = new Intent(ListarEventosAdminActivity.this, EditarEventoActivity.class);
+                            intent.putExtra("EVENTO_ID", eventoSelecionado.getId());
+                            startActivity(intent);
+                        }
                     } else { // Gerar Lista de Presença
                         Intent intent = new Intent(ListarEventosAdminActivity.this, GerarPresencaActivity.class);
                         intent.putExtra("EVENTO_ID", eventoSelecionado.getId());
@@ -111,16 +119,34 @@ public class ListarEventosAdminActivity extends BaseActivity {
                 .show();
         });
 
-        listViewEventos.setOnItemLongClickListener((parent, view, position, id) -> {
-            final Evento eventoParaDeletar = displayedEventos.get(position);
-            new AlertDialog.Builder(this)
-                .setTitle("Confirmar Exclusão")
-                .setMessage("Tem certeza que deseja excluir o evento '" + eventoParaDeletar.getNome() + "'? Todas as inscrições relacionadas também serão removidas.")
-                .setPositiveButton("Excluir", (dialog, which) -> deletarEventoEInscricoes(eventoParaDeletar))
-                .setNegativeButton("Cancelar", null)
-                .show();
-            return true; 
-        });
+        if ("ATIVOS".equals(tipoEvento)) {
+            listViewEventos.setOnItemLongClickListener((parent, view, position, id) -> {
+                final Evento eventoParaArquivar = displayedEventos.get(position);
+                String message = "Deseja arquivar o evento '" + eventoParaArquivar.getNome() + "'? O evento não será mais exibido, mas o histórico de participação dos usuários será mantido.";
+                arquivarEvento(eventoParaArquivar, message);
+                return true;
+            });
+        }
+    }
+
+    private void arquivarEvento(final Evento evento, String message) {
+        new AlertDialog.Builder(this)
+            .setTitle("Confirmar Arquivamento")
+            .setMessage(message)
+            .setPositiveButton("Arquivar", (dialog, which) -> {
+                db.collection("eventos").document(evento.getId())
+                    .update("arquivado", true)
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(ListarEventosAdminActivity.this, "Evento arquivado com sucesso.", Toast.LENGTH_SHORT).show();
+                        loadEventos();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(ListarEventosAdminActivity.this, "Erro ao arquivar evento.", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Erro ao arquivar evento", e);
+                    });
+            })
+            .setNegativeButton("Cancelar", null)
+            .show();
     }
 
     private void loadEventos() {
@@ -135,6 +161,10 @@ public class ListarEventosAdminActivity extends BaseActivity {
                     try {
                         Evento evento = document.toObject(Evento.class);
                         evento.setId(document.getId());
+
+                        if (evento.isArquivado()) {
+                            continue;
+                        }
 
                         String dataTerminoStr = evento.getDataTermino();
                         String horarioTerminoStr = evento.getHorarioTermino();
@@ -181,37 +211,6 @@ public class ListarEventosAdminActivity extends BaseActivity {
         }
 
         adapter.notifyDataSetChanged();
-    }
-
-    private void deletarEventoEInscricoes(final Evento evento) {
-        final String eventoId = evento.getId();
-
-        db.collection("inscricoes").whereEqualTo("idEvento", eventoId).get()
-            .addOnSuccessListener(queryDocumentSnapshots -> {
-                WriteBatch batch = db.batch();
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    batch.delete(doc.getReference());
-                }
-
-                batch.commit().addOnSuccessListener(aVoid -> {
-                    db.collection("eventos").document(eventoId).delete()
-                        .addOnSuccessListener(aVoid1 -> {
-                            Toast.makeText(ListarEventosAdminActivity.this, "Evento e inscrições excluídos com sucesso.", Toast.LENGTH_SHORT).show();
-                            loadEventos();
-                        })
-                        .addOnFailureListener(e -> {
-                            Log.e(TAG, "Erro ao excluir o evento.", e);
-                            Toast.makeText(ListarEventosAdminActivity.this, "Erro ao excluir o evento.", Toast.LENGTH_SHORT).show();
-                        });
-                }).addOnFailureListener(e -> {
-                    Log.e(TAG, "Erro ao excluir inscrições.", e);
-                    Toast.makeText(ListarEventosAdminActivity.this, "Erro ao excluir inscrições.", Toast.LENGTH_SHORT).show();
-                });
-            })
-            .addOnFailureListener(e -> {
-                Log.e(TAG, "Erro ao buscar inscrições para exclusão.", e);
-                Toast.makeText(ListarEventosAdminActivity.this, "Erro ao buscar inscrições para exclusão.", Toast.LENGTH_SHORT).show();
-            });
     }
 
     @Override

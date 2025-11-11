@@ -2,13 +2,11 @@ package br.edu.fatecgru.Eventos.ui;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -18,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
@@ -68,7 +68,6 @@ public class CadastroEventoActivity extends BaseActivity {
         btnCadastrarEvento = findViewById(R.id.btnCadastrarEvento);
 
         setupDateTimePickers();
-        cursosSelecionados.add("Todos"); // Default to all courses
 
         cbTempoTotal.setOnCheckedChangeListener((buttonView, isChecked) -> {
             edtTempoMinimoPermanencia.setEnabled(!isChecked);
@@ -97,8 +96,10 @@ public class CadastroEventoActivity extends BaseActivity {
 
                 long diff = dataTermino.getTime() - dataInicio.getTime();
                 long diffMinutes = diff / (60 * 1000);
+                long hours = diffMinutes / 60;
+                long minutes = diffMinutes % 60;
 
-                edtTempoMinimoPermanencia.setText(String.valueOf(diffMinutes));
+                edtTempoMinimoPermanencia.setText(String.format(Locale.getDefault(), "%02d:%02d", hours, minutes));
             } catch (ParseException e) {
                 Toast.makeText(this, "Datas ou horários inválidos.", Toast.LENGTH_SHORT).show();
             }
@@ -110,13 +111,16 @@ public class CadastroEventoActivity extends BaseActivity {
         edtDataEvento.setOnClickListener(v -> showDatePickerDialog(edtDataEvento));
 
         edtHorarioEvento.setFocusable(false);
-        edtHorarioEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioEvento));
+        edtHorarioEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioEvento, "Selecione o Horário"));
 
         edtDataTerminoEvento.setFocusable(false);
         edtDataTerminoEvento.setOnClickListener(v -> showDatePickerDialog(edtDataTerminoEvento));
 
         edtHorarioTerminoEvento.setFocusable(false);
-        edtHorarioTerminoEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioTerminoEvento));
+        edtHorarioTerminoEvento.setOnClickListener(v -> showTimePickerDialog(edtHorarioTerminoEvento, "Selecione o Horário"));
+
+        edtTempoMinimoPermanencia.setFocusable(false);
+        edtTempoMinimoPermanencia.setOnClickListener(v -> showDurationPickerDialog());
     }
 
     private void showDatePickerDialog(EditText dateField) {
@@ -137,19 +141,53 @@ public class CadastroEventoActivity extends BaseActivity {
         datePickerDialog.show();
     }
 
-    private void showTimePickerDialog(EditText timeField) {
+    private void showTimePickerDialog(EditText timeField, String title) {
         Calendar calendar = Calendar.getInstance();
-        TimePickerDialog timePickerDialog = new TimePickerDialog(
-                this,
-                (view, hourOfDay, minute) -> {
-                    String time = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
-                    timeField.setText(time);
-                },
-                calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE),
-                true
-        );
-        timePickerDialog.show();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        MaterialTimePicker picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(hour)
+                .setMinute(minute)
+                .setTitleText(title)
+                .build();
+
+        picker.show(getSupportFragmentManager(), "time_picker");
+
+        picker.addOnPositiveButtonClickListener(v -> {
+            int selectedHour = picker.getHour();
+            int selectedMinute = picker.getMinute();
+            String time = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
+            timeField.setText(time);
+        });
+    }
+
+    private void showDurationPickerDialog() {
+        int hour = 0;
+        int minute = 0;
+        String currentVal = edtTempoMinimoPermanencia.getText().toString();
+        if (!currentVal.isEmpty() && currentVal.contains(":")) {
+            String[] parts = currentVal.split(":");
+            hour = Integer.parseInt(parts[0]);
+            minute = Integer.parseInt(parts[1]);
+        }
+
+        MaterialTimePicker picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(hour)
+                .setMinute(minute)
+                .setTitleText("Duração Mínima (HH:mm)")
+                .build();
+
+        picker.show(getSupportFragmentManager(), "duration_picker");
+
+        picker.addOnPositiveButtonClickListener(v -> {
+            int selectedHour = picker.getHour();
+            int selectedMinute = picker.getMinute();
+            String duration = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
+            edtTempoMinimoPermanencia.setText(duration);
+        });
     }
 
     private void showCursosDialog() {
@@ -180,12 +218,9 @@ public class CadastroEventoActivity extends BaseActivity {
                 cursosSelecionados.clear();
                 cursosSelecionados.addAll(tempCursosSelecionados);
 
-                if (cursosSelecionados.isEmpty() || cursosSelecionados.size() == cursosDialog.length) {
-                    cursosSelecionados.clear(); 
-                    cursosSelecionados.add("Todos");
-                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+                if (cursosSelecionados.isEmpty()) {
+                    tvCursosPermitidos.setText("Selecione os cursos permitidos");
                 } else {
-                    cursosSelecionados.remove("Todos");
                     tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
                 }
             })
@@ -203,7 +238,16 @@ public class CadastroEventoActivity extends BaseActivity {
         String descricao = edtDescricaoEvento.getText().toString().trim();
         String tempoMinimoStr = edtTempoMinimoPermanencia.getText().toString().trim();
 
+        if (cursosSelecionados.isEmpty()) {
+            Toast.makeText(this, "Por favor, selecione ao menos um curso.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!validateInput(nome, data, horario, dataTermino, horarioTermino, local, descricao, tempoMinimoStr)) {
+            return;
+        }
+
+        if (!isEndAfterStart(data, horario, dataTermino, horarioTermino)) {
             return;
         }
 
@@ -211,7 +255,13 @@ public class CadastroEventoActivity extends BaseActivity {
             if (task.isSuccessful() && !task.getResult().isEmpty()) {
                 Toast.makeText(CadastroEventoActivity.this, "Já existe um evento com este nome. Por favor, escolha outro.", Toast.LENGTH_LONG).show();
             } else if (task.isSuccessful()) {
-                int tempoMinimo = Integer.parseInt(tempoMinimoStr);
+                int tempoMinimo;
+                if (tempoMinimoStr.contains(":")) {
+                    String[] parts = tempoMinimoStr.split(":");
+                    tempoMinimo = Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[1]);
+                } else {
+                    tempoMinimo = Integer.parseInt(tempoMinimoStr);
+                }
 
                 Evento novoEvento = new Evento();
                 novoEvento.setNome(nome);
@@ -223,12 +273,7 @@ public class CadastroEventoActivity extends BaseActivity {
                 novoEvento.setDescricao(descricao);
                 novoEvento.setTempoMinimo(tempoMinimo);
                 novoEvento.setTempoTotal(cbTempoTotal.isChecked());
-
-                if (cursosSelecionados.isEmpty() || (cursosSelecionados.contains("Todos"))){
-                    novoEvento.setCursosPermitidos(Arrays.asList("Todos"));
-                } else {
-                    novoEvento.setCursosPermitidos(cursosSelecionados);
-                }
+                novoEvento.setCursosPermitidos(cursosSelecionados);
 
                 db.collection("eventos").add(novoEvento)
                         .addOnSuccessListener(documentReference -> {
@@ -263,7 +308,7 @@ public class CadastroEventoActivity extends BaseActivity {
             Toast.makeText(this, "A data/hora de início não pode ser no passado.", Toast.LENGTH_LONG).show();
             return false;
         }
-        
+
         return true;
     }
 
@@ -277,6 +322,22 @@ public class CadastroEventoActivity extends BaseActivity {
         } catch (Exception e) {
             return true;
         }
+    }
+
+    private boolean isEndAfterStart(String startDate, String startTime, String endDate, String endTime) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            Date start = sdf.parse(startDate + " " + startTime);
+            Date end = sdf.parse(endDate + " " + endTime);
+            if (!end.after(start)) {
+                Toast.makeText(this, "O horário de término deve ser posterior ao horário de início.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } catch (ParseException e) {
+            Toast.makeText(this, "Formato de data ou hora inválido.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override

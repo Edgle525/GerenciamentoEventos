@@ -12,13 +12,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.timepicker.MaterialTimePicker;
+import com.google.android.material.timepicker.TimeFormat;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.WriteBatch;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import br.edu.fatecgru.Eventos.R;
 import br.edu.fatecgru.Eventos.model.Evento;
@@ -60,9 +64,38 @@ public class EditarEventoActivity extends BaseActivity {
 
         loadEvento();
 
+        edtTempoMinimo.setFocusable(false);
+        edtTempoMinimo.setOnClickListener(v -> showDurationPickerDialog());
         tvCursosPermitidos.setOnClickListener(v -> showCursosDialog());
         btnSalvar.setOnClickListener(v -> salvarAlteracoes());
-        btnExcluir.setOnClickListener(v -> confirmarExclusao());
+        btnExcluir.setOnClickListener(v -> confirmarArquivamento());
+    }
+
+    private void showDurationPickerDialog() {
+        int hour = 0;
+        int minute = 0;
+        String currentVal = edtTempoMinimo.getText().toString();
+        if (!currentVal.isEmpty() && currentVal.contains(":")) {
+            String[] parts = currentVal.split(":");
+            hour = Integer.parseInt(parts[0]);
+            minute = Integer.parseInt(parts[1]);
+        }
+
+        MaterialTimePicker picker = new MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .setHour(hour)
+                .setMinute(minute)
+                .setTitleText("Duração Mínima (HH:mm)")
+                .build();
+
+        picker.show(getSupportFragmentManager(), "duration_picker");
+
+        picker.addOnPositiveButtonClickListener(v -> {
+            int selectedHour = picker.getHour();
+            int selectedMinute = picker.getMinute();
+            String duration = String.format(Locale.getDefault(), "%02d:%02d", selectedHour, selectedMinute);
+            edtTempoMinimo.setText(duration);
+        });
     }
 
     private void loadEvento() {
@@ -80,18 +113,23 @@ public class EditarEventoActivity extends BaseActivity {
                             edtHorarioTermino.setText(evento.getHorarioTermino());
                             edtLocal.setText(evento.getLocal());
                             edtDescricao.setText(evento.getDescricao());
-                            edtTempoMinimo.setText(String.valueOf(evento.getTempoMinimo()));
+
+                            int totalMinutes = evento.getTempoMinimo();
+                            int hours = totalMinutes / 60;
+                            int minutes = totalMinutes % 60;
+                            String tempoFormatado = String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
+                            edtTempoMinimo.setText(tempoFormatado);
 
                             if (evento.getCursosPermitidos() != null && !evento.getCursosPermitidos().isEmpty()) {
                                 cursosSelecionados.clear(); // Clear before loading
                                 cursosSelecionados.addAll(evento.getCursosPermitidos());
-                                if (cursosSelecionados.contains("Todos")) {
-                                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+                                if (cursosSelecionados.isEmpty()) {
+                                    tvCursosPermitidos.setText("Selecione os cursos permitidos");
                                 } else {
                                     tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
                                 }
                             } else {
-                                tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+                                tvCursosPermitidos.setText("Selecione os cursos permitidos");
                             }
                         }
                     }
@@ -127,23 +165,11 @@ public class EditarEventoActivity extends BaseActivity {
             .setPositiveButton("OK", (dialog, which) -> {
                 cursosSelecionados.clear();
                 cursosSelecionados.addAll(tempCursosSelecionados);
-                
-                if (cursosSelecionados.isEmpty() || cursosSelecionados.size() == cursosDialog.length) {
-                    cursosSelecionados.clear();
-                    cursosSelecionados.add("Todos");
-                    tvCursosPermitidos.setText("Cursos Permitidos: Todos");
+
+                if (cursosSelecionados.isEmpty()) {
+                    tvCursosPermitidos.setText("Selecione os cursos permitidos");
                 } else {
-                    cursosSelecionados.remove("Todos"); // Ensure "Todos" is not mixed with specific courses
                     tvCursosPermitidos.setText("Cursos Permitidos: " + TextUtils.join(", ", cursosSelecionados));
-                }
-            })
-            .setNeutralButton("Todos", (dialog, which) -> {
-                // This button will now just select all items in the dialog
-                for(int i=0; i<checkedItems.length; i++){
-                    ((AlertDialog) dialog).getListView().setItemChecked(i, true);
-                    if(!tempCursosSelecionados.contains(cursosDialog[i])){
-                       tempCursosSelecionados.add(cursosDialog[i]);
-                    }
                 }
             })
             .setNegativeButton("Cancelar", null)
@@ -160,29 +186,38 @@ public class EditarEventoActivity extends BaseActivity {
         String descricao = edtDescricao.getText().toString().trim();
         String tempoMinimoStr = edtTempoMinimo.getText().toString().trim();
 
+        if (cursosSelecionados.isEmpty()) {
+            Toast.makeText(this, "Por favor, selecione ao menos um curso.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (nome.isEmpty() || data.isEmpty() || horario.isEmpty() || dataTermino.isEmpty() || horarioTermino.isEmpty() || local.isEmpty() || descricao.isEmpty() || tempoMinimoStr.isEmpty()) {
             Toast.makeText(this, "Todos os campos são obrigatórios", Toast.LENGTH_SHORT).show();
             return;
         }
-        
-        int tempoMinimo = Integer.parseInt(tempoMinimoStr);
-        List<String> finalCursos = new ArrayList<>();
-        if (cursosSelecionados.isEmpty() || cursosSelecionados.contains("Todos")) {
-            finalCursos.add("Todos");
+
+        if (!isEndAfterStart(data, horario, dataTermino, horarioTermino)) {
+            return;
+        }
+
+        int tempoMinimo;
+        if (tempoMinimoStr.contains(":")) {
+            String[] parts = tempoMinimoStr.split(":");
+            tempoMinimo = Integer.parseInt(parts[0]) * 60 + Integer.parseInt(parts[1]);
         } else {
-            finalCursos.addAll(cursosSelecionados);
+            tempoMinimo = Integer.parseInt(tempoMinimoStr);
         }
 
         db.collection("eventos").document(eventoId)
-                .update("nome", nome, 
-                        "data", data, 
-                        "horario", horario, 
-                        "dataTermino", dataTermino, 
-                        "horarioTermino", horarioTermino, 
-                        "local", local, 
-                        "descricao", descricao, 
+                .update("nome", nome,
+                        "data", data,
+                        "horario", horario,
+                        "dataTermino", dataTermino,
+                        "horarioTermino", horarioTermino,
+                        "local", local,
+                        "descricao", descricao,
                         "tempoMinimo", tempoMinimo,
-                        "cursosPermitidos", finalCursos)
+                        "cursosPermitidos", cursosSelecionados)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Evento atualizado com sucesso!", Toast.LENGTH_SHORT).show();
                     finish();
@@ -190,35 +225,44 @@ public class EditarEventoActivity extends BaseActivity {
                 .addOnFailureListener(e -> Toast.makeText(this, "Erro ao atualizar evento.", Toast.LENGTH_SHORT).show());
     }
 
-    private void confirmarExclusao() {
+    private boolean isEndAfterStart(String startDate, String startTime, String endDate, String endTime) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            Date start = sdf.parse(startDate + " " + startTime);
+            Date end = sdf.parse(endDate + " " + endTime);
+            if (!end.after(start)) {
+                Toast.makeText(this, "O horário de término deve ser posterior ao horário de início.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        } catch (ParseException e) {
+            Toast.makeText(this, "Formato de data ou hora inválido.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void confirmarArquivamento() {
         new AlertDialog.Builder(this)
-                .setTitle("Confirmar Exclusão")
-                .setMessage("Tem certeza que deseja excluir este evento? Todas as inscrições relacionadas também serão removidas.")
-                .setPositiveButton("Excluir", (dialog, which) -> deletarEventoEInscricoes())
+                .setTitle("Confirmar Arquivamento")
+                .setMessage("Tem certeza que deseja arquivar este evento? Ele não será mais exibido, mas o histórico de participação será mantido.")
+                .setPositiveButton("Arquivar", (dialog, which) -> arquivarEvento())
                 .setNegativeButton("Cancelar", null)
                 .show();
     }
 
-    private void deletarEventoEInscricoes() {
+    private void arquivarEvento() {
         if (eventoId == null) return;
 
-        db.collection("inscricoes").whereEqualTo("idEvento", eventoId).get()
-            .addOnSuccessListener(queryDocumentSnapshots -> {
-                WriteBatch batch = db.batch();
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    batch.delete(doc.getReference());
-                }
-
-                batch.commit().addOnSuccessListener(aVoid -> {
-                    db.collection("eventos").document(eventoId).delete()
-                        .addOnSuccessListener(aVoid1 -> {
-                            Toast.makeText(EditarEventoActivity.this, "Evento excluído com sucesso.", Toast.LENGTH_SHORT).show();
-                            finish(); 
-                        })
-                        .addOnFailureListener(e -> Log.e(TAG, "Erro ao excluir evento.", e));
-                }).addOnFailureListener(e -> Log.e(TAG, "Erro ao excluir inscrições.", e));
-            })
-            .addOnFailureListener(e -> Log.e(TAG, "Erro ao buscar inscrições.", e));
+        db.collection("eventos").document(eventoId)
+                .update("arquivado", true)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(EditarEventoActivity.this, "Evento arquivado com sucesso!", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(EditarEventoActivity.this, "Erro ao arquivar evento.", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Erro ao arquivar evento", e);
+                });
     }
 
     @Override

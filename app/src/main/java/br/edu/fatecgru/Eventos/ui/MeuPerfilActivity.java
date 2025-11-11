@@ -167,9 +167,8 @@ public class MeuPerfilActivity extends BaseActivity {
                 edtTelefone.addTextChangedListener(MaskUtils.insert("(##) #####-####", edtTelefone));
 
                 String curso = documentSnapshot.getString("curso");
-                if (!TextUtils.isEmpty(curso) && !curso.equals("Selecione o Curso")) {
+                if (!TextUtils.isEmpty(curso)) {
                     spinnerCurso.setText(curso, false);
-                    spinnerCurso.setEnabled(false);
                 }
 
                 String semestre = documentSnapshot.getString("semestre");
@@ -212,9 +211,6 @@ public class MeuPerfilActivity extends BaseActivity {
                 return;
             }
             updates.put("cpf", cpf);
-        }
-        if (spinnerCurso.isEnabled() && !spinnerCurso.getText().toString().equals("Selecione o Curso")) {
-            updates.put("curso", spinnerCurso.getText().toString());
         }
 
         String telefone = MaskUtils.unmask(edtTelefone.getText().toString());

@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
@@ -76,7 +78,7 @@ public class ViewParticipantsActivity extends BaseActivity {
     }
 
     private void loadAllUsers() {
-        db.collection("usuarios").orderBy("nome").get().addOnCompleteListener(task -> {
+        db.collection("usuarios").whereEqualTo("tipo", "USER").get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 allUsersList.clear();
                 for (QueryDocumentSnapshot document : task.getResult()) {
@@ -84,6 +86,8 @@ public class ViewParticipantsActivity extends BaseActivity {
                     usuario.setId(document.getId());
                     allUsersList.add(usuario);
                 }
+                // Ordena a lista localmente
+                Collections.sort(allUsersList, Comparator.comparing(Usuario::getNome, String.CASE_INSENSITIVE_ORDER));
                 filterUsers("");
             } else {
                 Toast.makeText(this, "Erro ao carregar usuários.", Toast.LENGTH_SHORT).show();

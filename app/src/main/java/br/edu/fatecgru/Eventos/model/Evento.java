@@ -20,11 +20,13 @@ public class Evento {
     private int tempoMinimo;
     private boolean tempoTotal;
     private List<String> cursosPermitidos;
+    private boolean arquivado;
 
     /**
      * Construtor vazio necessário para o Firebase Firestore.
      */
     public Evento() {
+        this.arquivado = false;
     }
 
     // --- Getters e Setters ---
@@ -115,5 +117,13 @@ public class Evento {
 
     public void setCursosPermitidos(List<String> cursosPermitidos) {
         this.cursosPermitidos = cursosPermitidos;
+    }
+    
+    public boolean isArquivado() {
+        return arquivado;
+    }
+
+    public void setArquivado(boolean arquivado) {
+        this.arquivado = arquivado;
     }
 }

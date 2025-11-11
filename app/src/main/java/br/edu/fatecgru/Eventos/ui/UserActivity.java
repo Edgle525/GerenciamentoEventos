@@ -192,50 +192,50 @@ public class UserActivity extends BaseActivity implements NavigationView.OnNavig
         updateNavHeader();
     }
 
-    private void loadEventos(String cursoUsuario) {
-        db.collection("eventos").get().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                eventosList.clear();
-                boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
+ private void loadEventos(String cursoUsuario) {
+    db.collection("eventos").get().addOnCompleteListener(task -> {
+        if (task.isSuccessful()) {
+            eventosList.clear();
+            boolean isCursoValido = cursoUsuario != null && !cursoUsuario.isEmpty() && !cursoUsuario.equals("Selecione o Curso");
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
-                Date agora = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+            Date agora = new Date();
 
-                for (QueryDocumentSnapshot document : task.getResult()) {
-                    try {
-                        Evento evento = document.toObject(Evento.class);
-                        if (evento == null) continue;
+            for (QueryDocumentSnapshot document : task.getResult()) {
+                try {
+                    Evento evento = document.toObject(Evento.class);
+                    if (evento == null || evento.isArquivado()) continue;
 
-                        String dataTerminoStr = evento.getDataTermino();
-                        String horarioTerminoStr = evento.getHorarioTermino();
+                    String dataTerminoStr = evento.getDataTermino();
+                    String horarioTerminoStr = evento.getHorarioTermino();
 
-                        if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
-                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
-                            if (dataTermino.after(agora)) {
-                                List<String> cursosPermitidos = evento.getCursosPermitidos();
-                                boolean isEventoVisivel = false;
-                                if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
-                                    isEventoVisivel = true;
-                                } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
-                                    isEventoVisivel = true;
-                                }
+                    if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                        Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                        if (dataTermino.after(agora)) {
+                            List<String> cursosPermitidos = evento.getCursosPermitidos();
+                            boolean isEventoVisivel = false;
+                            if (cursosPermitidos == null || cursosPermitidos.isEmpty() || cursosPermitidos.contains("Geral")) {
+                                isEventoVisivel = true;
+                            } else if (isCursoValido && cursosPermitidos.contains(cursoUsuario)) {
+                                isEventoVisivel = true;
+                            }
 
-                                if (isEventoVisivel) {
-                                    evento.setId(document.getId());
-                                    eventosList.add(evento);
-                                }
+                            if (isEventoVisivel) {
+                                evento.setId(document.getId());
+                                eventosList.add(evento);
                             }
                         }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                     }
+                } catch (Exception e) {
+                    Log.e(TAG, "Erro ao processar evento: " + document.getId(), e);
                 }
-                adapter.notifyDataSetChanged();
-            } else {
-                Toast.makeText(UserActivity.this, "Erro ao carregar eventos.", Toast.LENGTH_SHORT).show();
             }
-        });
-    }
+            adapter.notifyDataSetChanged();
+        } else {
+            Toast.makeText(UserActivity.this, "Erro ao carregar eventos.", Toast.LENGTH_SHORT).show();
+        }
+    });
+}
 
     @Override
     public void onInscreverClick(Evento evento) {

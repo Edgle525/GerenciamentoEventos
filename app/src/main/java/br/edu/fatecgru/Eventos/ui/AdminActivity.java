@@ -103,16 +103,29 @@ public class AdminActivity extends BaseActivity implements NavigationView.OnNavi
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
                 Date agora = new Date();
 
-                for (Evento evento : value.toObjects(Evento.class)) {
-                    try {
-                        Date dataTermino = sdf.parse(evento.getDataTermino() + " " + evento.getHorarioTermino());
-                        if (dataTermino.after(agora)) {
-                            eventosAtivos++;
-                        } else {
-                            eventosFinalizados++;
+                for (QueryDocumentSnapshot doc : value) {
+                    Evento evento = doc.toObject(Evento.class);
+                    if (evento.isArquivado()) {
+                        continue;
+                    }
+
+                    String dataTerminoStr = evento.getDataTermino();
+                    String horarioTerminoStr = evento.getHorarioTermino();
+
+                    if (dataTerminoStr != null && !dataTerminoStr.isEmpty() && horarioTerminoStr != null && !horarioTerminoStr.isEmpty()) {
+                        try {
+                            Date dataTermino = sdf.parse(dataTerminoStr + " " + horarioTerminoStr);
+                            if (dataTermino.after(agora)) {
+                                eventosAtivos++;
+                            } else {
+                                eventosFinalizados++;
+                            }
+                        } catch (ParseException e) {
+                            // Ignorar eventos com data mal formatada
                         }
-                    } catch (ParseException e) {
-                        //
+                    } else {
+                        // Eventos sem data de término são considerados ativos
+                        eventosAtivos++;
                     }
                 }
                 tvEventosAtivos.setText(String.valueOf(eventosAtivos));

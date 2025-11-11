@@ -34,6 +34,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
@@ -44,7 +45,7 @@ import br.edu.fatecgru.Eventos.model.Inscricao;
 
 public class ComprovanteActivity extends BaseActivity {
 
-    private static final int REQUEST_BLUETOOTH_PERMISSION = 1;
+    private static final int REQUEST_PERMISSIONS = 1;
     private static final int REQUEST_STORAGE_PERMISSION = 2;
 
     private Button btnImprimir, btnBaixarPdf;
@@ -74,7 +75,7 @@ public class ComprovanteActivity extends BaseActivity {
         fetchEventData();
 
         btnImprimir.setOnClickListener(v -> {
-            if (checkAndRequestBluetoothPermission()) {
+            if (checkAndRequestPermissions()) {
                 selectPrinterAndPrint();
             }
         });
@@ -162,18 +163,31 @@ public class ComprovanteActivity extends BaseActivity {
                 "----------------------------------\n\n";
     }
 
-    private boolean checkAndRequestBluetoothPermission() {
+    private boolean checkAndRequestPermissions() {
+        List<String> permissionsNeeded = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT, Manifest.permission.BLUETOOTH_SCAN}, REQUEST_BLUETOOTH_PERMISSION);
-                return false;
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_CONNECT);
+            }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_SCAN);
             }
         } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN}, REQUEST_BLUETOOTH_PERMISSION);
-                return false;
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH);
             }
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADMIN) != PackageManager.PERMISSION_GRANTED) {
+                permissionsNeeded.add(Manifest.permission.BLUETOOTH_ADMIN);
+            }
+        }
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+
+        if (!permissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionsNeeded.toArray(new String[0]), REQUEST_PERMISSIONS);
+            return false;
         }
         return true;
     }
@@ -358,6 +372,31 @@ public class ComprovanteActivity extends BaseActivity {
                 .addOnFailureListener(e -> runOnUiThread(() -> Toast.makeText(ComprovanteActivity.this, "Erro ao buscar inscrição para impressão.", Toast.LENGTH_LONG).show()));
     }
 
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_PERMISSIONS) {
+            boolean allPermissionsGranted = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    allPermissionsGranted = false;
+                    break;
+                }
+            }
+            if (allPermissionsGranted) {
+                selectPrinterAndPrint();
+            } else {
+                Toast.makeText(this, "As permissões de Bluetooth e Localização são necessárias para imprimir.", Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQUEST_STORAGE_PERMISSION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                gerarPdf();
+            } else {
+                Toast.makeText(this, "A permissão de armazenamento é necessária para salvar o PDF.", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
