@@ -70,7 +70,6 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:testOnly="true"
         android:theme="@style/Theme.GerenciamentoEventos" >
         <activity
             android:name="br.edu.fatecgru.Eventos.ui.MainActivity"
